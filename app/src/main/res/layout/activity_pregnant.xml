@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1"
+    android:background="#FCE4EC">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="น้ำหนักแม่"
+                android:id="@+id/prenantMom"
+                android:textColor="#ff9797"
+                android:textSize="40dp"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:paddingTop="15dp" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="5"
+
+                android:textSize="30dp"
+                android:id="@+id/prenant_Mom" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="kg."
+                android:id="@+id/prenantKg"
+                android:layout_column="2"
+                android:textColor="#ff9797"
+                android:textSize="40dp"
+                android:paddingStart="5dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="น้ำหนักลูก"
+                android:id="@+id/prenantBaby"
+                android:textColor="#ff9797"
+                android:textSize="40dp"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:paddingTop="15dp" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="5"
+                android:id="@+id/prenant_Baby" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="kg."
+                android:id="@+id/prenantB_kg"
+                android:layout_column="2"
+                android:textColor="#ff9797"
+                android:textSize="40dp"
+                android:paddingStart="5dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="หัวใจเต้น(ลูก)"
+                android:id="@+id/prenantBaby_H"
+                android:textColor="#ff9797"
+                android:textSize="40dp"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:paddingTop="15dp"  />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/prenantBaby_1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="t/m."
+                android:id="@+id/prenantBaby_t"
+                android:layout_column="2"
+                android:textColor="#ff9797"
+                android:textSize="40dp"
+                android:paddingStart="5dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="อัลตร้าซาวด์"
+                android:id="@+id/prenantBaby_a"
+                android:textColor="#ff9797"
+                android:textSize="40dp"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:paddingTop="15dp"  />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButton2"
+                android:src="@android:drawable/ic_menu_camera"
+                android:background="#00000000"
+                android:paddingTop="20dp" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="วันพบเเพทย์"
+                android:id="@+id/prenant_Pre"
+                android:textColor="#ff9797"
+                android:textSize="40dp"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:paddingTop="15dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/p_eebutton2"
+                android:textSize="25dp"
+                android:layout_column="1"
+                android:text="วว/ดด/ปป"
+                android:background="#F48FB1" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="ข้อความ"
+                android:id="@+id/prenantMessage"
+                android:textColor="#ff9797"
+                android:textSize="40dp"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:paddingTop="15dp" />
+
+        </TableRow>
+
+    </TableLayout>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="15"
+        android:id="@+id/prenant_Message"
+        android:textColor="#c0c0c0"
+        android:textSize="35dp"
+        android:layout_column="0"
+        android:layout_span="2"
+        android:paddingEnd="20dp"
+        android:paddingStart="20dp" />
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="แจ้งเตือนวันพบแพทย์  "
+            android:textColor="#ff9797"
+            android:textSize="40dp"
+            android:id="@+id/pnTextView"
+            android:paddingLeft="12dp" />
+
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/pnSwitch1"
+            android:textColor="#ff9797"
+            android:textSize="25dp"
+            android:background="#F48FB1"
+            android:backgroundTint="#d0b3e1"
+            android:layout_gravity="center_horizontal"
+            android:allowUndo="false" />
+    </TableRow>
+
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageButton"
+            android:src="@android:drawable/ic_input_add"
+            android:background="#00000000"
+            android:paddingEnd="20dp"
+            android:paddingStart="250dp"
+            android:paddingTop="20dp"
+            android:textSize="30dp"
+            android:elevation="@dimen/abc_action_button_min_width_material"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageButton6"
+            android:src="@android:drawable/ic_delete"
+            android:background="#00000000"
+            android:paddingTop="20dp"
+            android:textSize="30dp"/>
+    </TableRow>
+
+</LinearLayout>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#bacab3">
+
+
+    <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="match_parent"
+        android:layout_height="372dp"
+        android:layout_column="2" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="วันแรกของรอบเดือน"
+                android:textSize="28dp"
+                android:id="@+id/msButtonS"
+                android:background="#d0b3e1"
+                android:padding="9dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="วันสุดท้ายของรอบเดือน"
+                android:id="@+id/msButtonE"
+                android:textSize="28dp"
+                android:layout_column="1"
+                android:background="#d0b3e1" />
+
+
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="ระยะห่างรอบเดือน"
+                android:id="@+id/textView2"
+                android:textSize="35dp"
+                android:enabled="true"
+                android:paddingLeft="12dp" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/msEditText"
+                android:layout_column="1" />
+
+        </TableRow>
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="แจ้งเตือน        "
+
+                android:textSize="35dp"
+                android:id="@+id/msTextView"
+                android:paddingLeft="12dp" />
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cSwitch1"
+                android:textSize="20dp"
+                android:background="#d0b3e1"
+                android:backgroundTint="#d0b3e1"
+                android:layout_gravity="center_horizontal"
+                android:allowUndo="false" />
+        </TableRow>
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="30dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/msButtonO"
+                    android:layout_column="17"
+                    android:src="@android:drawable/ic_input_add"
+                    android:background="#00000000"
+                    android:paddingStart="250dp"
+                    android:paddingTop="5dp"
+                    android:textSize="30dp"
+                    android:elevation="@dimen/abc_action_button_min_width_material"
+                    android:paddingEnd="25dp" />
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/msButtonD"
+                    android:src="@android:drawable/ic_delete"
+                    android:background="#00000000"
+                    android:paddingTop="5dp" />
+            </TableRow>
+
+        </TableLayout>
+
+
+    </TableLayout>
+</LinearLayout>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FCE4EC">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="168dp">
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="ชื่อยาคุม"
+                android:id="@+id/mother"
+                android:textColor="#ff9797"
+                android:textSize="40dp"
+                android:layout_column="2"
+                android:padding="12dp" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="8"
+                android:id="@+id/editText9"
+                android:layout_column="3" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="จำนวนยาคุม"
+                android:id="@+id/con_number"
+                android:layout_column="2"
+                android:textColor="#ff9797"
+                android:textSize="40dp"
+                android:padding="12dp" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="7"
+                android:id="@+id/editText10"
+                android:layout_column="3"
+                android:ellipsize="end" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="เม็ด"
+                android:textColor="#ff9797"
+                android:textSize="40dp"
+                android:id="@+id/textView17"
+                android:layout_column="10"
+                android:padding="12dp" />
+        </TableRow>
+
+    </TableLayout>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="วันที่เริ่มกินยาคุม"
+            android:textColor="#ff9797"
+            android:textSize="40dp"
+            android:id="@+id/conC"
+            android:padding="12dp" />
+        <Button
+
+            android:id="@+id/cButtonDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="28dp"
+            android:layout_column="1"
+            android:text="    วว/ดด/ปป    "
+            android:background="#F48FB1"
+            android:backgroundTint="#F48FB1" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="แจ้งเตือน        "
+            android:textColor="#ff9797"
+            android:textSize="40dp"
+            android:id="@+id/cTextView"
+            android:paddingLeft="12dp" />
+
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/cSwitch1"
+            android:textSize="20dp"
+            android:background="#F48FB1"
+            android:backgroundTint="#FCE4EC"
+            android:layout_gravity="center_horizontal"
+            android:allowUndo="false" />
+    </TableRow>
+
+</LinearLayout>
