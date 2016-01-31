@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
                 android:ems="7"
-                android:id="@+id/editName"
+                android:id="@+id/pfName"
                 android:textSize="30dp"
                 android:layout_column="1" />
 
@@ -46,24 +46,28 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="วันที่เกิด"
-                android:textColor="#ff9797"
-                android:textSize="40dp"
-                android:id="@+id/textData"
-                android:layout_column="0" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="วันที่เกิด"
+            android:textColor="#ff9797"
+            android:textSize="40dp"
+            android:id="@+id/textData"
+            android:layout_column="0" />
+
+
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/pfButtonDate"
-                android:textSize="25dp"
-                android:layout_column="1"
-                android:text="วว/ดด/ปป"
+                android:inputType="textPersonName"
+                android:ems="7"
+                android:id="@+id/pfDate"
+                android:text="ปป-ดด-วว"
+                android:textSize="30dp"
                 android:background="#F48FB1"
-                android:backgroundTint="#F48FB1" />
+                android:backgroundTint="#F48FB1"
+                android:layout_column="1" />
 
         </TableRow>
 
@@ -85,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
                 android:ems="7"
-                android:id="@+id/editEmail"
+                android:id="@+id/pfEmail"
                 android:textSize="30dp"
                 android:layout_column="1" />
 
@@ -109,7 +113,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:ems="6"
-                android:id="@+id/editW"
+                android:id="@+id/pfWeight"
                 android:textSize="30dp"
                 android:layout_column="1" />
 
@@ -143,7 +147,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:ems="6"
-                android:id="@+id/editH"
+                android:id="@+id/pfHeight"
                 android:textSize="30dp"
                 android:layout_column="1" />
 
@@ -183,7 +187,7 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="151dp"
-            android:id="@+id/editMessage"
+            android:id="@+id/pfMessage"
             android:textSize="30dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
