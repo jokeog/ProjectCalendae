@@ -1,8 +1,6 @@
-package com.mikepenz.materialdrawer.app.utils;
+package com.mikepenz.materialdrawer.app.database;
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
@@ -26,28 +24,18 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
 
-        String CREATE_Profile_TABLE = String.format("CREATE TABLE %s " +
-                "(%s INTEGER PRIMARY KEY  AUTOINCREMENT, %s TEXT, %s TEXT, %s TEXT, %s TEXT, %s TEXT , %s TEXT )",
+        String CREATE_TABLE = String.format("CREATE TABLE %s " +
+                "(%s INTEGER PRIMARY KEY , %s TEXT, %s NUMERIC, %s TEXT )",
                 "profile",
-                BaseColumns._ID,
+                "id",
                 "name",
-                "date",
-                "email",
-                "weigth",
-                "heigth",
-                "bmi");
+                "birthday",
+                "email");
 
-        Log.i(TAG, CREATE_Profile_TABLE);
+        Log.i(TAG, CREATE_TABLE);
 
         // create Profile table
-        db.execSQL(CREATE_Profile_TABLE);
-        /*db.execSQL("CREATE TABLE profile " +
-                "(ID INTEGER PRIMARY KEY," +
-                " USER_NAME TEXT(100)," +
-                " WEIGHT TEXT(100)," +
-                " HEIGHT TEXT(100)," +
-                " AGE TEXT(100)," +
-                " BIRTHDAY TEXT(100));");*/
+        db.execSQL(CREATE_TABLE);
     }
 
     @Override
