@@ -1,10 +1,16 @@
 package com.mikepenz.materialdrawer.app.calender;
 
+import android.annotation.TargetApi;
+import android.app.DatePickerDialog;
+import android.content.Context;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,10 +23,19 @@ import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.Nameable;
+import com.prolificinteractive.materialcalendarview.CalendarDay;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class Pregnant extends AppCompatActivity {
 
     private Drawer result = null;
+
+    @Bind(R.id.p_buttonDay)
+    Button pDate;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +44,11 @@ public class Pregnant extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pregnant);
         setTitle(R.string.drawer_item_Pregnant_header);
+        ButterKnife.bind(this);
 
         int value[] = {R.id.prenantMom,R.id.prenant_Baby,R.id.prenant_Mom ,R.id.prenant_Pre ,
                 R.id.prenantB_kg ,R.id.prenantBaby,R.id.prenantBaby_1,R.id.prenantBaby_a ,R.id.prenantBaby_H ,R.id.prenantBaby_t
-                ,R.id.prenantKg,R.id.prenantMessage ,R.id.p_eebutton2 ,R.id.prenant_Message,R.id.pnSwitch1,R.id.pnTextView};
+                ,R.id.prenantKg,R.id.prenantMessage ,R.id.p_buttonDay ,R.id.prenant_Message,R.id.pnSwitch1,R.id.pnTextView};
 
         CalendarFont font =new CalendarFont() ;
 
@@ -92,4 +108,34 @@ public class Pregnant extends AppCompatActivity {
             super.onBackPressed();
         }
     }
+
+
+    @OnClick(R.id.p_buttonDay)
+    void onMinClicked() {
+        showDatePickerDialog(this, null, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                String dateSelect;
+                dateSelect = String.valueOf(dayOfMonth)+"-"+String.valueOf(monthOfYear)+"-"+String.valueOf(year);
+                pDate.setText(dateSelect);
+
+            }
+        });
+    }
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    public static void showDatePickerDialog(Context context, CalendarDay day,
+                                            DatePickerDialog.OnDateSetListener callback) {
+        if (day == null) {
+            day = CalendarDay.today();
+        }
+        DatePickerDialog dialog = new DatePickerDialog(
+                context, 0, callback, day.getYear(), day.getMonth(), day.getDay()
+        );
+        dialog.show();
+
+    }
+
+
+
+
 }

@@ -159,11 +159,13 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/p_eebutton2"
+                android:inputType="textPersonName"
+                android:id="@+id/p_buttonDay"
                 android:textSize="25dp"
                 android:layout_column="1"
                 android:text="วว/ดด/ปป"
-                android:background="#F48FB1" />
+                android:background="#F48FB1"
+                android:clickable="false" />
         </TableRow>
 
         <TableRow

@@ -22,21 +22,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="ชื่อ"
+                android:text="วันบันทึก"
                 android:id="@+id/textName"
                 android:textColor="#ff9797"
                 android:textSize="40dp"
-                android:paddingEnd="25dp"
-                android:paddingStart="25dp" />
+                android:paddingEnd="10dp"
+                android:paddingStart="10dp" />
 
 
-            <EditText
+            <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
                 android:ems="7"
-                android:id="@+id/pfName"
+                android:id="@+id/gDateS"
+                android:text="ปป-ดด-วว"
                 android:textSize="30dp"
+                android:background="#F48FB1"
+                android:backgroundTint="#F48FB1"
                 android:layout_column="1" />
 
         </TableRow>
@@ -49,7 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="วันที่เกิด"
+            android:text="ชั่งน้ำหนัก"
             android:textColor="#ff9797"
             android:textSize="40dp"
             android:id="@+id/textData"
@@ -62,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
                 android:ems="7"
-                android:id="@+id/pfDate"
+                android:id="@+id/gDate"
                 android:text="ปป-ดด-วว"
                 android:textSize="30dp"
                 android:background="#F48FB1"
@@ -79,25 +82,89 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="E-mail"
+                android:text="น้ำหนัก"
                 android:textColor="#ff9797"
                 android:textSize="40dp"
-                android:id="@+id/textEmail" />
+                android:id="@+id/textW" />
 
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
-                android:ems="7"
-                android:id="@+id/pfEmail"
+                android:inputType="number"
+                android:ems="6"
+                android:id="@+id/pfWeight"
                 android:textSize="30dp"
                 android:layout_column="1" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="kg."
+                android:textColor="#ff9797"
+                android:textSize="35dp"
+                android:id="@+id/textKg" />
+
         </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="ส่วนสูง"
+                android:textColor="#ff9797"
+                android:textSize="40dp"
+                android:id="@+id/textH"
+                android:layout_column="0" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="6"
+                android:id="@+id/pfHeight"
+                android:textSize="30dp"
+                android:layout_column="1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="cm."
+                android:textColor="#ff9797"
+                android:textSize="35dp"
+                android:id="@+id/textCm" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="คำนวณค่า BMI"
+                android:textColor="#ff9797"
+                android:textSize="30dp"
+                android:id="@+id/radioButton"
+                android:layout_column="1" />
+        </TableRow>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="151dp"
+            android:id="@+id/pfMessage"
+            android:textSize="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
         <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="79dp"
+            android:layout_height="match_parent"
             android:textSize="30dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
@@ -126,8 +193,7 @@
                     android:id="@+id/imageButton4"
                     android:src="@android:drawable/ic_delete"
                     android:background="#00000000"
-                    android:paddingTop="20dp"
-                    android:layout_column="18" />
+                    android:paddingTop="20dp" />
             </TableRow>
 
         </TableLayout>
