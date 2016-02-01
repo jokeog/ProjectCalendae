@@ -21,6 +21,7 @@ import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.app.calender.Contracaption;
+import com.mikepenz.materialdrawer.app.calender.Graph;
 import com.mikepenz.materialdrawer.app.calender.Menstruation;
 import com.mikepenz.materialdrawer.app.calender.Pregnant;
 import com.mikepenz.materialdrawer.app.calender.Profile;
@@ -34,12 +35,14 @@ import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileSettingDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
+import com.mikepenz.materialdrawer.model.SwitchDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 import com.mikepenz.materialdrawer.util.RecyclerViewCacheUtil;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -174,7 +177,9 @@ public class DrawerActivity extends AppCompatActivity {
                         new PrimaryDrawerItem().withName(R.string.drawer_item_profile_header).withDescription(R.string.drawer_item_profile_header_desc).withIcon(GoogleMaterial.Icon.gmd_face).withIdentifier(1).withSelectable(false),
                         new PrimaryDrawerItem().withName(R.string.drawer_item_Menstr_header).withDescription(R.string.drawer_item_Menstr_header_desc).withIcon(GoogleMaterial.Icon.gmd_favorite).withIdentifier(2).withSelectable(false),
                         new PrimaryDrawerItem().withName(R.string.drawer_item_Pregnant_header).withDescription(R.string.drawer_item_Pregnant_header_desc).withIcon(GoogleMaterial.Icon.gmd_alarm).withIdentifier(3).withSelectable(false),
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_Contracation_header).withDescription(R.string.drawer_item_Contracation_header_desc).withIcon(GoogleMaterial.Icon.gmd_favorite_outline).withIdentifier(4).withSelectable(false)
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_Contracation_header).withDescription(R.string.drawer_item_Contracation_header_desc).withIcon(GoogleMaterial.Icon.gmd_favorite_outline).withIdentifier(4).withSelectable(false),
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_Graph_header).withDescription(R.string.drawer_item_Graph_header_desc).withIcon(GoogleMaterial.Icon.gmd_favorite).withIdentifier(5).withSelectable(false)
+                    //    new SwitchDrawerItem().withName("").withIcon(GoogleMaterial.Icon.gmd_alarm).withChecked(true).withOnCheckedChangeListener(onCheckedChangeListener)
                         /*new PrimaryDrawerItem().withName(R.string.drawer_item_compact_header).withDescription(R.string.drawer_item_compact_header_desc).withIcon(GoogleMaterial.Icon.gmd_sun).withIdentifier(1).withSelectable(false),
                         new PrimaryDrawerItem().withName(R.string.drawer_item_action_bar_drawer).withDescription(R.string.drawer_item_action_bar_drawer_desc).withIcon(FontAwesome.Icon.faw_home).withIdentifier(2).withSelectable(false),
                         new PrimaryDrawerItem().withName(R.string.drawer_item_multi_drawer).withDescription(R.string.drawer_item_multi_drawer_desc).withIcon(FontAwesome.Icon.faw_gamepad).withIdentifier(3).withSelectable(false),
@@ -223,7 +228,7 @@ public class DrawerActivity extends AppCompatActivity {
                             } else if (drawerItem.getIdentifier() == 4) {
                                 intent = new Intent(DrawerActivity.this, Contracaption.class);
                             } else if (drawerItem.getIdentifier() == 5) {
-                                intent = new Intent(DrawerActivity.this, AdvancedActivity.class);
+                                intent = new Intent(DrawerActivity.this, Graph.class);
                             } else if (drawerItem.getIdentifier() == 6) {
                                 intent = new Intent(DrawerActivity.this, KeyboardUtilActivity.class);
                             } else if (drawerItem.getIdentifier() == 7) {
@@ -290,7 +295,7 @@ public class DrawerActivity extends AppCompatActivity {
             headerResult.setActiveProfile(profile);
         }
 
-        result.updateBadge(4, new StringHolder(10 + ""));
+        result.updateBadge(4, new StringHolder(""));
     }
 
     private OnCheckedChangeListener onCheckedChangeListener = new OnCheckedChangeListener() {
@@ -322,5 +327,7 @@ public class DrawerActivity extends AppCompatActivity {
             super.onBackPressed();
         }
     }
+
+
 
 }
