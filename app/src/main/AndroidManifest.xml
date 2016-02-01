@@ -42,6 +42,9 @@
             android:name=".calender.Contracaption"
             android:theme="@style/MaterialDrawerTheme.Main" />
         <activity
+            android:name=".calender.Graph"
+            android:theme="@style/MaterialDrawerTheme.Main" />
+        <activity
             android:name=".MenuDrawerActivity"
             android:theme="@style/MaterialDrawerTheme.Light.DarkToolbar.TranslucentStatus" />
         <activity

@@ -6,15 +6,15 @@
 
     <!-- Drawer Items -->
     <string name="drawer_item_profile_header">Profile</string>
-    <string name="drawer_item_profile_header_desc">company Information</string>
+    <string name="drawer_item_profile_header_desc">Company Information</string>
     <string name="drawer_item_Menstr_header">Menstruation</string>
-    <string name="drawer_item_Menstr_header_desc">menstrual period</string>
+    <string name="drawer_item_Menstr_header_desc">Menstrual Period</string>
     <string name="drawer_item_Pregnant_header">Pregnant</string>
-    <string name="drawer_item_Pregnant_header_desc">pregnancy preparation</string>
+    <string name="drawer_item_Pregnant_header_desc">Pregnancy Preparation</string>
     <string name="drawer_item_Contracation_header">Contracation</string>
-    <string name="drawer_item_Contracation_header_desc">control the birth rate</string>
-    <string name="drawer_item_Graph_header">Grap</string>
-    <string name="drawer_item_Graph_header_desc">body mass index</string>
+    <string name="drawer_item_Contracation_header_desc">Control The Birth Rate</string>
+    <string name="drawer_item_Graph_header">BMI</string>
+    <string name="drawer_item_Graph_header_desc">Body Mass Index</string>
 
 
     <string name="drawer_item_persistent_compact_header">PersistentHeader Drawer</string>

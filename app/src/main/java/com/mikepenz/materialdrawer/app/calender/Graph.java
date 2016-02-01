@@ -42,18 +42,18 @@ public class Graph extends AppCompatActivity {
     private String resultBMI[];
 
     @Bind(R.id.gDateS)
-    public EditText rDateS;
+    public Button rDateS;
 
     @Bind(R.id.gDate)
     public Button rDate;
 
-    @Bind(R.id.pfWeight)
+    @Bind(R.id.gWeight)
     public EditText rWeight;
 
-    @Bind(R.id.pfHeight)
+    @Bind(R.id.gHeight)
     public EditText rHeight;
 
-    @Bind(R.id.pfMessage)
+    @Bind(R.id.gMessage)
     public EditText rMessage;
 
 
@@ -122,8 +122,7 @@ public class Graph extends AppCompatActivity {
                 "4. ถ้าคุณสามารถลดพลังงานเข้าจากอาหารลงได้วันละ 400 กิโลแคลอรี และเพิ่มการใช้ พลังงานจากการออกกำลังกายวันละ 200 กิโลแคลอรี รวมแล้วคุณมีพลังงาพร่องลงไปวันละ 600 กิโลแคลอรี ออกกำลังกายประมาณ 6 วัน คิดเป็นพลังงานพร่อง 3600 กิโลแคลอรี คุณจะลดไขมันลงได้ประมาณครึ่งกิโลกรัมต่อสัปดาห์ พลังงานเข้าหรือออก 3500 กิโลแคลอรี จะเพิ่มหรือลดไขมันได้ 1 ปอนด์ หรือ 0.45 กิโลกรัม\n" +
                 "5. ควรปรึกษาแพทย์หรือผู้เชี่ยวชาญในการลดและควบคุมน้ำหนัก\n";
 
-        int value[] = {R.id.textData,R.id.textName ,R.id.textEmail ,R.id.textH,R.id.textW,R.id.radioButton ,R.id.pfName,
-                R.id.pfEmail ,R.id.pfHeight ,R.id.pfWeight ,R.id.pfMessage ,R.id.pfDate  ,R.id.textKg ,R.id.textCm};
+        int value[] = {R.id.gText1,R.id.gText2,R.id.gText3,R.id.gText4,R.id.gCalBMI,R.id.gMessage,R.id.gWeight,R.id.gHeight,R.id.gDate,R.id.gDateS,R.id.gText5,R.id.gText6};
 
         CalendarFont font =new CalendarFont() ;
         font.setFonts(value ,this) ;
@@ -180,7 +179,7 @@ public class Graph extends AppCompatActivity {
         }
     }
 
-    @OnClick(R.id.pfDate)
+    @OnClick(R.id.gDate)
       void onMinClicked() {
         showDatePickerDialog(this, null, new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -207,7 +206,7 @@ public class Graph extends AppCompatActivity {
     }
 
 
-    @OnClick (R.id.radioButton)
+    @OnClick (R.id.gCalBMI)
     void onClickBmi ()
     {
         this.setHeight();
@@ -245,7 +244,7 @@ public class Graph extends AppCompatActivity {
 
         }
 
-        EditText editText = (EditText)findViewById(R.id.pfMessage);
+        EditText editText = (EditText)findViewById(R.id.gMessage);
         editText.setText(String.valueOf(result) + " " + bmi, TextView.BufferType.EDITABLE);
     }
 

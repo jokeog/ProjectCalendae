@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="วันบันทึก"
-                android:id="@+id/textName"
+                android:id="@+id/gText1"
                 android:textColor="#ff9797"
                 android:textSize="40dp"
                 android:paddingEnd="10dp"
@@ -55,7 +55,7 @@
             android:text="ชั่งน้ำหนัก"
             android:textColor="#ff9797"
             android:textSize="40dp"
-            android:id="@+id/textData"
+            android:id="@+id/gText2"
             android:layout_column="0" />
 
 
@@ -85,14 +85,14 @@
                 android:text="น้ำหนัก"
                 android:textColor="#ff9797"
                 android:textSize="40dp"
-                android:id="@+id/textW" />
+                android:id="@+id/gText3" />
 
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:ems="6"
-                android:id="@+id/pfWeight"
+                android:id="@+id/gWeight"
                 android:textSize="30dp"
                 android:layout_column="1" />
 
@@ -103,7 +103,7 @@
                 android:text="kg."
                 android:textColor="#ff9797"
                 android:textSize="35dp"
-                android:id="@+id/textKg" />
+                android:id="@+id/gText5" />
 
         </TableRow>
 
@@ -118,7 +118,7 @@
                 android:text="ส่วนสูง"
                 android:textColor="#ff9797"
                 android:textSize="40dp"
-                android:id="@+id/textH"
+                android:id="@+id/gText4"
                 android:layout_column="0" />
 
             <EditText
@@ -126,7 +126,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:ems="6"
-                android:id="@+id/pfHeight"
+                android:id="@+id/gHeight"
                 android:textSize="30dp"
                 android:layout_column="1" />
 
@@ -137,7 +137,7 @@
                 android:text="cm."
                 android:textColor="#ff9797"
                 android:textSize="35dp"
-                android:id="@+id/textCm" />
+                android:id="@+id/gText6" />
         </TableRow>
 
         <TableRow
@@ -150,14 +150,14 @@
                 android:text="คำนวณค่า BMI"
                 android:textColor="#ff9797"
                 android:textSize="30dp"
-                android:id="@+id/radioButton"
+                android:id="@+id/gCalBMI"
                 android:layout_column="1" />
         </TableRow>
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="151dp"
-            android:id="@+id/pfMessage"
+            android:id="@+id/gMessage"
             android:textSize="30dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />

@@ -73,13 +73,13 @@ public class Menstruation extends AppCompatActivity {
         widget.setArrowColor(color);
         widget.setSelectionColor(color);
 
-        widget.addDecorators(
+        /*widget.addDecorators(
                 new MySelectorDecorator(this),
                 new HighlightWeekendsDecorator(),
                 oneDayDecorator
         );
 
-       new ApiSimulator().executeOnExecutor(Executors.newSingleThreadExecutor());
+       new ApiSimulator().executeOnExecutor(Executors.newSingleThreadExecutor());*/
 
 
 

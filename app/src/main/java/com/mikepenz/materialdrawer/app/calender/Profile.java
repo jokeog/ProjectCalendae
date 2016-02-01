@@ -64,12 +64,6 @@ public class Profile extends AppCompatActivity {
     public Button rDate;
     @Bind(R.id.pfEmail)
     public EditText rEmail;
-    @Bind(R.id.pfWeight)
-    public EditText rWeight;
-    @Bind(R.id.pfHeight)
-    public EditText rHeight;
-    @Bind(R.id.pfMessage)
-    public EditText rMessage;
     // </editor-fold
 
     @Override
@@ -91,8 +85,8 @@ public class Profile extends AppCompatActivity {
         // </editor-fold
 
         // <editor-fold desc="เซต Fonts">
-        int value[] = {R.id.textData,R.id.textName ,R.id.textEmail ,R.id.textH,R.id.textW,R.id.radioButton ,R.id.pfName,
-                R.id.pfEmail ,R.id.pfHeight ,R.id.pfWeight ,R.id.pfMessage ,R.id.pfDate  ,R.id.textKg ,R.id.textCm};
+        int value[] = {R.id.textData,R.id.textName ,R.id.textEmail ,R.id.pfName,
+                R.id.pfEmail  ,R.id.pfDate };
         CalendarFont font =new CalendarFont() ;
         font.setFonts(value ,this) ;
         // </editor-fold
@@ -214,48 +208,6 @@ public class Profile extends AppCompatActivity {
     }
 
 
-    @OnClick (R.id.radioButton)
-    void onClickBmi ()
-    {
-        this.setHeight();
-        this.setWeight();
-
-        double result = value.weight / ((value.height/100)*(value.height/100));
-        String bmi;
-        result = Math.floor(result * 100) / 100;
-
-        if(result <= 18.50)
-        {
-            bmi ="น้ำหนักน้อย / ผอม" + resultTestBMI[0];
-
-
-        }
-        else if (result >18.50 && result<= 22.90)
-        {
-            bmi ="ปกติ (สุขภาพดี)" + resultTestBMI[1];
-
-
-        }
-        else if (result >23 && result<=24.90 )
-        {
-            bmi ="ท้วม / โรคอ้วนระดับ 1" + resultTestBMI[2];
-
-        }
-        else if (result >25 && result<=29.90 )
-        {
-            bmi ="อ้วน / โรคอ้วนระดับ 2" + resultTestBMI[3];
-
-        }
-        else
-        {
-            bmi ="อ้วนมาก / โรคอ้วนระดับ 3" + resultTestBMI[4];
-
-        }
-
-        EditText editText = (EditText)findViewById(R.id.pfMessage);
-        editText.setText(String.valueOf(result) + " " + bmi, TextView.BufferType.EDITABLE);
-    }
-
     @OnClick(R.id.imageButton3)
     void saveProfile(){
 
@@ -305,18 +257,6 @@ public class Profile extends AppCompatActivity {
     public void setEmail()
     {
         value.email = rEmail.getText().toString();
-    }
-    public void setWeight()
-    {
-        value.weight = Double.parseDouble(rWeight.getText().toString());
-    }
-    public void setHeight()
-    {
-        value.height = Double.parseDouble(rHeight.getText().toString());
-    }
-    public void setBmi()
-    {
-        value.message = rMessage.getText().toString();
     }
     // </editor-fold>
 
