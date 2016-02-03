@@ -34,7 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
-                android:ems="7"
+                android:ems="5"
                 android:id="@+id/gDateS"
                 android:text="ปป-ดด-วว"
                 android:textSize="30dp"
@@ -64,7 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
-                android:ems="7"
+                android:ems="5"
                 android:id="@+id/gDate"
                 android:text="ปป-ดด-วว"
                 android:textSize="30dp"
@@ -92,6 +92,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:ems="6"
+                android:textColor="#cbab8d"
                 android:id="@+id/gWeight"
                 android:textSize="30dp"
                 android:layout_column="1" />
@@ -126,6 +127,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:ems="6"
+                android:textColor="#cbab8d"
                 android:id="@+id/gHeight"
                 android:textSize="30dp"
                 android:layout_column="1" />
@@ -156,8 +158,9 @@
 
         <EditText
             android:layout_width="wrap_content"
-            android:layout_height="151dp"
+            android:layout_height="220dp"
             android:id="@+id/gMessage"
+            android:textColor="#cbab8d"
             android:textSize="30dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />

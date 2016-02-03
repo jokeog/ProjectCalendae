@@ -8,11 +8,11 @@ import com.mikepenz.materialdrawer.app.calender.Profile;
 /**
  * Created
  */
-public  class  DBProfile {
+public  class DBPregnant {
 
     private SQLiteDatabase database;
 
-    public DBProfile (DBHelper db)
+    public DBPregnant(DBHelper db)
     {
         database = db.getWritableDatabase();
     }
