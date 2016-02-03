@@ -32,6 +32,7 @@ dependencies {
     compile "com.android.support:recyclerview-v7:${rootProject.ext.supportLibVersion}"
     compile "com.android.support:support-annotations:${rootProject.ext.supportLibVersion}"
 
+
     // used to base on some backwards compatible themes
     // contains util classes to support various android versions, and clean up code
     // comes with the awesome "Holder"-Pattern
@@ -42,4 +43,37 @@ dependencies {
     // and provides scalable icons. the core is very very light
     // https://github.com/mikepenz/Android-Iconics
     compile 'com.mikepenz:iconics-core:2.5.4@aar'
+
+    //compile fileTree(dir: 'libs', include: ['*.jar'])
+    //compile 'com.android.support:support-v4:19.+'
+    provided 'io.realm:realm-android:0.87.3' // "optional" dependency to realm-database API
+}
+
+android.libraryVariants.all { variant ->
+    def name = variant.buildType.name
+    def task = project.tasks.create "jar${name.capitalize()}", Jar
+    task.dependsOn variant.javaCompile
+    task.from variant.javaCompile.destinationDir
+    artifacts.add('archives', task);
+}
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    failOnError  false
+    source = android.sourceSets.main.java.sourceFiles
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
 }
