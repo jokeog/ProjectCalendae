@@ -3,6 +3,7 @@ package com.mikepenz.materialdrawer.app.calender;
 import android.annotation.TargetApi;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.app.R;
+import com.mikepenz.materialdrawer.app.database.DBPregnant;
 import com.mikepenz.materialdrawer.app.utils.CalendarFont;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
@@ -31,10 +33,36 @@ import butterknife.OnClick;
 
 public class Pregnant extends AppCompatActivity {
 
+
+
+    public static class mValue {
+        public double mWight;
+        public double bWight;
+        public double heart;
+        public String pDate;
+        public String message;
+
+    }
+
+    mValue value = new mValue();
+    mValue dbValue = new mValue();
+
+
+    private DBPregnant dataBase;
+
+
     private Drawer result = null;
 
-    @Bind(R.id.p_buttonDay)
+    @Bind(R.id.pregnantButtonDay)
     Button pDate;
+    @Bind(R.id.prenantMom)
+    TextView mWight;
+    @Bind(R.id.prenantBaby)
+    TextView bWight;
+    @Bind(R.id.prenantHeart)
+    TextView heart;
+    @Bind(R.id.prenantMsg)
+    TextView prenantMessage;
 
 
     @Override
@@ -46,13 +74,13 @@ public class Pregnant extends AppCompatActivity {
         setTitle(R.string.drawer_item_Pregnant_header);
         ButterKnife.bind(this);
 
-        int value[] = {R.id.prenantMom,R.id.prenant_Baby,R.id.prenant_Mom ,R.id.prenant_Pre ,
-                R.id.prenantB_kg ,R.id.prenantBaby,R.id.prenantBaby_1,R.id.prenantBaby_a ,R.id.prenantBaby_H ,R.id.prenantBaby_t
-                ,R.id.prenantKg,R.id.prenantMessage ,R.id.p_buttonDay ,R.id.prenant_Message,R.id.pnSwitch1,R.id.pnTextView};
+        int value[] = {R.id.prenantMom, R.id.prenantBaby, R.id.prenantMom, R.id.prenant_Pre,
+                R.id.prenantB_kg, R.id.prenantBaby, R.id.prenantHeart, R.id.prenantBaby_a, R.id.prenantBabyH
+                , R.id.prenantKg, R.id.prenantMessage, R.id.pregnantButtonDay, R.id.prenantMsg, R.id.pnSwitch1, R.id.pnTextView};
 
-        CalendarFont font =new CalendarFont() ;
+        CalendarFont font = new CalendarFont();
 
-        font.setFonts(value, this) ;
+        font.setFonts(value, this);
 
 
         // Handle Toolbar
@@ -79,6 +107,9 @@ public class Pregnant extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(false);
     }
+
+
+
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -110,18 +141,19 @@ public class Pregnant extends AppCompatActivity {
     }
 
 
-    @OnClick(R.id.p_buttonDay)
+    @OnClick(R.id.pregnantButtonDay)
     void onMinClicked() {
         showDatePickerDialog(this, null, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 String dateSelect;
-                dateSelect = String.valueOf(dayOfMonth)+"-"+String.valueOf(monthOfYear)+"-"+String.valueOf(year);
+                dateSelect = String.valueOf(dayOfMonth) + "-" + String.valueOf(monthOfYear + 1) + "-" + String.valueOf(year);
                 pDate.setText(dateSelect);
 
             }
         });
     }
+
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public static void showDatePickerDialog(Context context, CalendarDay day,
                                             DatePickerDialog.OnDateSetListener callback) {
@@ -135,7 +167,52 @@ public class Pregnant extends AppCompatActivity {
 
     }
 
+    @OnClick(R.id.pregnantSave)
+    void savePregnant() {
+        android.app.AlertDialog.Builder builder =
+                new android.app.AlertDialog.Builder(this);
+        builder.setTitle("บันทึกข้อมูล");
+        builder.setMessage("ยืนยันการบันทึกข้อมูล");
+        builder.setPositiveButton(getString(android.R.string.ok),
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        setValueInClass();
+                       dataBase.insert(value.mWight,value.bWight,value.heart,value.pDate,value.message);
+
+                        finish();
+                    }
+                });
+
+    }
 
 
+    void setValueInClass() {
+        this.setMessage();
+        this.setMwight();
+        this.setHeart();
+        this.setBwight();
+        this.setPregnantDate();
+    }
+
+    void setMessage() {
+        value.message = prenantMessage.getText().toString();
+    }
+
+    void setMwight() {
+        value.mWight = Double.parseDouble(mWight.getText().toString());
+    }
+
+    void setBwight() {
+        value.bWight = Double.parseDouble(bWight.getText().toString());
+    }
+
+    void setHeart() {
+        value.heart = Double.parseDouble(heart.getText().toString());
+    }
+
+    void setPregnantDate() {
+        value.pDate = pDate.getText().toString();
+    }
 
 }

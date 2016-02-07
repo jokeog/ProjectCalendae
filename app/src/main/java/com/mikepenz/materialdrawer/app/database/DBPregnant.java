@@ -3,7 +3,9 @@ package com.mikepenz.materialdrawer.app.database;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.mikepenz.materialdrawer.app.calender.Profile;
+import com.mikepenz.materialdrawer.app.calender.Pregnant;
+
+import java.util.Calendar;
 
 /**
  * Created
@@ -17,35 +19,45 @@ public  class DBPregnant {
         database = db.getWritableDatabase();
     }
 
-    public void insert(String name,String birthday,String email){
-        String temp =String.format("INSERT INTO profile (id,name,birthday,email) VALUES  (1 ,'%s','%s','%s')",name,birthday,email);
+    public void insert(Double mWight,Double bWight,Double heart,String pDate,String message){
+        Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int day =c.get(Calendar.DAY_OF_MONTH);
+        String createDate = String.valueOf(year) + "-" + String.valueOf(month + 1) + "-" + String.valueOf(day);
+
+        String temp =String.format("INSERT INTO pregnant (mWight,bWight,heart,pDate,message,createDate) VALUES  (%s,%s,%s,'%s','%s','%s')",mWight,bWight,heart,pDate,message,createDate);
         database.execSQL(temp);
     }
 
-    public void update(String name,String birthday,String email){
-        String temp =String.format("update profile set name='%s',birthday='%s',email='%s' where id=1",name,birthday,email);
+    public void update(Double mWight,Double bWight,Double heart,String pDate,String message,int pid){
+
+        String temp =String.format("update pregnant set mWight=%s,bWight=%s,heart=%s,pDate='%s',message='%s', where pid= %s" ,mWight,bWight,heart,pDate,message,pid);
         database.execSQL(temp);
     }
 
-    public Profile.mValue selectAllData() {
+   /* public Pregnant.mValue selectAllData() {
 
-        String strSQL = "SELECT  name,birthday,email FROM profile where id=1";
+        String strSQL = "SELECT * FROM pregnant ";
         Cursor cursor = database.rawQuery(strSQL, null);
-        Profile.mValue profile=new Profile.mValue();
+        Pregnant.mValue pregnant =new Pregnant().mValue();
         if(cursor != null)
         {
             if (cursor.moveToFirst()) {
                 do {
-                    profile.name = cursor.getString(0);
-                    profile.birthDay = cursor.getString(1);
-                    profile.email = cursor.getString(2);
+                    pregnant.mWight = cursor.getDouble(0);
+                    pregnant.bWight = cursor.getDouble(1);
+                    pregnant.heart = cursor.getDouble(2);
+                    pregnant.pDate = cursor.getString(3);
+                    pregnant.message = cursor.getString(4);
+
                 } while (cursor.moveToNext());
             }
         }
         cursor.close();
-        return profile;
+        return pregnant;
 
-    }
+    }*/
 
     public int countAllData() {
 

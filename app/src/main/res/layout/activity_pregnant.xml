@@ -32,7 +32,7 @@
                 android:ems="5"
 
                 android:textSize="30dp"
-                android:id="@+id/prenant_Mom" />
+                android:id="@+id/prenantMom" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -67,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:ems="5"
-                android:id="@+id/prenant_Baby" />
+                android:id="@+id/prenantBaby" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -90,7 +90,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="หัวใจเต้น(ลูก)"
-                android:id="@+id/prenantBaby_H"
+                android:id="@+id/prenantBabyH"
                 android:textColor="#ff9797"
                 android:textSize="40dp"
                 android:paddingEnd="16dp"
@@ -100,7 +100,7 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/prenantBaby_1" />
+                android:id="@+id/prenantHeart" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -123,7 +123,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="อัลตร้าซาวด์"
-                android:id="@+id/prenantBaby_a"
+                android:id="@+id/prenantBabya"
                 android:textColor="#ff9797"
                 android:textSize="40dp"
                 android:paddingEnd="16dp"
@@ -149,7 +149,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="วันพบเเพทย์"
-                android:id="@+id/prenant_Pre"
+                android:id="@+id/prenantPre"
                 android:textColor="#ff9797"
                 android:textSize="40dp"
                 android:paddingEnd="16dp"
@@ -160,7 +160,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
-                android:id="@+id/p_buttonDay"
+                android:id="@+id/pregnantButtonDay"
                 android:textSize="25dp"
                 android:layout_column="1"
                 android:text="วว/ดด/ปป"
@@ -177,7 +177,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="ข้อความ"
-                android:id="@+id/prenantMessage"
+                android:id="@+id/prenantMsg"
                 android:textColor="#ff9797"
                 android:textSize="40dp"
                 android:paddingEnd="16dp"
@@ -193,7 +193,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="15"
-        android:id="@+id/prenant_Message"
+        android:id="@+id/prenantMessage"
         android:textColor="#c0c0c0"
         android:textSize="35dp"
         android:layout_column="0"
@@ -235,7 +235,7 @@
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageButton"
+            android:id="@+id/pregnantSave"
             android:src="@android:drawable/ic_input_add"
             android:background="#00000000"
             android:paddingEnd="20dp"
