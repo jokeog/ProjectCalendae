@@ -19,7 +19,9 @@ import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.app.R;
+import com.mikepenz.materialdrawer.app.database.DBHelper;
 import com.mikepenz.materialdrawer.app.database.DBPregnant;
+import com.mikepenz.materialdrawer.app.database.DBProfile;
 import com.mikepenz.materialdrawer.app.utils.CalendarFont;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
@@ -36,6 +38,7 @@ public class Pregnant extends AppCompatActivity {
 
 
     public static class mValue {
+        public int pid;
         public double mWight;
         public double bWight;
         public double heart;
@@ -73,6 +76,10 @@ public class Pregnant extends AppCompatActivity {
         setContentView(R.layout.activity_pregnant);
         setTitle(R.string.drawer_item_Pregnant_header);
         ButterKnife.bind(this);
+
+        DBHelper mHelper;
+        mHelper = new DBHelper(this);
+        dataBase = new DBPregnant(mHelper);
 
         int value[] = {R.id.prenantMom, R.id.prenantBabyTT, R.id.prenantPre,R.id.prenantHeart,R.id.prenantMomm,
                 R.id.prenantBkg, R.id.prenantBaby, R.id.prenantHeart, R.id.prenantBabya, R.id.prenantBabyH
@@ -179,7 +186,7 @@ public class Pregnant extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         setValueInClass();
                         dataBase.insert(value.mWight, value.bWight, value.heart, value.pDate, value.message);
-
+                        mValue a = dataBase.selectAllData();
                         finish();
                     }
                 });

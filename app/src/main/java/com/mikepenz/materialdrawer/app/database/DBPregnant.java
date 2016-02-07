@@ -27,6 +27,7 @@ public  class DBPregnant {
         String createDate = String.valueOf(year) + "-" + String.valueOf(month + 1) + "-" + String.valueOf(day);
 
         String temp =String.format("INSERT INTO pregnant (mWight,bWight,heart,pDate,message,createDate) VALUES  (%s,%s,%s,'%s','%s','%s')",mWight,bWight,heart,pDate,message,createDate);
+
         database.execSQL(temp);
     }
 
@@ -38,18 +39,19 @@ public  class DBPregnant {
 
     public Pregnant.mValue selectAllData() {
 
-        String strSQL = "SELECT * FROM pregnant ";
+        String strSQL = "SELECT pid,mWight,bWight,heart,pDate,message,createDate FROM pregnant ";
         Cursor cursor = database.rawQuery(strSQL, null);
         Pregnant.mValue pregnant =new Pregnant.mValue();
         if(cursor != null)
         {
             if (cursor.moveToFirst()) {
                 do {
-                    pregnant.mWight = cursor.getDouble(0);
-                    pregnant.bWight = cursor.getDouble(1);
-                    pregnant.heart = cursor.getDouble(2);
-                    pregnant.pDate = cursor.getString(3);
-                    pregnant.message = cursor.getString(4);
+                    pregnant.pid = cursor.getInt(0);
+                    pregnant.mWight = cursor.getDouble(1);
+                    pregnant.bWight = cursor.getDouble(2);
+                    pregnant.heart = cursor.getDouble(3);
+                    pregnant.pDate = cursor.getString(4);
+                    pregnant.message = cursor.getString(5);
 
                 } while (cursor.moveToNext());
             }

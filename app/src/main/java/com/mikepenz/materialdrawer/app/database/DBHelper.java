@@ -13,9 +13,11 @@ public class DBHelper extends SQLiteOpenHelper {
     private final String TAG = getClass().getSimpleName();
 
     private SQLiteDatabase sqLiteDatabase;
+    private static final int DATABASE_VERSION = 2;
+    //Ver 1 Add profile,pregnant
 
     public DBHelper(Context context) {
-        super(context, "calendar.db", null, 1);
+        super(context, "calendar.db", null, DATABASE_VERSION);
 
     }
 
@@ -24,15 +26,15 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
 
-        String CREATE_TABLE = String.format("CREATE TABLE %s " +
+        String CREATE_PROFILE = String.format("CREATE TABLE %s " +
                 "(%s INTEGER PRIMARY KEY , %s TEXT, %s NUMERIC, %s TEXT )",
                 "profile",
                 "id",
                 "name",
                 "birthday",
                 "email");
-        String createPregant = String.format(" CREATE TABLE %s " +
-                        "(%s INTEGER PRIMARY KEY  AUTOINCREMENT , %s REAL, %s REAL, %s REAL,%s NUMERIC ,%s TEXT,%s NUMERIC)",
+        String CREATE_PERGANT = String.format(" CREATE TABLE %s " +
+                        "(%s INTEGER PRIMARY KEY AUTOINCREMENT , %s REAL, %s REAL, %s REAL,%s NUMERIC ,%s TEXT,%s NUMERIC)",
                 "pregnant",
                 "pid",
                 "mWight",
@@ -41,12 +43,13 @@ public class DBHelper extends SQLiteOpenHelper {
                 "pDate",
                 "message",
                 "createDate");
-        CREATE_TABLE=CREATE_TABLE+createPregant;
 
-        Log.i(TAG, CREATE_TABLE);
+        //Log.i(TAG, CREATE_TABLE);
 
         // create Profile table
-        db.execSQL(CREATE_TABLE);
+        db.execSQL(CREATE_PERGANT);
+        db.execSQL(CREATE_PROFILE);
+
 
     }
 
@@ -59,10 +62,9 @@ public class DBHelper extends SQLiteOpenHelper {
         String DROP_Pregnant_TABLE = "DROP TABLE IF EXISTS " + "pregnant";
 
 
-        DROP_TABLE=DROP_Profile_TABLE+DROP_Pregnant_TABLE;
-
-        db.execSQL(DROP_TABLE);
-        Log.i(TAG, "Upgrade Database from " + oldVersion + " to " + newVersion);
+        db.execSQL(DROP_Profile_TABLE);
+        db.execSQL(DROP_Pregnant_TABLE);
+        //Log.i(TAG, "Upgrade Database from " + oldVersion + " to " + newVersion);
         onCreate(db);
 
 
