@@ -25,6 +25,8 @@ import com.mikepenz.materialdrawer.app.calender.Graph;
 import com.mikepenz.materialdrawer.app.calender.Menstruation;
 import com.mikepenz.materialdrawer.app.calender.Pregnant;
 import com.mikepenz.materialdrawer.app.calender.Profile;
+import com.mikepenz.materialdrawer.app.database.DBHelper;
+import com.mikepenz.materialdrawer.app.database.DBMain;
 import com.mikepenz.materialdrawer.app.decorators.EventDecorator;
 import com.mikepenz.materialdrawer.app.decorators.HighlightWeekendsDecorator;
 import com.mikepenz.materialdrawer.app.decorators.MySelectorDecorator;
@@ -51,6 +53,7 @@ import java.util.concurrent.Executors;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class DrawerActivity extends AppCompatActivity {
     private static final int PROFILE_SETTING = 1;
@@ -59,6 +62,7 @@ public class DrawerActivity extends AppCompatActivity {
     private AccountHeader headerResult = null;
     private Drawer result = null;
     private boolean opened = false;
+    List<DBMain.CalenderValue> dateList;
 
     @Bind(R.id.calendarView)
     MaterialCalendarView widget;
@@ -74,12 +78,18 @@ public class DrawerActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             Calendar calendar = Calendar.getInstance();
-            calendar.add(Calendar.MONTH, -2);
             ArrayList<CalendarDay> dates = new ArrayList<>();
-            for (int i = 0; i < 30; i++) {
+            /*for (int i = 0; i < 5; i++) {
                 CalendarDay day = CalendarDay.from(calendar);
                 dates.add(day);
                 calendar.add(Calendar.DATE, 5);
+            }*/
+
+            for(DBMain.CalenderValue e :dateList)
+            {
+                calendar.set(e.year, e.month-1, e.day);
+                CalendarDay day = CalendarDay.from(calendar);
+                dates.add(day);
             }
 
             return dates;
@@ -93,9 +103,10 @@ public class DrawerActivity extends AppCompatActivity {
                 return;
             }
 
-            widget.addDecorator(new EventDecorator(Color.RED, calendarDays));
+            widget.addDecorator(new EventDecorator(Color.rgb(3, 21, 255), calendarDays));
         }
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,7 +120,7 @@ public class DrawerActivity extends AppCompatActivity {
                 oneDayDecorator
         );
 
-        new ApiSimulator().executeOnExecutor(Executors.newSingleThreadExecutor());
+        setCalendarWidget();
 
         //new ApiSimulator().executeOnExecutor(Executors.newSingleThreadExecutor());
 
@@ -328,6 +339,14 @@ public class DrawerActivity extends AppCompatActivity {
         }
     }
 
+    @OnClick(R.id.mainRefesh)
+    void setCalendarWidget(){
+        DBHelper mHelper;
+        mHelper = new DBHelper(this);
+        DBMain dataBase=new DBMain(mHelper);
+        dateList = dataBase.selectAllData();
+        new ApiSimulator().executeOnExecutor(Executors.newSingleThreadExecutor());
+    }
 
 
 }
