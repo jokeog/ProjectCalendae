@@ -36,11 +36,11 @@ public  class DBPregnant {
         database.execSQL(temp);
     }
 
-   /* public Pregnant.mValue selectAllData() {
+    public Pregnant.mValue selectAllData() {
 
         String strSQL = "SELECT * FROM pregnant ";
         Cursor cursor = database.rawQuery(strSQL, null);
-        Pregnant.mValue pregnant =new Pregnant().mValue();
+        Pregnant.mValue pregnant =new Pregnant.mValue();
         if(cursor != null)
         {
             if (cursor.moveToFirst()) {
@@ -57,11 +57,11 @@ public  class DBPregnant {
         cursor.close();
         return pregnant;
 
-    }*/
+    }
 
     public int countAllData() {
 
-        String strSQL = "SELECT  COUNT(*)  FROM profile";
+        String strSQL = "SELECT  COUNT(*)  FROM pregnant";
         Cursor cursor = database.rawQuery(strSQL, null);
         int countRow=0;
         if(cursor != null)

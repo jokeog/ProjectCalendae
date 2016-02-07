@@ -55,14 +55,14 @@ public class Pregnant extends AppCompatActivity {
 
     @Bind(R.id.pregnantButtonDay)
     Button pDate;
-    @Bind(R.id.prenantMom)
+    @Bind(R.id.prenantMomm)
     TextView mWight;
-    @Bind(R.id.prenantBaby)
+    @Bind(R.id.prenantBabyT)
     TextView bWight;
     @Bind(R.id.prenantHeart)
     TextView heart;
-    @Bind(R.id.prenantMsg)
-    TextView prenantMessage;
+    @Bind(R.id.prenantMessage)
+    TextView message;
 
 
     @Override
@@ -74,8 +74,8 @@ public class Pregnant extends AppCompatActivity {
         setTitle(R.string.drawer_item_Pregnant_header);
         ButterKnife.bind(this);
 
-        int value[] = {R.id.prenantMom, R.id.prenantBaby, R.id.prenantMom, R.id.prenant_Pre,
-                R.id.prenantB_kg, R.id.prenantBaby, R.id.prenantHeart, R.id.prenantBaby_a, R.id.prenantBabyH
+        int value[] = {R.id.prenantMom, R.id.prenantBabyTT, R.id.prenantPre,R.id.prenantHeart,R.id.prenantMomm,
+                R.id.prenantBkg, R.id.prenantBaby, R.id.prenantHeart, R.id.prenantBabya, R.id.prenantBabyH
                 , R.id.prenantKg, R.id.prenantMessage, R.id.pregnantButtonDay, R.id.prenantMsg, R.id.pnSwitch1, R.id.pnTextView};
 
         CalendarFont font = new CalendarFont();
@@ -147,7 +147,7 @@ public class Pregnant extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 String dateSelect;
-                dateSelect = String.valueOf(dayOfMonth) + "-" + String.valueOf(monthOfYear + 1) + "-" + String.valueOf(year);
+                dateSelect = String.valueOf(year) + "-" + String.valueOf(monthOfYear + 1) + "-" + String.valueOf(dayOfMonth);
                 pDate.setText(dateSelect);
 
             }
@@ -178,12 +178,19 @@ public class Pregnant extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         setValueInClass();
-                       dataBase.insert(value.mWight,value.bWight,value.heart,value.pDate,value.message);
+                        dataBase.insert(value.mWight, value.bWight, value.heart, value.pDate, value.message);
 
                         finish();
                     }
                 });
-
+        builder.setNegativeButton(getString(android.R.string.cancel),
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+        builder.show();
     }
 
 
@@ -196,7 +203,7 @@ public class Pregnant extends AppCompatActivity {
     }
 
     void setMessage() {
-        value.message = prenantMessage.getText().toString();
+        value.message = message.getText().toString();
     }
 
     void setMwight() {

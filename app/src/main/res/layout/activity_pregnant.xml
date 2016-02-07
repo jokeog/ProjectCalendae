@@ -29,10 +29,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="number"
-                android:ems="5"
-
+                android:ems="4"
                 android:textSize="30dp"
-                android:id="@+id/prenantMom" />
+                android:id="@+id/prenantMomm" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -66,15 +65,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="number"
+                android:textSize="30dp"
                 android:ems="5"
-                android:id="@+id/prenantBaby" />
+                android:id="@+id/prenantBabyT" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="kg."
-                android:id="@+id/prenantB_kg"
+                android:id="@+id/prenantBkg"
                 android:layout_column="2"
                 android:textColor="#ff9797"
                 android:textSize="40dp"
@@ -100,6 +100,8 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:inputType="number"
+                android:textSize="30dp"
                 android:id="@+id/prenantHeart" />
 
             <TextView
@@ -107,11 +109,11 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="t/m."
-                android:id="@+id/prenantBaby_t"
+                android:id="@+id/prenantBabyTT"
                 android:layout_column="2"
                 android:textColor="#ff9797"
                 android:textSize="40dp"
-                android:paddingStart="5dp" />
+                 />
         </TableRow>
 
         <TableRow
@@ -195,7 +197,7 @@
         android:ems="15"
         android:id="@+id/prenantMessage"
         android:textColor="#c0c0c0"
-        android:textSize="35dp"
+        android:textSize="30dp"
         android:layout_column="0"
         android:layout_span="2"
         android:paddingEnd="20dp"
