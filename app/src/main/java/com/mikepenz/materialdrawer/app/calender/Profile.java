@@ -217,16 +217,28 @@ public class Profile extends AppCompatActivity {
     void saveProfile(){
         android.app.AlertDialog.Builder builder =
                 new android.app.AlertDialog.Builder(this);
+        setEmail();
+        String line = value.email;
+        if(line != null)
+        {
+            String emailreg = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
+            Boolean mail = line.matches(emailreg);
+            if (mail == false) {
+                builder.setTitle("แจ้งเตือน");
+                builder.setMessage("รูปแบบ E-mail ไม่ถูกต้อง");
+                builder.setNegativeButton(getString(android.R.string.ok),
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                builder.show();
 
-        String lineIwant = value.email;
-        String emailreg = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)+@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)+(\\.[A-Za-z]{2,})$";
-        Boolean mail = lineIwant.matches(emailreg);
-        if (mail == false) {
-            builder.setMessage("E-mail ถูกต้อง");;
-        }else if(mail == true){
-            builder.setMessage("กรุณากรอก E-mail");
+                return;
+            }
+
         }
-
 
         builder.setTitle("บันทึกข้อมูล");
         builder.setMessage("ยืนยันการบันทึกข้อมูล");
