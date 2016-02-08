@@ -48,29 +48,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="ชั่งน้ำหนัก"
-            android:textColor="#ff9797"
-            android:textSize="40dp"
-            android:id="@+id/gText2"
-            android:layout_column="0" />
-
-
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:ems="5"
-                android:id="@+id/gDate"
-                android:text="ปป-ดด-วว"
-                android:textSize="30dp"
-                android:background="#F48FB1"
-                android:backgroundTint="#F48FB1"
-                android:layout_column="1" />
 
         </TableRow>
 
@@ -156,14 +133,16 @@
                 android:layout_column="1" />
         </TableRow>
 
-        <EditText
+             <EditText
+
             android:layout_width="wrap_content"
             android:layout_height="220dp"
             android:id="@+id/gMessage"
             android:textColor="#cbab8d"
             android:textSize="30dp"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"/>
+
 
         <TableLayout
             android:layout_width="match_parent"
@@ -180,7 +159,7 @@
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/imageButton3"
+                    android:id="@+id/gSave"
                     android:layout_column="17"
                     android:src="@android:drawable/ic_input_add"
                     android:background="#00000000"

@@ -49,11 +49,7 @@ public class Pregnant extends AppCompatActivity {
 
     mValue value = new mValue();
     mValue dbValue = new mValue();
-
-
     private DBPregnant dataBase;
-
-
     private Drawer result = null;
 
     @Bind(R.id.pregnantButtonDay)
@@ -81,7 +77,7 @@ public class Pregnant extends AppCompatActivity {
         mHelper = new DBHelper(this);
         dataBase = new DBPregnant(mHelper);
 
-        int value[] = {R.id.prenantMom, R.id.prenantBabyTT, R.id.prenantPre,R.id.prenantHeart,R.id.prenantMomm,
+        int value[] = {R.id.prenantMom, R.id.prenantBabyTT,R.id.prenantBabyT, R.id.prenantPre,R.id.prenantHeart,R.id.prenantMomm,
                 R.id.prenantBkg, R.id.prenantBaby, R.id.prenantHeart, R.id.prenantBabya, R.id.prenantBabyH
                 , R.id.prenantKg, R.id.prenantMessage, R.id.pregnantButtonDay, R.id.prenantMsg, R.id.pnSwitch1, R.id.pnTextView};
 

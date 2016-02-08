@@ -3,6 +3,7 @@ package com.mikepenz.materialdrawer.app.calender;
 import android.annotation.TargetApi;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,6 +15,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.mikepenz.materialdrawer.app.database.DBHelper;
+import com.mikepenz.materialdrawer.app.database.DBGraph;
 
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.materialdrawer.Drawer;
@@ -51,6 +54,7 @@ import com.mikephil.charting.interfaces.datasets.IDataSet;
 import com.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -58,53 +62,31 @@ import butterknife.OnClick;
 
 public class Graph extends AppCompatActivity {
 
-    private String saveDate;
-    private String date;
-    private double weight;
-    private double height;
-    private String message;
-    private double bmi;
+    public static class mValue {
+        public String date;
+        public double weight;
+        public double height;
+        public String bmi;
 
-    private String resultBMI[];
+
+    }
+
+    mValue value = new mValue();
+    mValue dbValue = new mValue();
+    private DBGraph dataBase;
+ //   private Drawer result = null;
+
+
+
 
     @Bind(R.id.gDateS)
     public Button rDateS;
-
-    @Bind(R.id.gDate)
-    public Button rDate;
-
     @Bind(R.id.gWeight)
     public EditText rWeight;
-
     @Bind(R.id.gHeight)
     public EditText rHeight;
-
     @Bind(R.id.gMessage)
-    public EditText rMessage;
-
-
-    public void setrDateS()
-    {
-        saveDate = rDateS.getText().toString();
-    }
-    public void setDate()
-    {
-        date = rDate.getText().toString();
-    }
-    public void setWeight()
-    {
-        weight = Double.parseDouble(rWeight.getText().toString());
-    }
-    public void setHeight()
-    {
-        height = Double.parseDouble(rHeight.getText().toString());
-    }
-    public void setBmi()
-    {
-        message = rMessage.getText().toString();
-    }
-
-
+    public EditText rBmi;
 
     private Drawer result = null;
 
@@ -117,7 +99,7 @@ public class Graph extends AppCompatActivity {
             "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"
     };
 
-
+    public String resultBMI[];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
@@ -128,6 +110,18 @@ public class Graph extends AppCompatActivity {
         setTitle(R.string.drawer_item_Graph_header);
         ButterKnife.bind(this);//เริ่มให้ปลั๊กอิน
         // </editor-fold
+
+        Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int day =c.get(Calendar.DAY_OF_MONTH);
+        String createDate = String.valueOf(year + 552) + "-" + String.valueOf(month + 1) + "-" + String.valueOf(day);
+        rDateS.setText(createDate);
+
+        DBHelper mHelper;
+        mHelper = new DBHelper(this);
+        dataBase = new DBGraph(mHelper);
+
 
         resultBMI = new String[5];
 
@@ -155,7 +149,7 @@ public class Graph extends AppCompatActivity {
                 "4. ถ้าคุณสามารถลดพลังงานเข้าจากอาหารลงได้วันละ 400 กิโลแคลอรี และเพิ่มการใช้ พลังงานจากการออกกำลังกายวันละ 200 กิโลแคลอรี รวมแล้วคุณมีพลังงาพร่องลงไปวันละ 600 กิโลแคลอรี ออกกำลังกายประมาณ 6 วัน คิดเป็นพลังงานพร่อง 3600 กิโลแคลอรี คุณจะลดไขมันลงได้ประมาณครึ่งกิโลกรัมต่อสัปดาห์ พลังงานเข้าหรือออก 3500 กิโลแคลอรี จะเพิ่มหรือลดไขมันได้ 1 ปอนด์ หรือ 0.45 กิโลกรัม\n" +
                 "5. ควรปรึกษาแพทย์หรือผู้เชี่ยวชาญในการลดและควบคุมน้ำหนัก\n";
 
-        int value[] = {R.id.gText1,R.id.gText2,R.id.gText3,R.id.gText4,R.id.gCalBMI,R.id.gMessage,R.id.gWeight,R.id.gHeight,R.id.gDate,R.id.gDateS,R.id.gText5,R.id.gText6};
+        int value[] = {R.id.gText1,R.id.gText3,R.id.gText4,R.id.gCalBMI,R.id.gMessage,R.id.gWeight,R.id.gHeight,R.id.gDateS,R.id.gText5,R.id.gText6};
 
         CalendarFont font =new CalendarFont() ;
         font.setFonts(value ,this) ;
@@ -243,18 +237,7 @@ public class Graph extends AppCompatActivity {
         }
     }
 
-    @OnClick(R.id.gDate)
-      void onMinClicked() {
-        showDatePickerDialog(this, null, new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                String dateSelect;
-                dateSelect = String.valueOf(year) + "-" + String.valueOf(monthOfYear+1) + "-" + String.valueOf(dayOfMonth);
-                rDate.setText(dateSelect);
 
-            }
-        });
-    }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public static void showDatePickerDialog(Context context, CalendarDay day,
@@ -270,13 +253,37 @@ public class Graph extends AppCompatActivity {
     }
 
 
+
+    void setValueInClass() {
+        this.setDate();
+        this.setWeight();
+        this.setHeight();
+        this.setBMI();
+
+    }
+    void setDate() {
+        value.date = rDateS.getText().toString();
+    }
+
+    void setWeight() {
+        value.weight = Double.parseDouble(rWeight.getText().toString());
+    }
+
+    void setHeight() {
+        value.height = Double.parseDouble(rHeight.getText().toString());
+    }
+
+    void setBMI() { value.bmi = rBmi.getText().toString();    }
+
+
+
     @OnClick (R.id.gCalBMI)
     void onClickBmi ()
     {
         this.setHeight();
         this.setWeight();
 
-        double result = weight / ((height/100)*(height/100));
+        double result = value.weight / ((value.height/100)*(value.height/100));
         String bmi;
         result = Math.floor(result * 100) / 100;
 
@@ -423,5 +430,32 @@ public class Graph extends AppCompatActivity {
     private float getRandom(float range, float startsfrom) {
         return (float) (Math.random() * range) + startsfrom;
     }
+
+
+    @OnClick(R.id.gSave)
+    void saveGraph() {
+        android.app.AlertDialog.Builder builder =
+                new android.app.AlertDialog.Builder(this);
+        builder.setTitle("บันทึกข้อมูล");
+        builder.setMessage("ยืนยันการบันทึกข้อมูล");
+        builder.setPositiveButton(getString(android.R.string.ok),
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        setValueInClass();
+                        dataBase.insert(value.date, value.height, value.weight, value.bmi);
+                        finish();
+                    }
+                });
+        builder.setNegativeButton(getString(android.R.string.cancel),
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+        builder.show();
+    }
+
 
 }

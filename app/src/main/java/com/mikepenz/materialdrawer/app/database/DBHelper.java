@@ -13,7 +13,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private final String TAG = getClass().getSimpleName();
 
     private SQLiteDatabase sqLiteDatabase;
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
     //Ver 1 Add profile,pregnant
 
     public DBHelper(Context context) {
@@ -44,11 +44,21 @@ public class DBHelper extends SQLiteOpenHelper {
                 "message",
                 "createDate");
 
+        String CREATE_GRAPH = String.format(" CREATE TABLE %s " +
+                        "(%s INTEGER PRIMARY KEY AUTOINCREMENT , %s REAL, %s REAL, %s REAL ,%s TEXT,%s NUMERIC)",
+                "graph",
+                "gid",
+                "date",
+                "weight",
+                "height",
+                "bmi",
+                "createDate");
         //Log.i(TAG, CREATE_TABLE);
 
         // create Profile table
         db.execSQL(CREATE_PERGANT);
         db.execSQL(CREATE_PROFILE);
+        db.execSQL(CREATE_GRAPH);
 
 
     }

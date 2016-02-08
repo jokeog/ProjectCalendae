@@ -5,15 +5,15 @@
     <string name="action_settings">Settings</string>
 
     <!-- Drawer Items -->
-    <string name="drawer_item_profile_header">Profile</string>
+    <string name="drawer_item_profile_header">ข้อมูลส่วนตัว</string>
     <string name="drawer_item_profile_header_desc">Company Information</string>
-    <string name="drawer_item_Menstr_header">Menstruation</string>
+    <string name="drawer_item_Menstr_header">เตรียมตั้งครรภ์</string>
     <string name="drawer_item_Menstr_header_desc">Menstrual Period</string>
-    <string name="drawer_item_Pregnant_header">Pregnant</string>
+    <string name="drawer_item_Pregnant_header">ตั้งครรภ์</string>
     <string name="drawer_item_Pregnant_header_desc">Pregnancy Preparation</string>
-    <string name="drawer_item_Contracation_header">Contracation</string>
+    <string name="drawer_item_Contracation_header">คุมกำเนิด</string>
     <string name="drawer_item_Contracation_header_desc">Control The Birth Rate</string>
-    <string name="drawer_item_Graph_header">BMI</string>
+    <string name="drawer_item_Graph_header">ดัชนีมวลกาย</string>
     <string name="drawer_item_Graph_header_desc">Body Mass Index</string>
 
 

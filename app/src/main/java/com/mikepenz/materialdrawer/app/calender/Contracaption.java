@@ -29,8 +29,7 @@ public class Contracaption extends AppCompatActivity {
         setTitle(R.string.drawer_item_Contracation_header);
 
 
-        int value[] = {R.id.mother,R.id.con_number,R.id.editText9,R.id.con_number,R.id.editText10,R.id.textView17,R.id.conC,R.id.cButtonDate
-        ,R.id.cTextView,R.id.cSwitch1};
+        int value[] = {R.id.cName,R.id.cNumber,R.id.cDate,R.id.cText1,R.id.cText2,R.id.cText3,R.id.cText4,R.id.cText5,R.id.cSwitch1};
 
         CalendarFont font =new CalendarFont() ;
         font.setFonts(value, this) ;

@@ -31,6 +31,8 @@ import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 
 import android.content.DialogInterface;
 
+import java.util.Calendar;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -88,8 +90,10 @@ public class Profile extends AppCompatActivity {
         int value[] = {R.id.textData,R.id.textName ,R.id.textEmail ,R.id.pfName,
                 R.id.pfEmail  ,R.id.pfDate };
         CalendarFont font =new CalendarFont() ;
-        font.setFonts(value ,this) ;
+        font.setFonts(value, this) ;
         // </editor-fold
+
+
 
         // <editor-fold desc="Handle Toolbar">
         result = new DrawerBuilder()
@@ -151,7 +155,8 @@ public class Profile extends AppCompatActivity {
         rName.setText(dbValue.name);
         rDate.setText(dbValue.birthDay);
         rEmail.setText(dbValue.email);
-    }
+
+}
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         //add the values which need to be saved from the drawer to the bundle
@@ -187,7 +192,7 @@ public class Profile extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 String dateSelect;
-                dateSelect = String.valueOf(year) + "-" + String.valueOf(monthOfYear + 1) + "-" + String.valueOf(dayOfMonth);
+                dateSelect = String.valueOf(year ) + "-" + String.valueOf(monthOfYear + 1) + "-" + String.valueOf(dayOfMonth);
                 rDate.setText(dateSelect);
 
             }
@@ -210,16 +215,27 @@ public class Profile extends AppCompatActivity {
 
     @OnClick(R.id.imageButton3)
     void saveProfile(){
-
         android.app.AlertDialog.Builder builder =
                 new android.app.AlertDialog.Builder(this);
-        builder.setTitle("แก้ไขข้อมูล");
-        builder.setMessage("ยืนยันการแก้ไขข้อมูล");
+
+        String lineIwant = value.email;
+        String emailreg = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)+@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)+(\\.[A-Za-z]{2,})$";
+        Boolean mail = lineIwant.matches(emailreg);
+        if (mail == false) {
+            builder.setMessage("E-mail ถูกต้อง");;
+        }else if(mail == true){
+            builder.setMessage("กรุณากรอก E-mail");
+        }
+
+
+        builder.setTitle("บันทึกข้อมูล");
+        builder.setMessage("ยืนยันการบันทึกข้อมูล");
 
         builder.setPositiveButton(getString(android.R.string.ok),
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+
                         setValueInClass();
                         if (dataBase.countAllData() == 0)
                             dataBase.insert(value.name, value.birthDay, value.email);

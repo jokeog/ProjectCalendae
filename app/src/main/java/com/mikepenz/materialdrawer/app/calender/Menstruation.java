@@ -62,7 +62,7 @@ public class Menstruation extends AppCompatActivity {
         setTitle(R.string.drawer_item_Menstr_header);
 
 
-        int value[] = {R.id.msButtonS,R.id.msButtonE,R.id.textView2,R.id.msEditText,R.id.msTextView};
+        int value[] = {R.id.msButtonS,R.id.msButtonE,R.id.msClear,R.id.msTextView};
 
         CalendarFont font =new CalendarFont() ;
         font.setFonts(value, this) ;

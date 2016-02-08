@@ -16,7 +16,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="ชื่อยาคุม"
-                android:id="@+id/mother"
+                android:id="@+id/cText1"
                 android:textColor="#ff9797"
                 android:textSize="40dp"
                 android:layout_column="2"
@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
                 android:ems="8"
-                android:id="@+id/editText9"
+                android:id="@+id/cName"
                 android:layout_column="3" />
 
         </TableRow>
@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="จำนวนยาคุม"
-                android:id="@+id/con_number"
+                android:id="@+id/cText2"
                 android:layout_column="2"
                 android:textColor="#ff9797"
                 android:textSize="40dp"
@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:ems="7"
-                android:id="@+id/editText10"
+                android:id="@+id/cNumber"
                 android:layout_column="3"
                 android:ellipsize="end" />
 
@@ -63,7 +63,7 @@
                 android:text="เม็ด"
                 android:textColor="#ff9797"
                 android:textSize="40dp"
-                android:id="@+id/textView17"
+                android:id="@+id/cText5"
                 android:layout_column="10"
                 android:padding="12dp" />
         </TableRow>
@@ -82,11 +82,11 @@
             android:text="วันที่เริ่มกินยาคุม"
             android:textColor="#ff9797"
             android:textSize="40dp"
-            android:id="@+id/conC"
+            android:id="@+id/cText3"
             android:padding="12dp" />
         <Button
 
-            android:id="@+id/cButtonDate"
+            android:id="@+id/cDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="28dp"
@@ -107,7 +107,7 @@
             android:text="แจ้งเตือน        "
             android:textColor="#ff9797"
             android:textSize="40dp"
-            android:id="@+id/cTextView"
+            android:id="@+id/cText4"
             android:paddingLeft="12dp" />
 
         <Switch
@@ -120,5 +120,42 @@
             android:layout_gravity="center_horizontal"
             android:allowUndo="false" />
     </TableRow>
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="79dp"
+        android:textSize="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButton3"
+                android:layout_column="17"
+                android:src="@android:drawable/ic_input_add"
+                android:background="#00000000"
+                android:paddingEnd="20dp"
+                android:paddingStart="250dp"
+                android:paddingTop="20dp"
+                android:textSize="30dp"
+                android:elevation="@dimen/abc_action_button_min_width_material" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButton4"
+                android:src="@android:drawable/ic_delete"
+                android:background="#00000000"
+                android:paddingTop="20dp"
+                android:layout_column="18" />
+        </TableRow>
+
+    </TableLayout>
+
 
 </LinearLayout>

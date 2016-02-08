@@ -36,6 +36,7 @@
                 android:inputType="textPersonName"
                 android:ems="7"
                 android:id="@+id/pfName"
+                android:textColor="#cbab8d"
                 android:textSize="30dp"
                 android:layout_column="1" />
 
@@ -90,6 +91,7 @@
                 android:inputType="textEmailAddress"
                 android:ems="7"
                 android:id="@+id/pfEmail"
+                android:textColor="#cbab8d"
                 android:textSize="30dp"
                 android:layout_column="1" />
 
