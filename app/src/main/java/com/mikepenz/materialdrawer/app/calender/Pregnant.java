@@ -38,7 +38,7 @@ public class Pregnant extends AppCompatActivity {
 
 
     public static class mValue {
-        public int pid;
+        public int pid=0;
         public double mWight;
         public double bWight;
         public double heart;
@@ -46,6 +46,7 @@ public class Pregnant extends AppCompatActivity {
         public String message;
 
     }
+
 
     mValue value = new mValue();
     mValue dbValue = new mValue();
@@ -76,6 +77,15 @@ public class Pregnant extends AppCompatActivity {
         DBHelper mHelper;
         mHelper = new DBHelper(this);
         dataBase = new DBPregnant(mHelper);
+        int id=dataBase.CheckIDInDay();
+        if(id!=0)
+        {
+            dbValue = dataBase.selectAllData(id);
+            dbToLayout();
+        }
+
+
+
 
         int value[] = {R.id.prenantMom, R.id.prenantBabyTT,R.id.prenantBabyT, R.id.prenantPre,R.id.prenantHeart,R.id.prenantMomm,
                 R.id.prenantBkg, R.id.prenantBaby, R.id.prenantHeart, R.id.prenantBabya, R.id.prenantBabyH
@@ -84,6 +94,8 @@ public class Pregnant extends AppCompatActivity {
         CalendarFont font = new CalendarFont();
 
         font.setFonts(value, this);
+
+
 
 
         // Handle Toolbar
@@ -109,12 +121,20 @@ public class Pregnant extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(false);
+
+
+    }
+
+    private void dbToLayout(){
+
+        mWight.setText(String.valueOf(dbValue.mWight));
+        bWight.setText(String.valueOf(dbValue.bWight));
+        heart.setText(String.valueOf(dbValue.heart));
+        pDate.setText(dbValue.pDate);
+        message.setText(dbValue.message);
     }
 
 
-
-
-    @Override
     protected void onSaveInstanceState(Bundle outState) {
         //add the values which need to be saved from the drawer to the bundle
         outState = result.saveInstanceState(outState);
@@ -169,6 +189,34 @@ public class Pregnant extends AppCompatActivity {
         dialog.show();
 
     }
+    @OnClick(R.id.pregnantDalete)
+      void delete()
+        {
+            android.app.AlertDialog.Builder builder =
+                    new android.app.AlertDialog.Builder(this);
+            builder.setTitle("ลบข้อมูล");
+            builder.setMessage("ยืนยันการลบข้อมูล");
+            builder.setPositiveButton(getString(android.R.string.ok),
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            if (dbValue.pid != 0) {
+                                dataBase.delete(dbValue.pid);
+                            }
+                            finish();
+                        }
+                    });
+            builder.setNegativeButton(getString(android.R.string.cancel),
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+            builder.show();
+        }
+
 
     @OnClick(R.id.pregnantSave)
     void savePregnant() {
@@ -181,8 +229,11 @@ public class Pregnant extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         setValueInClass();
-                        dataBase.insert(value.mWight, value.bWight, value.heart, value.pDate, value.message);
-                        mValue a = dataBase.selectAllData();
+                        if (dbValue.pid != 0) {
+                            dataBase.update(value.mWight, value.bWight, value.heart, value.pDate, value.message,value.pid);
+                        } else {
+                            dataBase.insert(value.mWight, value.bWight, value.heart, value.pDate, value.message);
+                        }
                         finish();
                     }
                 });
@@ -203,6 +254,7 @@ public class Pregnant extends AppCompatActivity {
         this.setHeart();
         this.setBwight();
         this.setPregnantDate();
+        value.pid = dbValue.pid;
     }
 
     void setMessage() {

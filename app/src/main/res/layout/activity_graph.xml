@@ -133,13 +133,12 @@
                 android:layout_column="1" />
         </TableRow>
 
-             <EditText
-
+             <TextView android:scrollbars = "vertical"
             android:layout_width="wrap_content"
-            android:layout_height="220dp"
+            android:layout_height="638dp"
             android:id="@+id/gMessage"
             android:textColor="#cbab8d"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"/>
 

@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.ScrollingMovementMethod;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -86,7 +87,7 @@ public class Graph extends AppCompatActivity {
     @Bind(R.id.gHeight)
     public EditText rHeight;
     @Bind(R.id.gMessage)
-    public EditText rBmi;
+    public TextView rBmi;
 
     private Drawer result = null;
 
@@ -123,6 +124,7 @@ public class Graph extends AppCompatActivity {
         dataBase = new DBGraph(mHelper);
 
 
+        rBmi.setMovementMethod(new ScrollingMovementMethod());
         resultBMI = new String[5];
 
         resultBMI[0]="\nแนะนำ\n" +
@@ -315,7 +317,7 @@ public class Graph extends AppCompatActivity {
 
         }
 
-        EditText editText = (EditText)findViewById(R.id.gMessage);
+        TextView editText = (TextView)findViewById(R.id.gMessage);
         editText.setText(String.valueOf(result) + " " + bmi, TextView.BufferType.EDITABLE);
     }
 

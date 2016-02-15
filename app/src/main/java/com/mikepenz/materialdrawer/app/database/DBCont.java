@@ -3,6 +3,7 @@ package com.mikepenz.materialdrawer.app.database;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.mikepenz.materialdrawer.app.calender.Contracaption;
 import com.mikepenz.materialdrawer.app.calender.Pregnant;
 
 import java.util.Calendar;
@@ -10,60 +11,56 @@ import java.util.Calendar;
 /**
  * Created
  */
-public  class DBPregnant {
+public  class DBCont {
 
     private SQLiteDatabase database;
 
-    public DBPregnant(DBHelper db)
+    public DBCont(DBHelper db)
     {
         database = db.getWritableDatabase();
     }
 
-    public void insert(Double mWight,Double bWight,Double heart,String pDate,String message){
+    public void insert(Double cName,Double cNumber,String cDate){
         Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);
         int day =c.get(Calendar.DAY_OF_MONTH);
         String createDate = String.valueOf(year) + "-" + String.valueOf(month + 1) + "-" + String.valueOf(day);
 
-        String temp =String.format("INSERT INTO pregnant (mWight,bWight,heart,pDate,message,createDate) VALUES  (%s,%s,%s,'%s','%s','%s')",mWight,bWight,heart,pDate,message,createDate);
+        String temp =String.format("INSERT INTO pregnant (cName,cNumber,cDate,createDate) VALUES  (%s,%s,'%s','%s')",cName,cNumber,cDate,createDate);
 
         database.execSQL(temp);
     }
 
-    public void update(Double mWight,Double bWight,Double heart,String pDate,String message,int pid){
+    public void update(Double cName,Double cNumber,String cDate,int cid){
 
-        String temp =String.format("update pregnant set mWight=%s,bWight=%s,heart=%s,pDate='%s',message='%s'  where pid= %s" ,mWight,bWight,heart,pDate,message,pid);
+        String temp =String.format("update cont set cName=%s,cNumber=%s,cDate='%s'  where cid= %s" ,cName,cNumber,cDate,cid);
         database.execSQL(temp);
     }
 
-    public Pregnant.mValue selectAllData(int id) {
+    public Contracaption.mValue selectAllData(int id) {
 
-        String strSQL = String.format("SELECT pid,mWight,bWight,heart,pDate,message,createDate FROM pregnant where pid=%s",id );
+        String strSQL = String.format("SELECT cid,cName,cNumber,cDate,createDate FROM cont where cid=%s",id );
         Cursor cursor = database.rawQuery(strSQL, null);
-        Pregnant.mValue pregnant =new Pregnant.mValue();
+        Contracaption.mValue cont =new Contracaption.mValue();
         if(cursor != null)
         {
             if (cursor.moveToFirst()) {
                 do {
-                    pregnant.pid = cursor.getInt(0);
-                    pregnant.mWight = cursor.getDouble(1);
-                    pregnant.bWight = cursor.getDouble(2);
-                    pregnant.heart = cursor.getDouble(3);
-                    pregnant.pDate = cursor.getString(4);
-                    pregnant.message = cursor.getString(5);
+                    cont.cid = cursor.getInt(0);
+
 
                 } while (cursor.moveToNext());
             }
         }
         cursor.close();
-        return pregnant;
+        return cont;
 
     }
 
     public int countAllData() {
 
-        String strSQL = "SELECT  COUNT(*)  FROM pregnant";
+        String strSQL = "SELECT  COUNT(*)  FROM cont";
         Cursor cursor = database.rawQuery(strSQL, null);
         int countRow=0;
         if(cursor != null)
@@ -88,7 +85,7 @@ public  class DBPregnant {
         String createDatetime = String.valueOf(year) + "-" + String.valueOf(month + 1) + "-" + String.valueOf(day);
 
         int id = 0;
-        String strSQL = String.format("SELECT pid FROM pregnant where createDate ='%s'", createDatetime);
+        String strSQL = String.format("SELECT cid FROM cont where createDate ='%s'", createDatetime);
         Cursor cursor = database.rawQuery(strSQL, null);
         if(cursor != null)
         {
@@ -106,9 +103,10 @@ public  class DBPregnant {
     }
     public void delete(int id)
     {
-        String delete =String.format( "delete from pregnant WHERE pid =%s " ,id );
+        String delete =String.format( "delete from cont WHERE cid =%s " ,id );
         database.execSQL(delete);
 
     }
+
 
 }

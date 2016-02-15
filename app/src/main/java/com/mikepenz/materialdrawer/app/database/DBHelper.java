@@ -44,6 +44,15 @@ public class DBHelper extends SQLiteOpenHelper {
                 "message",
                 "createDate");
 
+        String CREATE_CONT = String.format(" CREATE TABLE %s " +
+                        "(%s INTEGER PRIMARY KEY AUTOINCREMENT , %s REAL, %s REAL,%s NUMERIC ,%s NUMERIC)",
+                "cont",
+                "cid",
+                "mWight",
+                "bWight",
+                "pDate",
+                "createDate");
+
         String CREATE_GRAPH = String.format(" CREATE TABLE %s " +
                         "(%s INTEGER PRIMARY KEY AUTOINCREMENT , %s REAL, %s REAL, %s REAL ,%s TEXT,%s NUMERIC)",
                 "graph",
