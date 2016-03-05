@@ -238,25 +238,18 @@
         android:layout_height="wrap_content">
 
         <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
             android:id="@+id/pregnantSave"
-            android:src="@android:drawable/ic_input_add"
+            android:src="@android:drawable/checkbox_on_background"
             android:background="#00000000"
-            android:paddingEnd="20dp"
-            android:paddingStart="230dp"
+            android:paddingEnd="13dp"
             android:paddingTop="20dp"
             android:textSize="30dp"
-            android:elevation="@dimen/abc_action_button_min_width_material"/>
+            android:elevation="@dimen/abc_action_button_min_width_material"
+            android:paddingStart="250dp" />
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageButton6"
-            android:src="@android:drawable/ic_delete"
-            android:background="#00000000"
-            android:paddingTop="20dp"
-            android:textSize="30dp"/>
+
 
         <ImageButton
             android:layout_width="wrap_content"

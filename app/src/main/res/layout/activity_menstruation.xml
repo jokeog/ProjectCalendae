@@ -8,7 +8,7 @@
     <com.prolificinteractive.materialcalendarview.MaterialCalendarView
         android:id="@+id/calendarView"
         android:layout_width="match_parent"
-        android:layout_height="372dp"
+        android:layout_height="385dp"
         android:layout_column="2" />
 
     <TableLayout
@@ -96,9 +96,9 @@
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/msButtonO"
+                    android:id="@+id/msSave"
                     android:layout_column="17"
-                    android:src="@android:drawable/ic_input_add"
+                    android:src="@android:drawable/checkbox_on_background"
                     android:background="#00000000"
                     android:paddingStart="250dp"
                     android:paddingTop="5dp"
@@ -109,8 +109,8 @@
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/msButtonD"
-                    android:src="@android:drawable/ic_delete"
+                    android:id="@+id/msDelete"
+                    android:src="@android:drawable/ic_menu_delete"
                     android:background="#00000000"
                     android:paddingTop="5dp" />
             </TableRow>

@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,7 +21,6 @@ import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.app.R;
 import com.mikepenz.materialdrawer.app.database.DBCont;
 import com.mikepenz.materialdrawer.app.database.DBHelper;
-import com.mikepenz.materialdrawer.app.database.DBPregnant;
 import com.mikepenz.materialdrawer.app.utils.CalendarFont;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
@@ -37,8 +37,8 @@ public class Contracaption extends AppCompatActivity {
 
     public static class mValue {
         public int cid=0;
-        public double cName;
-        public double cNumber;
+        public String cName;
+        public int cNumber;
         public String cDate;
     }
 
@@ -48,11 +48,11 @@ public class Contracaption extends AppCompatActivity {
     private Drawer result = null;
 
     @Bind(R.id.cName)
-    Button cName;
+    EditText cName;
     @Bind(R.id.cNumber)
-    TextView cNumber;
+    EditText cNumber;
     @Bind(R.id.cDate)
-    TextView cDate;
+    Button cDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +71,7 @@ public class Contracaption extends AppCompatActivity {
 
         DBHelper mHelper;
         mHelper = new DBHelper(this);
-        dataBase = new DBcont(mHelper);
+        dataBase = new DBCont(mHelper);
         int id=dataBase.CheckIDInDay();
         if(id!=0)
         {
@@ -115,7 +115,7 @@ public class Contracaption extends AppCompatActivity {
 
     private void dbToLayout(){
 
-        cName.setText(String.valueOf(dbValue.cName));
+        cName.setText(dbValue.cName);
         cNumber.setText(String.valueOf(dbValue.cNumber));
         cDate.setText(dbValue.cDate);
 
@@ -189,7 +189,7 @@ public class Contracaption extends AppCompatActivity {
                         if (dbValue.cid != 0) {
                             dataBase.update(value.cName, value.cNumber, value.cDate,value.cid);
                         } else {
-                            dataBase.insert(value.cName, value.cNumber, value.cDate, value.cid);
+                            dataBase.insert(value.cName, value.cNumber, value.cDate);
                         }
                         finish();
                     }
@@ -210,11 +210,11 @@ public class Contracaption extends AppCompatActivity {
         value.cid = dbValue.cid;
     }
     void setCname() {
-        value.cName = Double.parseDouble(cName.getText().toString());
+        value.cName = cName.getText().toString();
     }
 
     void setCnumber() {
-        value.cNumber = Double.parseDouble(cNumber.getText().toString());
+        value.cNumber = Integer.parseInt(cNumber.getText().toString());
     }
 
     void setcDate() {

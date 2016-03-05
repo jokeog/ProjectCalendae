@@ -16,6 +16,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+
 import com.mikepenz.materialdrawer.app.database.DBHelper;
 import com.mikepenz.materialdrawer.app.database.DBGraph;
 
@@ -64,10 +66,12 @@ import butterknife.OnClick;
 public class Graph extends AppCompatActivity {
 
     public static class mValue {
+        public int gid =0;
         public String date;
         public double weight;
         public double height;
-        public String bmi;
+        public double bmi;
+        public String mg;
 
 
     }
@@ -75,6 +79,7 @@ public class Graph extends AppCompatActivity {
     mValue value = new mValue();
     mValue dbValue = new mValue();
     private DBGraph dataBase;
+
  //   private Drawer result = null;
 
 
@@ -88,6 +93,8 @@ public class Graph extends AppCompatActivity {
     public EditText rHeight;
     @Bind(R.id.gMessage)
     public TextView rBmi;
+    @Bind(R.id.gMg)
+    public TextView rMg;
 
     private Drawer result = null;
 
@@ -116,13 +123,19 @@ public class Graph extends AppCompatActivity {
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);
         int day =c.get(Calendar.DAY_OF_MONTH);
-        String createDate = String.valueOf(year + 552) + "-" + String.valueOf(month + 1) + "-" + String.valueOf(day);
+        String createDate = String.valueOf(year ) + "-" + String.valueOf(month + 1) + "-" + String.valueOf(day);
         rDateS.setText(createDate);
 
         DBHelper mHelper;
         mHelper = new DBHelper(this);
         dataBase = new DBGraph(mHelper);
-
+        int id=dataBase.CheckIDInDay();
+        if(id!=0)
+        {
+            dbValue = dataBase.selectAllData(id);
+            dbToLayout();
+            onClickBmi();
+        }
 
         rBmi.setMovementMethod(new ScrollingMovementMethod());
         resultBMI = new String[5];
@@ -151,7 +164,7 @@ public class Graph extends AppCompatActivity {
                 "4. ถ้าคุณสามารถลดพลังงานเข้าจากอาหารลงได้วันละ 400 กิโลแคลอรี และเพิ่มการใช้ พลังงานจากการออกกำลังกายวันละ 200 กิโลแคลอรี รวมแล้วคุณมีพลังงาพร่องลงไปวันละ 600 กิโลแคลอรี ออกกำลังกายประมาณ 6 วัน คิดเป็นพลังงานพร่อง 3600 กิโลแคลอรี คุณจะลดไขมันลงได้ประมาณครึ่งกิโลกรัมต่อสัปดาห์ พลังงานเข้าหรือออก 3500 กิโลแคลอรี จะเพิ่มหรือลดไขมันได้ 1 ปอนด์ หรือ 0.45 กิโลกรัม\n" +
                 "5. ควรปรึกษาแพทย์หรือผู้เชี่ยวชาญในการลดและควบคุมน้ำหนัก\n";
 
-        int value[] = {R.id.gText1,R.id.gText3,R.id.gText4,R.id.gCalBMI,R.id.gMessage,R.id.gWeight,R.id.gHeight,R.id.gDateS,R.id.gText5,R.id.gText6};
+        int value[] = {R.id.gBMI,R.id.gText1,R.id.gText3,R.id.gText4,R.id.gCalBMI,R.id.gMessage,R.id.gWeight,R.id.gHeight,R.id.gDateS,R.id.gText5,R.id.gText6,R.id.gMg};
 
         CalendarFont font =new CalendarFont() ;
         font.setFonts(value ,this) ;
@@ -210,6 +223,15 @@ public class Graph extends AppCompatActivity {
         mChart.setData(data);
         mChart.invalidate();
     }
+    private void dbToLayout(){
+
+        rDateS.setText(dbValue.date);
+        rWeight.setText(String.valueOf(dbValue.weight));
+        rHeight.setText(String.valueOf(dbValue.height));
+        rBmi.setText(String.valueOf(dbValue.bmi));
+
+    }
+
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         //add the values which need to be saved from the drawer to the bundle
@@ -261,6 +283,7 @@ public class Graph extends AppCompatActivity {
         this.setWeight();
         this.setHeight();
         this.setBMI();
+        this.setMg();
 
     }
     void setDate() {
@@ -275,7 +298,8 @@ public class Graph extends AppCompatActivity {
         value.height = Double.parseDouble(rHeight.getText().toString());
     }
 
-    void setBMI() { value.bmi = rBmi.getText().toString();    }
+    void setBMI() { value.bmi = Double.parseDouble(rBmi.getText().toString());   }
+    void setMg() { value.mg = rMg.getText().toString();    }
 
 
 
@@ -286,39 +310,150 @@ public class Graph extends AppCompatActivity {
         this.setWeight();
 
         double result = value.weight / ((value.height/100)*(value.height/100));
-        String bmi;
+        String gbmi;
         result = Math.floor(result * 100) / 100;
 
         if(result <= 18.50)
         {
-            bmi ="น้ำหนักน้อย / ผอม" +resultBMI[0];
+            gbmi ="น้ำหนักน้อย / ผอม" ;
 
 
         }
         else if (result >18.50 && result<= 22.90)
         {
-            bmi ="ปกติ (สุขภาพดี)" +resultBMI[1];
+            gbmi ="ปกติ (สุขภาพดี)";
 
 
         }
         else if (result >23 && result<=24.90 )
         {
-            bmi ="ท้วม / โรคอ้วนระดับ 1" +resultBMI[2];
+           gbmi ="ท้วม / โรคอ้วนระดับ 1";
 
         }
         else if (result >25 && result<=29.90 )
         {
-            bmi ="อ้วน / โรคอ้วนระดับ 2" +resultBMI[3];
+            gbmi ="อ้วน / โรคอ้วนระดับ 2" ;
 
         }
         else
         {
-            bmi ="อ้วนมาก / โรคอ้วนระดับ 3" +resultBMI[4];
+            gbmi ="อ้วนมาก / โรคอ้วนระดับ 3" ;
 
         }
 
         TextView editText = (TextView)findViewById(R.id.gMessage);
-        editText.setText(String.valueOf(result) + " " + bmi, TextView.BufferType.EDITABLE);
+        editText.setText(String.valueOf(result), TextView.BufferType.EDITABLE);
+        TextView editTextbmi = (TextView)findViewById(R.id.gMg);
+        editTextbmi.setText( gbmi, TextView.BufferType.EDITABLE);
+    }
+
+    @OnClick (R.id.gBMI)
+    void onClickgBmi ()
+    {
+        this.setHeight();
+        this.setWeight();
+
+
+
+        double result = value.weight / ((value.height/100)*(value.height/100));
+        String bmi;
+        result = Math.floor(result * 100) / 100;
+
+        if(result <= 18.50)
+        {
+            android.app.AlertDialog.Builder builder =
+                    new android.app.AlertDialog.Builder(this);
+            builder.setTitle("แนะนำสุขภาพ");
+            builder.setMessage(resultBMI[0]);
+            builder.setPositiveButton(getString(android.R.string.ok),
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            setValueInClass();
+
+                            finish();
+                        }
+                    });
+
+            builder.show();
+        }
+        else if (result >18.50 && result<= 22.90)
+        {
+            android.app.AlertDialog.Builder builder =
+                    new android.app.AlertDialog.Builder(this);
+            builder.setTitle("แนะนำสุขภาพ");
+            builder.setMessage(resultBMI[1]);
+            builder.setPositiveButton(getString(android.R.string.ok),
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            setValueInClass();
+
+                            finish();
+                        }
+                    });
+
+            builder.show();
+
+        }
+        else if (result >23 && result<=24.90 )
+        {
+            android.app.AlertDialog.Builder builder =
+                    new android.app.AlertDialog.Builder(this);
+            builder.setTitle("แนะนำสุขภาพ");
+            builder.setMessage(resultBMI[2]);
+            builder.setPositiveButton(getString(android.R.string.ok),
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            setValueInClass();
+
+                            finish();
+                        }
+                    });
+
+            builder.show();
+
+        }
+        else if (result >25 && result<=29.90 )
+        {
+            android.app.AlertDialog.Builder builder =
+                    new android.app.AlertDialog.Builder(this);
+            builder.setTitle("แนะนำสุขภาพ");
+            builder.setMessage(resultBMI[3]);
+            builder.setPositiveButton(getString(android.R.string.ok),
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            setValueInClass();
+
+                            finish();
+                        }
+                    });
+
+            builder.show();
+
+        }
+        else
+        {
+            android.app.AlertDialog.Builder builder =
+                    new android.app.AlertDialog.Builder(this);
+            builder.setTitle("แนะนำสุขภาพ");
+            builder.setMessage(resultBMI[4]);
+            builder.setPositiveButton(getString(android.R.string.ok),
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            setValueInClass();
+
+                            finish();
+                        }
+                    });
+
+            builder.show();
+
+        }
+
     }
 
 
@@ -445,7 +580,35 @@ public class Graph extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         setValueInClass();
-                        dataBase.insert(value.date, value.height, value.weight, value.bmi);
+                        dataBase.insert(value.date, value.weight, value.height, value.bmi,value.mg);
+                        finish();
+                    }
+                });
+        builder.setNegativeButton(getString(android.R.string.cancel),
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+        builder.show();
+    }
+
+    @OnClick(R.id.gDelete)
+    void delete()
+    {
+        android.app.AlertDialog.Builder builder =
+                new android.app.AlertDialog.Builder(this);
+        builder.setTitle("ลบข้อมูล");
+        builder.setMessage("ยืนยันการลบข้อมูล");
+        builder.setPositiveButton(getString(android.R.string.ok),
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        if (dbValue.gid != 0) {
+                            dataBase.delete(dbValue.gid);
+                        }
                         finish();
                     }
                 });

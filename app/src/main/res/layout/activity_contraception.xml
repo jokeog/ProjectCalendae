@@ -26,8 +26,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
-                android:ems="8"
+                android:ems="5"
                 android:id="@+id/cName"
+                android:textColor="#cbab8d"
+                android:textSize="30dp"
                 android:layout_column="3" />
 
         </TableRow>
@@ -51,8 +53,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="number"
-                android:ems="7"
+                android:ems="5"
                 android:id="@+id/cNumber"
+                android:textColor="#cbab8d"
+                android:textSize="30dp"
                 android:layout_column="3"
                 android:ellipsize="end" />
 
@@ -130,38 +134,33 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:paddingTop="20dp"
+            android:paddingEnd="20dp">
 
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/cSave"
                 android:layout_column="17"
-                android:src="@android:drawable/ic_input_add"
+                android:src="@android:drawable/checkbox_on_background"
                 android:background="#00000000"
                 android:paddingEnd="20dp"
                 android:paddingStart="250dp"
                 android:paddingTop="20dp"
-                android:textSize="30dp"
+                android:textSize="50dp"
                 android:elevation="@dimen/abc_action_button_min_width_material" />
 
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageButton4"
-                android:src="@android:drawable/ic_delete"
-                android:background="#00000000"
-                android:paddingTop="20dp"
-                android:layout_column="18" />
+
 
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@android:drawable/ic_menu_delete"
                 android:background="#00000000"
-                android:paddingTop="20dp"
                 android:textSize="30dp"
-                android:id="@+id/cDalete" />
+                android:id="@+id/cDalete"
+                android:paddingTop="13dp" />
         </TableRow>
 
     </TableLayout>

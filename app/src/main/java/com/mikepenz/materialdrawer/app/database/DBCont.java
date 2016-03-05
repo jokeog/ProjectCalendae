@@ -20,27 +20,25 @@ public  class DBCont {
         database = db.getWritableDatabase();
     }
 
-    public void insert(Double cName,Double cNumber,String cDate){
+    public void insert(String cName,int cNumber,String cDate){
         Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);
         int day =c.get(Calendar.DAY_OF_MONTH);
         String createDate = String.valueOf(year) + "-" + String.valueOf(month + 1) + "-" + String.valueOf(day);
-
-        String temp =String.format("INSERT INTO pregnant (cName,cNumber,cDate,createDate) VALUES  (%s,%s,'%s','%s')",cName,cNumber,cDate,createDate);
-
+        String temp =String.format("INSERT INTO contracaption (cName,cNumber,cDate,createDate) VALUES  ('%s',%s,'%s','%s')",cName,cNumber,cDate,createDate);
         database.execSQL(temp);
     }
 
-    public void update(Double cName,Double cNumber,String cDate,int cid){
+    public void update(String cName,int cNumber,String cDate,int cid){
 
-        String temp =String.format("update cont set cName=%s,cNumber=%s,cDate='%s'  where cid= %s" ,cName,cNumber,cDate,cid);
+        String temp =String.format("update contracaption set cName='%s',cNumber=%s,cDate='%s'  where cid= %s" ,cName,cNumber,cDate,cid);
         database.execSQL(temp);
     }
 
     public Contracaption.mValue selectAllData(int id) {
 
-        String strSQL = String.format("SELECT cid,cName,cNumber,cDate,createDate FROM cont where cid=%s",id );
+        String strSQL = String.format("SELECT cid,cName,cNumber,cDate,createDate FROM contracaption where cid=%s",id );
         Cursor cursor = database.rawQuery(strSQL, null);
         Contracaption.mValue cont =new Contracaption.mValue();
         if(cursor != null)
@@ -48,6 +46,9 @@ public  class DBCont {
             if (cursor.moveToFirst()) {
                 do {
                     cont.cid = cursor.getInt(0);
+                    cont.cName = cursor.getString(1);
+                    cont.cNumber = cursor.getInt(2);
+                    cont.cDate = cursor.getString(3);
 
 
                 } while (cursor.moveToNext());
@@ -60,7 +61,7 @@ public  class DBCont {
 
     public int countAllData() {
 
-        String strSQL = "SELECT  COUNT(*)  FROM cont";
+        String strSQL = "SELECT  COUNT(*)  FROM contracaption";
         Cursor cursor = database.rawQuery(strSQL, null);
         int countRow=0;
         if(cursor != null)
@@ -85,7 +86,7 @@ public  class DBCont {
         String createDatetime = String.valueOf(year) + "-" + String.valueOf(month + 1) + "-" + String.valueOf(day);
 
         int id = 0;
-        String strSQL = String.format("SELECT cid FROM cont where createDate ='%s'", createDatetime);
+        String strSQL = String.format("SELECT cid FROM contracaption where createDate ='%s'", createDatetime);
         Cursor cursor = database.rawQuery(strSQL, null);
         if(cursor != null)
         {
@@ -103,7 +104,7 @@ public  class DBCont {
     }
     public void delete(int id)
     {
-        String delete =String.format( "delete from cont WHERE cid =%s " ,id );
+        String delete =String.format( "delete from contracaption WHERE cid =%s " ,id );
         database.execSQL(delete);
 
     }

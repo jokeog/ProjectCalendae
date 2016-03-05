@@ -86,6 +86,13 @@ public class Profile extends AppCompatActivity {
             dbToLayout();
         // </editor-fold
 
+        Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int day =c.get(Calendar.DAY_OF_MONTH);
+        String createDate = String.valueOf(year ) + "-" + String.valueOf(month + 1) + "-" + String.valueOf(day);
+        rDate.setText(createDate);
+
         // <editor-fold desc="เซต Fonts">
         int value[] = {R.id.textData,R.id.textName ,R.id.textEmail ,R.id.pfName,
                 R.id.pfEmail  ,R.id.pfDate };
@@ -265,6 +272,12 @@ public class Profile extends AppCompatActivity {
                     }
                 });
         builder.show();
+    }
+
+    @OnClick(R.id.pDalete)
+    void delete()
+    {
+
     }
 
     void setValueInClass()

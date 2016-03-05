@@ -64,4 +64,10 @@ public  class  DBProfile {
         return  countRow;
 
     }
+    public void delete()
+    {
+        String delete =String.format( "delete from profile WHERE id =1");
+        database.execSQL(delete);
+
+    }
 }

@@ -13,7 +13,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private final String TAG = getClass().getSimpleName();
 
     private SQLiteDatabase sqLiteDatabase;
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 11;
     //Ver 1 Add profile,pregnant
 
     public DBHelper(Context context) {
@@ -45,16 +45,16 @@ public class DBHelper extends SQLiteOpenHelper {
                 "createDate");
 
         String CREATE_CONT = String.format(" CREATE TABLE %s " +
-                        "(%s INTEGER PRIMARY KEY AUTOINCREMENT , %s REAL, %s REAL,%s NUMERIC ,%s NUMERIC)",
-                "cont",
+                        "(%s INTEGER PRIMARY KEY AUTOINCREMENT , %s NUMERIC, %s INTEGER,%s NUMERIC ,%s NUMERIC)",
+                "contracaption",
                 "cid",
-                "mWight",
-                "bWight",
-                "pDate",
+                "cName",
+                "cNumber",
+                "cDate",
                 "createDate");
 
         String CREATE_GRAPH = String.format(" CREATE TABLE %s " +
-                        "(%s INTEGER PRIMARY KEY AUTOINCREMENT , %s REAL, %s REAL, %s REAL ,%s TEXT,%s NUMERIC)",
+                        "(%s INTEGER PRIMARY KEY AUTOINCREMENT , %s REAL, %s REAL, %s REAL ,%s REAL ,%s NUMERIC)",
                 "graph",
                 "gid",
                 "date",
@@ -62,13 +62,25 @@ public class DBHelper extends SQLiteOpenHelper {
                 "height",
                 "bmi",
                 "createDate");
+
+        String CREATE_MENSTUATION = String.format(" CREATE TABLE %s " +
+                        "(%s INTEGER PRIMARY KEY AUTOINCREMENT , %s NUMERIC, %s NUMERIC, %s INTEGER ,%s REAL ,%s NUMERIC,%s NUMERIC)",
+                "menstuation",
+                "mid",
+                "startDate",
+                "endDate",
+                "phaseDate",
+                "phaseDateAvg",
+                "onlyDate",
+                "createDate");
         //Log.i(TAG, CREATE_TABLE);
 
         // create Profile table
         db.execSQL(CREATE_PERGANT);
         db.execSQL(CREATE_PROFILE);
         db.execSQL(CREATE_GRAPH);
-
+        db.execSQL(CREATE_CONT);
+        db.execSQL(CREATE_MENSTUATION);
 
     }
 
@@ -79,10 +91,15 @@ public class DBHelper extends SQLiteOpenHelper {
 
         String DROP_Profile_TABLE = "DROP TABLE IF EXISTS " + "profile";
         String DROP_Pregnant_TABLE = "DROP TABLE IF EXISTS " + "pregnant";
-
+        String DROP_Graph_TABLE = "DROP TABLE IF EXISTS " + "graph";
+        String DROP_Cont_TABLE = "DROP TABLE IF EXISTS " + "contracaption";
+        String DROP_Menstuation_TABLE = "DROP TABLE IF EXISTS " + "menstuation";
 
         db.execSQL(DROP_Profile_TABLE);
         db.execSQL(DROP_Pregnant_TABLE);
+        db.execSQL(DROP_Graph_TABLE);
+        db.execSQL(DROP_Cont_TABLE);
+        db.execSQL(DROP_Menstuation_TABLE);
         //Log.i(TAG, "Upgrade Database from " + oldVersion + " to " + newVersion);
         onCreate(db);
 

@@ -80,7 +80,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="E-mail"
+                android:text="อีเมล์"
                 android:textColor="#ff9797"
                 android:textSize="40dp"
                 android:id="@+id/textEmail" />
@@ -114,7 +114,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/imageButton3"
                     android:layout_column="17"
-                    android:src="@android:drawable/ic_input_add"
+                    android:src="@android:drawable/checkbox_on_background"
                     android:background="#00000000"
                     android:paddingEnd="20dp"
                     android:paddingStart="250dp"
@@ -125,11 +125,11 @@
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/imageButton4"
-                    android:src="@android:drawable/ic_delete"
+                    android:src="@android:drawable/ic_menu_delete"
                     android:background="#00000000"
-                    android:paddingTop="20dp"
-                    android:layout_column="18" />
+                    android:paddingTop="13dp"
+                    android:textSize="30dp"
+                    android:id="@+id/pDalete" />
             </TableRow>
 
         </TableLayout>
