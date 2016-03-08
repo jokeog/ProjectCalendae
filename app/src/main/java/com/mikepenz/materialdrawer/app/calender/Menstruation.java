@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
@@ -112,6 +113,14 @@ public class Menstruation extends AppCompatActivity {
         int color = -65536;//red
         widget.setArrowColor(color);
         widget.setSelectionColor(color);
+
+        /*widget.addDecorators(
+                new MySelectorDecorator(this),
+                new HighlightWeekendsDecorator(),
+                oneDayDecorator
+        );
+
+       new ApiSimulator().executeOnExecutor(Executors.newSingleThreadExecutor());*/
 
 
         // Handle Toolbar
@@ -294,6 +303,40 @@ public class Menstruation extends AppCompatActivity {
             super.onBackPressed();
         }
     }
+
+    private class ApiSimulator extends AsyncTask<Void, Void, List<CalendarDay>> {
+
+        @Override
+        protected List<CalendarDay> doInBackground(@NonNull Void... voids) {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            Calendar calendar = Calendar.getInstance();
+            calendar.add(Calendar.MONTH, -2);
+            ArrayList<CalendarDay> dates = new ArrayList<>();
+            for (int i = 0; i < 30; i++) {
+                CalendarDay day = CalendarDay.from(calendar);
+                dates.add(day);
+                calendar.add(Calendar.DATE, 5);
+            }
+
+            return dates;
+        }
+
+        @Override
+        protected void onPostExecute(@NonNull List<CalendarDay> calendarDays) {
+            super.onPostExecute(calendarDays);
+
+            if (isFinishing()) {
+                return;
+            }
+
+            widget.addDecorator(new EventDecorator(Color.RED, calendarDays));
+        }
+    }
+
 
 
 }

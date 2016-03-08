@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:weightSum="1"
+<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
     android:background="#FCE4EC">
 
     <TableLayout
@@ -14,16 +16,16 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="น้ำหนักแม่"
                 android:id="@+id/prenantMom"
                 android:textColor="#ff9797"
                 android:textSize="40dp"
-                android:paddingEnd="16dp"
-                android:paddingStart="16dp"
-                android:paddingTop="15dp" />
+                android:paddingTop="15dp"
+                android:layout_column="1"
+                android:layout_weight="1" />
 
             <EditText
                 android:layout_width="wrap_content"
@@ -32,7 +34,8 @@
                 android:textColor="#cbab8d"
                 android:ems="4"
                 android:textSize="30dp"
-                android:id="@+id/prenantMomm" />
+                android:id="@+id/prenantMomm"
+                android:layout_column="2" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -40,80 +43,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="kg."
                 android:id="@+id/prenantKg"
-                android:layout_column="2"
-                android:textColor="#ff9797"
-                android:textSize="40dp"
-                android:paddingStart="5dp" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="น้ำหนักลูก"
-                android:id="@+id/prenantBaby"
-                android:textColor="#ff9797"
-                android:textSize="40dp"
-                android:paddingEnd="16dp"
-                android:paddingStart="16dp"
-                android:paddingTop="15dp" />
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:textColor="#cbab8d"
-                android:textSize="30dp"
-                android:ems="4"
-                android:id="@+id/prenantBabyT" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="kg."
-                android:id="@+id/prenantBkg"
-                android:layout_column="2"
-                android:textColor="#ff9797"
-                android:textSize="40dp"
-                android:paddingStart="5dp" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="หัวใจเต้น(ลูก)"
-                android:id="@+id/prenantBabyH"
-                android:textColor="#ff9797"
-                android:textSize="40dp"
-                android:paddingEnd="16dp"
-                android:paddingStart="16dp"
-                android:paddingTop="15dp"  />
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:textColor="#cbab8d"
-                android:textSize="30dp"
-                android:id="@+id/prenantHeart" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="t/m."
-                android:id="@+id/prenantBabyTT"
-                android:layout_column="2"
+                android:layout_column="3"
                 android:textColor="#ff9797"
                 android:textSize="40dp"
                  />
@@ -124,25 +54,36 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="น้ำหนักลูก"
+                android:id="@+id/prenantBaby"
+                android:textColor="#ff9797"
+                android:textSize="40dp"
+                android:paddingTop="15dp"
+                android:layout_column="1"
+                android:layout_weight="1" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:textColor="#cbab8d"
+                android:textSize="30dp"
+                android:ems="4"
+                android:id="@+id/prenantBabyT"
+                android:layout_column="2" />
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="อัลตร้าซาวด์"
-                android:id="@+id/prenantBabya"
+                android:text="kg."
+                android:id="@+id/prenantBkg"
+                android:layout_column="3"
                 android:textColor="#ff9797"
-                android:textSize="40dp"
-                android:paddingEnd="16dp"
-                android:paddingStart="16dp"
-                android:paddingTop="15dp"  />
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageButton2"
-                android:src="@android:drawable/ic_menu_camera"
-                android:background="#00000000"
-                android:paddingTop="20dp" />
-
+                android:textSize="40dp" />
         </TableRow>
 
         <TableRow
@@ -150,16 +91,93 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="หัวใจเต้น(ลูก)"
+                android:id="@+id/prenantBabyH"
+                android:textColor="#ff9797"
+                android:textSize="40dp"
+                android:paddingTop="15dp"
+                android:layout_column="1"
+                android:layout_weight="1" />
+
+            <EditText
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:textColor="#cbab8d"
+                android:textSize="30dp"
+                android:id="@+id/prenantHeart"
+                android:layout_column="2" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="t/m."
+                android:id="@+id/prenantBabyTT"
+                android:layout_column="3"
+                android:textColor="#ff9797"
+                android:textSize="40dp"
+                 />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="อัลตร้าซาวด์"
+                android:id="@+id/prenantBabya"
+                android:textColor="#ff9797"
+                android:textSize="40dp"
+                android:paddingTop="15dp"
+                android:layout_column="1"
+                android:layout_weight="1" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButton2"
+                android:src="@android:drawable/ic_menu_camera"
+                android:background="#00000000"
+                android:paddingTop="20dp"
+                android:layout_column="2" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView android:id="@+id/imageView1"
+                android:layout_height="400px"
+                android:src="@android:drawable/ic_menu_camera"
+                android:layout_width="400px"
+                android:layout_column="1">
+
+            </ImageView>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="วันพบเเพทย์"
                 android:id="@+id/prenantPre"
                 android:textColor="#ff9797"
                 android:textSize="40dp"
-                android:paddingEnd="16dp"
-                android:paddingStart="16dp"
-                android:paddingTop="15dp" />
+                android:paddingTop="15dp"
+                android:layout_column="1"
+                android:layout_weight="1" />
 
             <Button
                 android:layout_width="wrap_content"
@@ -167,7 +185,7 @@
                 android:inputType="textPersonName"
                 android:id="@+id/pregnantButtonDay"
                 android:textSize="25dp"
-                android:layout_column="1"
+                android:layout_column="2"
                 android:text="วว/ดด/ปป"
                 android:background="#F48FB1"
                 android:clickable="false" />
@@ -178,87 +196,88 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="ข้อความ"
                 android:id="@+id/prenantMsg"
                 android:textColor="#ff9797"
                 android:textSize="40dp"
-                android:paddingEnd="16dp"
-                android:paddingStart="16dp"
-                android:paddingTop="15dp" />
+                android:paddingTop="15dp"
+                android:layout_column="1"
+                android:layout_weight="1" />
 
+        </TableRow>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="15"
+            android:id="@+id/prenantMessage"
+            android:textColor="#cbab8d"
+            android:textSize="30dp"
+            android:layout_column="0"
+            android:layout_span="2" />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="แจ้งเตือนวันพบแพทย์  "
+                android:textColor="#ff9797"
+                android:textSize="40dp"
+                android:id="@+id/pnTextView"
+                android:paddingLeft="12dp"
+                android:layout_column="1"
+                android:layout_weight="1" />
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/pnSwitch1"
+                android:textColor="#ff9797"
+                android:textSize="25dp"
+                android:background="#F48FB1"
+                android:backgroundTint="#d0b3e1"
+                android:layout_gravity="center_horizontal"
+                android:allowUndo="false"
+                android:layout_column="2" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+            <ImageButton
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/pregnantSave"
+                android:src="@android:drawable/checkbox_on_background"
+                android:background="#00000000"
+                android:paddingTop="20dp"
+                android:textSize="30dp"
+                android:elevation="@dimen/abc_action_button_min_width_material"
+                android:layout_column="1" />
+
+            <ImageButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/ic_menu_delete"
+                android:background="#00000000"
+                android:paddingTop="20dp"
+                android:textSize="30dp"
+                android:id="@+id/pregnantDalete"
+                android:layout_column="2"
+                android:layout_weight="1" />
         </TableRow>
 
     </TableLayout>
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="15"
-        android:id="@+id/prenantMessage"
-        android:textColor="#cbab8d"
-        android:textSize="30dp"
-        android:layout_column="0"
-        android:layout_span="2"
-        android:paddingEnd="20dp"
-        android:paddingStart="20dp" />
 
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="แจ้งเตือนวันพบแพทย์  "
-            android:textColor="#ff9797"
-            android:textSize="40dp"
-            android:id="@+id/pnTextView"
-            android:paddingLeft="12dp" />
-
-        <Switch
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/pnSwitch1"
-            android:textColor="#ff9797"
-            android:textSize="25dp"
-            android:background="#F48FB1"
-            android:backgroundTint="#d0b3e1"
-            android:layout_gravity="center_horizontal"
-            android:allowUndo="false" />
-    </TableRow>
-
-
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageButton
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/pregnantSave"
-            android:src="@android:drawable/checkbox_on_background"
-            android:background="#00000000"
-            android:paddingEnd="13dp"
-            android:paddingTop="20dp"
-            android:textSize="30dp"
-            android:elevation="@dimen/abc_action_button_min_width_material"
-            android:paddingStart="250dp" />
-
-
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@android:drawable/ic_menu_delete"
-            android:background="#00000000"
-            android:paddingTop="20dp"
-            android:textSize="30dp"
-            android:id="@+id/pregnantDalete" />
-    </TableRow>
-
-</LinearLayout>
+</ScrollView>

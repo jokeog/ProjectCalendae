@@ -4,20 +4,28 @@ import android.annotation.TargetApi;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.mikepenz.materialdrawer.app.DrawerActivity;
 import com.mikepenz.materialdrawer.app.R;
 import com.mikepenz.materialdrawer.app.database.DBHelper;
 import com.mikepenz.materialdrawer.app.database.DBPregnant;
@@ -28,6 +36,9 @@ import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
+
+import java.io.File;
+import java.io.FileOutputStream;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -63,6 +74,8 @@ public class Pregnant extends AppCompatActivity {
     TextView heart;
     @Bind(R.id.prenantMessage)
     TextView message;
+    @Bind(R.id.imageView1)
+    ImageView imageView;
 
 
     @Override
@@ -132,6 +145,17 @@ public class Pregnant extends AppCompatActivity {
         heart.setText(String.valueOf(dbValue.heart));
         pDate.setText(dbValue.pDate);
         message.setText(dbValue.message);
+        File imgFile = new  File(String.format("%s/image/imp%s.jpg",DrawerActivity.appPath,dataBase.CheckIDInDay()));
+
+        if(imgFile.exists()){
+
+            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+
+            ImageView myImage = (ImageView) findViewById(R.id.imageView1);
+
+            myImage.setImageBitmap(myBitmap);
+
+        }
     }
 
 
@@ -234,6 +258,10 @@ public class Pregnant extends AppCompatActivity {
                         } else {
                             dataBase.insert(value.mWight, value.bWight, value.heart, value.pDate, value.message);
                         }
+                        if(photo != null)
+                        {
+                            createDirectoryAndSaveFile(String.format("imp%s",dataBase.CheckIDInDay()));
+                        }
                         finish();
                     }
                 });
@@ -262,19 +290,65 @@ public class Pregnant extends AppCompatActivity {
     }
 
     void setMwight() {
+        if(heart.getText().toString().length()!=0)
         value.mWight = Double.parseDouble(mWight.getText().toString());
     }
 
     void setBwight() {
+        if(heart.getText().toString().length()!=0)
         value.bWight = Double.parseDouble(bWight.getText().toString());
     }
 
     void setHeart() {
+        if(heart.getText().toString().length()!=0)
         value.heart = Double.parseDouble(heart.getText().toString());
     }
 
     void setPregnantDate() {
+
+        if(pDate.getText().toString()!="วว/ดด/ปป")
         value.pDate = pDate.getText().toString();
+
+    }
+
+    private static final int CAMERA_REQUEST = 1888;
+    private  Bitmap photo;
+
+    @OnClick(R.id.imageButton2)
+    void OpenCamera(){
+        Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(cameraIntent, CAMERA_REQUEST);
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
+            photo = (Bitmap) data.getExtras().get("data");
+            imageView.setImageBitmap(photo);
+        }
+    }
+
+    private void createDirectoryAndSaveFile( String fileName) {
+        Bitmap imageToSave=photo;
+        String s= DrawerActivity.appPath+"/image";
+        File direct = new File(s);
+
+        if (!direct.exists()) {
+            File wallpaperDirectory = new File(s);
+            wallpaperDirectory.mkdirs();
+        }
+
+        File file = new File(new File(s), fileName+".jpg");
+        if (file.exists()) {
+            file.delete();
+        }
+        try {
+            FileOutputStream out = new FileOutputStream(file);
+            imageToSave.compress(Bitmap.CompressFormat.JPEG, 100, out);
+            out.flush();
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

@@ -1,6 +1,8 @@
 package com.mikepenz.materialdrawer.app;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -62,6 +64,7 @@ public class DrawerActivity extends AppCompatActivity {
     private AccountHeader headerResult = null;
     private Drawer result = null;
     private boolean opened = false;
+    public  static  String appPath;
     List<DBMain.CalenderValue> dateList;
 
     @Bind(R.id.calendarView)
@@ -121,6 +124,15 @@ public class DrawerActivity extends AppCompatActivity {
         );
 
         setCalendarWidget();
+
+        PackageManager m = getPackageManager();
+        appPath = getPackageName();
+        try {
+            PackageInfo p = m.getPackageInfo(appPath, 0);
+            appPath = p.applicationInfo.dataDir;
+        } catch (PackageManager.NameNotFoundException e) {
+
+        }
 
         //new ApiSimulator().executeOnExecutor(Executors.newSingleThreadExecutor());
 
