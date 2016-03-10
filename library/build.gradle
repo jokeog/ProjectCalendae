@@ -31,7 +31,7 @@ dependencies {
     compile "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
     compile "com.android.support:recyclerview-v7:${rootProject.ext.supportLibVersion}"
     compile "com.android.support:support-annotations:${rootProject.ext.supportLibVersion}"
-
+    compile 'com.facebook.android:facebook-android-sdk:4.1.0'
 
     // used to base on some backwards compatible themes
     // contains util classes to support various android versions, and clean up code

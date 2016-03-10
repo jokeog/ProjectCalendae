@@ -14,10 +14,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.bumptech.glide.Glide;
+import com.facebook.*;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.mikepenz.materialdrawer.app.database.DBHelper;
 import com.mikepenz.materialdrawer.app.database.DBGraph;
 
@@ -25,6 +31,8 @@ import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.app.R;
+import com.mikepenz.materialdrawer.app.facebook.IntentUtil;
+import com.mikepenz.materialdrawer.app.facebook.PrefUtil;
 import com.mikepenz.materialdrawer.app.utils.CalendarFont;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
@@ -55,6 +63,13 @@ import com.mikephil.charting.data.ScatterData;
 import com.mikephil.charting.data.ScatterDataSet;
 import com.mikephil.charting.interfaces.datasets.IDataSet;
 import com.mikephil.charting.utils.ColorTemplate;
+
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.Profile;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -108,13 +123,48 @@ public class Graph extends AppCompatActivity {
     };
 
     public String resultBMI[];
+
+    private CallbackManager callbackManager;
+    private TextView info;
+    private ImageView profileImgView;
+    private LoginButton loginButton;
+
+    private PrefUtil prefUtil;
+    private IntentUtil intentUtil;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 
         super.onCreate(savedInstanceState);
-        // <editor-fold desc=" โหลด layout">
+
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        callbackManager = CallbackManager.Factory.create();
         setContentView(R.layout.activity_graph);
+        //onFaceBook();
+
+        LoginManager.getInstance().registerCallback(callbackManager,
+                new FacebookCallback<LoginResult>() {
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
+                        // App code
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        // App code
+                    }
+
+                    @Override
+                    public void onError(FacebookException exception) {
+                        // App code
+                    }
+                });
+
+        // <editor-fold desc=" โหลด layout">
+
         setTitle(R.string.drawer_item_Graph_header);
         ButterKnife.bind(this);//เริ่มให้ปลั๊กอิน
         // </editor-fold
@@ -580,7 +630,7 @@ public class Graph extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         setValueInClass();
-                        dataBase.insert(value.date, value.weight, value.height, value.bmi,value.mg);
+                        dataBase.insert(value.date, value.weight, value.height, value.bmi, value.mg);
                         finish();
                     }
                 });
@@ -620,6 +670,78 @@ public class Graph extends AppCompatActivity {
                     }
                 });
         builder.show();
+    }
+
+    private String message(Profile profile) {
+        StringBuilder stringBuffer = new StringBuilder();
+        if (profile != null) {
+            stringBuffer.append("Welcome ").append(profile.getName());
+        }
+        return stringBuffer.toString();
+    }
+
+    private void deleteAccessToken() {
+        AccessTokenTracker accessTokenTracker = new AccessTokenTracker() {
+            @Override
+            protected void onCurrentAccessTokenChanged(
+                    AccessToken oldAccessToken,
+                    AccessToken currentAccessToken) {
+
+                if (currentAccessToken == null){
+                    //User logged out
+                    prefUtil.clearToken();
+                    clearUserArea();
+                }
+            }
+        };
+    }
+
+    private void clearUserArea() {
+        info.setText("");
+        profileImgView.setImageDrawable(null);
+    }
+
+    public void onFaceBook() {
+
+
+        prefUtil = new PrefUtil(this);
+        intentUtil = new IntentUtil(this);
+
+        info = (TextView) findViewById(R.id.info);
+        profileImgView = (ImageView) findViewById(R.id.profile_img);
+        loginButton = (LoginButton) findViewById(R.id.login_button1);
+
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                com.facebook.Profile profile = com.facebook.Profile.getCurrentProfile();
+                info.setText(message(profile));
+
+                String userId = loginResult.getAccessToken().getUserId();
+                String accessToken = loginResult.getAccessToken().getToken();
+
+                // save accessToken to SharedPreference
+                prefUtil.saveAccessToken(accessToken);
+
+                String profileImgUrl = "https://graph.facebook.com/" + userId + "/picture?type=large";
+
+
+                Glide.with(Graph.this)
+                        .load(profileImgUrl)
+                        .into(profileImgView);
+            }
+
+            @Override
+            public void onCancel() {
+                info.setText("Login attempt cancelled.");
+            }
+
+            @Override
+            public void onError(FacebookException e) {
+                e.printStackTrace();
+                info.setText("Login attempt failed.");
+            }
+        });
     }
 
 

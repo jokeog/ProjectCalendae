@@ -7,12 +7,16 @@
     android:background="#FCE4EC"
     tools:context=".MainCalendar$PlaceholderFragment">
 
+
+
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
+
+
 
         <TableRow
             android:layout_width="match_parent"
@@ -26,8 +30,7 @@
                 android:id="@+id/gText1"
                 android:textColor="#ff9797"
                 android:textSize="40dp"
-                android:paddingEnd="10dp"
-                android:paddingStart="10dp" />
+                android:paddingEnd="10dp" />
 
 
             <Button
@@ -213,14 +216,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-
                 <com.mikephil.charting.charts.CombinedChart
                     android:id="@+id/chart1"
                     android:layout_width="350dp"
                     android:layout_height="550dp"/>
+
+
             </TableRow>
 
         </TableLayout>
+
+        <ImageView
+            android:id="@+id/profile_img"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_centerHorizontal="true" />
+
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/login_button1" />
 
         <SeekBar
             android:layout_width="wrap_content"
