@@ -4,7 +4,9 @@ import android.annotation.TargetApi;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -21,9 +23,13 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.facebook.*;
+import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.facebook.share.Sharer;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareDialog;
 import com.mikepenz.materialdrawer.app.database.DBHelper;
 import com.mikepenz.materialdrawer.app.database.DBGraph;
 
@@ -87,18 +93,11 @@ public class Graph extends AppCompatActivity {
         public double height;
         public double bmi;
         public String mg;
-
-
     }
 
     mValue value = new mValue();
     mValue dbValue = new mValue();
     private DBGraph dataBase;
-
- //   private Drawer result = null;
-
-
-
 
     @Bind(R.id.gDateS)
     public Button rDateS;
@@ -110,7 +109,8 @@ public class Graph extends AppCompatActivity {
     public TextView rBmi;
     @Bind(R.id.gMg)
     public TextView rMg;
-
+    @Bind(R.id.shar_button1)
+    public com.facebook.share.widget.ShareButton shareButton;
     private Drawer result = null;
 
     MaterialCalendarView widget;
@@ -123,17 +123,15 @@ public class Graph extends AppCompatActivity {
     };
 
     public String resultBMI[];
-
     private CallbackManager callbackManager;
+    private CallbackManager callbackManagerS;
+    ShareDialog shareDialog;
     private TextView info;
     private ImageView profileImgView;
     private LoginButton loginButton;
-
     private PrefUtil prefUtil;
     private IntentUtil intentUtil;
-
-
-
+    private  com.facebook.Profile profile;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
@@ -142,29 +140,18 @@ public class Graph extends AppCompatActivity {
 
         FacebookSdk.sdkInitialize(getApplicationContext());
         callbackManager = CallbackManager.Factory.create();
+        callbackManagerS = CallbackManager.Factory.create();
         setContentView(R.layout.activity_graph);
-        //onFaceBook();
-
-        LoginManager.getInstance().registerCallback(callbackManager,
-                new FacebookCallback<LoginResult>() {
-                    @Override
-                    public void onSuccess(LoginResult loginResult) {
-                        // App code
-                    }
-
-                    @Override
-                    public void onCancel() {
-                        // App code
-                    }
-
-                    @Override
-                    public void onError(FacebookException exception) {
-                        // App code
-                    }
-                });
-
-        // <editor-fold desc=" โหลด layout">
-
+        onFaceBook();
+        profile = com.facebook.Profile.getCurrentProfile();
+        if(profile != null)
+        {
+            String userId = profile.getId();
+            String profileImgUrl = "https://graph.facebook.com/" + userId + "/picture?type=large";
+            Glide.with(Graph.this)
+                    .load(profileImgUrl)
+                    .into(profileImgView);
+        }
         setTitle(R.string.drawer_item_Graph_header);
         ButterKnife.bind(this);//เริ่มให้ปลั๊กอิน
         // </editor-fold
@@ -281,14 +268,12 @@ public class Graph extends AppCompatActivity {
         rBmi.setText(String.valueOf(dbValue.bmi));
 
     }
-
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         //add the values which need to be saved from the drawer to the bundle
         outState = result.saveInstanceState(outState);
         super.onSaveInstanceState(outState);
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -300,7 +285,6 @@ public class Graph extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
     @Override
     public void onBackPressed() {
         //handle the back press :D close the drawer first and if the drawer is closed close the activity
@@ -310,9 +294,6 @@ public class Graph extends AppCompatActivity {
             super.onBackPressed();
         }
     }
-
-
-
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public static void showDatePickerDialog(Context context, CalendarDay day,
                                             DatePickerDialog.OnDateSetListener callback) {
@@ -325,9 +306,6 @@ public class Graph extends AppCompatActivity {
         dialog.show();
 
     }
-
-
-
     void setValueInClass() {
         this.setDate();
         this.setWeight();
@@ -339,18 +317,14 @@ public class Graph extends AppCompatActivity {
     void setDate() {
         value.date = rDateS.getText().toString();
     }
-
     void setWeight() {
         value.weight = Double.parseDouble(rWeight.getText().toString());
     }
-
     void setHeight() {
         value.height = Double.parseDouble(rHeight.getText().toString());
     }
-
     void setBMI() { value.bmi = Double.parseDouble(rBmi.getText().toString());   }
     void setMg() { value.mg = rMg.getText().toString();    }
-
 
 
     @OnClick (R.id.gCalBMI)
@@ -396,7 +370,6 @@ public class Graph extends AppCompatActivity {
         TextView editTextbmi = (TextView)findViewById(R.id.gMg);
         editTextbmi.setText( gbmi, TextView.BufferType.EDITABLE);
     }
-
     @OnClick (R.id.gBMI)
     void onClickgBmi ()
     {
@@ -506,7 +479,6 @@ public class Graph extends AppCompatActivity {
 
     }
 
-
     private LineData generateLineData() {
 
         LineData d = new LineData();
@@ -533,7 +505,6 @@ public class Graph extends AppCompatActivity {
 
         return d;
     }
-
     private BarData generateBarData() {
 
         BarData d = new BarData();
@@ -553,7 +524,6 @@ public class Graph extends AppCompatActivity {
 
         return d;
     }
-
     protected ScatterData generateScatterData() {
 
         ScatterData d = new ScatterData();
@@ -572,7 +542,6 @@ public class Graph extends AppCompatActivity {
 
         return d;
     }
-
     protected CandleData generateCandleData() {
 
         CandleData d = new CandleData();
@@ -591,7 +560,6 @@ public class Graph extends AppCompatActivity {
 
         return d;
     }
-
     protected BubbleData generateBubbleData() {
 
         BubbleData bd = new BubbleData();
@@ -618,7 +586,6 @@ public class Graph extends AppCompatActivity {
         return (float) (Math.random() * range) + startsfrom;
     }
 
-
     @OnClick(R.id.gSave)
     void saveGraph() {
         android.app.AlertDialog.Builder builder =
@@ -643,7 +610,6 @@ public class Graph extends AppCompatActivity {
                 });
         builder.show();
     }
-
     @OnClick(R.id.gDelete)
     void delete()
     {
@@ -672,13 +638,6 @@ public class Graph extends AppCompatActivity {
         builder.show();
     }
 
-    private String message(Profile profile) {
-        StringBuilder stringBuffer = new StringBuilder();
-        if (profile != null) {
-            stringBuffer.append("Welcome ").append(profile.getName());
-        }
-        return stringBuffer.toString();
-    }
 
     private void deleteAccessToken() {
         AccessTokenTracker accessTokenTracker = new AccessTokenTracker() {
@@ -695,12 +654,36 @@ public class Graph extends AppCompatActivity {
             }
         };
     }
-
     private void clearUserArea() {
         info.setText("");
         profileImgView.setImageDrawable(null);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+//        deleteAccessToken();
+//        Profile profile = Profile.getCurrentProfile();
+//        info.setText(message(profile));
+        AppEventsLogger.activateApp(this);
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // Logs 'app deactivate' App Event.
+        AppEventsLogger.deactivateApp(this);
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+    private String message(Profile profile) {
+        StringBuilder stringBuffer = new StringBuilder();
+        if (profile != null) {
+            stringBuffer.append("Welcome ").append(profile.getName());
+        }
+        return stringBuffer.toString();
+    }
     public void onFaceBook() {
 
 
@@ -715,7 +698,7 @@ public class Graph extends AppCompatActivity {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 com.facebook.Profile profile = com.facebook.Profile.getCurrentProfile();
-                info.setText(message(profile));
+                //info.setText(message(profile));
 
                 String userId = loginResult.getAccessToken().getUserId();
                 String accessToken = loginResult.getAccessToken().getToken();
@@ -744,5 +727,22 @@ public class Graph extends AppCompatActivity {
         });
     }
 
+    @OnClick(R.id.shar_button1)
+    public void shardToFaceBook(){
+
+        shareDialog = new ShareDialog(this);
+        String userId = profile.getId();
+        String profileImgUrl = "https://graph.facebook.com/" + userId + "/picture?type=large";
+        ShareLinkContent linkContent = new ShareLinkContent.Builder()
+                .setContentTitle("Calendar Wooman -History Weighs")
+                .setContentDescription(
+                        "พี่โจ๊ก หนูมิ้นจุ๊ฟฟฟมาแก้ต่อเองนะค่ะ <3")
+                .setContentUrl(Uri.parse("https://www.google.com/"))
+                .setImageUrl(Uri.parse(profileImgUrl))
+                .build();
+
+        shareDialog.show(linkContent);
+
+    }
 
 }
