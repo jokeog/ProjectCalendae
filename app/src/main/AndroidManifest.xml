@@ -91,6 +91,7 @@
 
 
     </application>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <!--<provider android:authorities="com.facebook.appFacebookContentProvider{APP_ID}"-->
         <!--android:name="com.facebook.FacebookContentProvider"-->

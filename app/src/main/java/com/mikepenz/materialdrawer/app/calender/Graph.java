@@ -736,7 +736,7 @@ public class Graph extends AppCompatActivity {
         ShareLinkContent linkContent = new ShareLinkContent.Builder()
                 .setContentTitle("Calendar Wooman -History Weighs")
                 .setContentDescription(
-                        "พี่โจ๊ก หนูมิ้นจุ๊ฟฟฟมาแก้ต่อเองนะค่ะ <3")
+                        "Test Projuct Minny <3")
                 .setContentUrl(Uri.parse("https://www.google.com/"))
                 .setImageUrl(Uri.parse(profileImgUrl))
                 .build();

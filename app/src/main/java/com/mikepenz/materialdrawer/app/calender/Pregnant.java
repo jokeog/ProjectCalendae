@@ -7,18 +7,22 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +43,7 @@ import com.prolificinteractive.materialcalendarview.CalendarDay;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -76,6 +81,12 @@ public class Pregnant extends AppCompatActivity {
     TextView message;
     @Bind(R.id.imageView1)
     ImageView imageView;
+    @Bind(R.id.prenantHour)
+    Spinner hour;
+    @Bind(R.id.prenantMin)
+    Spinner min;
+
+    private static int RESULT_LOAD_IMAGE = 1;
 
 
     @Override
@@ -86,6 +97,8 @@ public class Pregnant extends AppCompatActivity {
         setContentView(R.layout.activity_pregnant);
         setTitle(R.string.drawer_item_Pregnant_header);
         ButterKnife.bind(this);
+
+
 
         DBHelper mHelper;
         mHelper = new DBHelper(this);
@@ -102,7 +115,8 @@ public class Pregnant extends AppCompatActivity {
 
         int value[] = {R.id.prenantMom, R.id.prenantBabyTT,R.id.prenantBabyT, R.id.prenantPre,R.id.prenantHeart,R.id.prenantMomm,
                 R.id.prenantBkg, R.id.prenantBaby, R.id.prenantHeart, R.id.prenantBabya, R.id.prenantBabyH
-                , R.id.prenantKg, R.id.prenantMessage, R.id.pregnantButtonDay, R.id.prenantMsg, R.id.pnSwitch1, R.id.pnTextView};
+                , R.id.prenantKg, R.id.prenantMessage, R.id.pregnantButtonDay, R.id.prenantMsg, R.id.pnSwitch1, R.id.pnTextView
+        ,R.id.pregtextView,R.id.pregnantPhoto};
 
         CalendarFont font = new CalendarFont();
 
@@ -139,11 +153,19 @@ public class Pregnant extends AppCompatActivity {
     }
 
     private void dbToLayout(){
+        String parts[]= dbValue.pDate.split("-");
+        String date = parts[0] +"-"+ parts[1] +"-"+ parts[2] ;
+         String hourP = parts[3];
+        String minP = parts[4];
+
 
         mWight.setText(String.valueOf(dbValue.mWight));
         bWight.setText(String.valueOf(dbValue.bWight));
         heart.setText(String.valueOf(dbValue.heart));
-        pDate.setText(dbValue.pDate);
+        pDate.setText(date);
+        hour.setSelection(Integer.parseInt(hourP));
+        min.setSelection(Integer.parseInt( minP));
+
         message.setText(dbValue.message);
         File imgFile = new  File(String.format("%s/image/imp%s.jpg",DrawerActivity.appPath,dataBase.CheckIDInDay()));
 
@@ -305,9 +327,10 @@ public class Pregnant extends AppCompatActivity {
     }
 
     void setPregnantDate() {
-
-        if(pDate.getText().toString()!="วว/ดด/ปป")
-        value.pDate = pDate.getText().toString();
+        String hourText = hour.getSelectedItem().toString();
+        String minText = min.getSelectedItem().toString();
+        if( pDate.getText().toString()!= " "&& hourText != " "&& minText!="วว/ดด/ปป")
+        value.pDate = pDate.getText().toString() +"-"+hourText + "-" +minText;
 
     }
 
@@ -324,6 +347,22 @@ public class Pregnant extends AppCompatActivity {
         if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
             photo = (Bitmap) data.getExtras().get("data");
             imageView.setImageBitmap(photo);
+        }
+
+        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = { MediaStore.Images.Media.DATA };
+
+            Cursor cursor = getContentResolver().query(selectedImage,
+                    filePathColumn, null, null, null);
+            cursor.moveToFirst();
+
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String picturePath = cursor.getString(columnIndex);
+            cursor.close();
+
+            imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+
         }
     }
 
@@ -349,6 +388,15 @@ public class Pregnant extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    @OnClick(R.id.pregnantPhoto)
+    void photo(){
+        Intent i = new Intent(
+                Intent.ACTION_PICK,
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+        startActivityForResult(i, RESULT_LOAD_IMAGE);
+
     }
 
 }

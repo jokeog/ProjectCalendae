@@ -71,44 +71,6 @@ public class DrawerActivity extends AppCompatActivity {
     MaterialCalendarView widget;
     private final OneDayDecorator oneDayDecorator = new OneDayDecorator();
 
-    private class ApiSimulator extends AsyncTask<Void, Void, List<CalendarDay>> {
-
-        @Override
-        protected List<CalendarDay> doInBackground(@NonNull Void... voids) {
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            Calendar calendar = Calendar.getInstance();
-            ArrayList<CalendarDay> dates = new ArrayList<>();
-            /*for (int i = 0; i < 5; i++) {
-                CalendarDay day = CalendarDay.from(calendar);
-                dates.add(day);
-                calendar.add(Calendar.DATE, 5);
-            }*/
-
-            for(DBMain.CalenderValue e :dateList)
-            {
-                calendar.set(e.year, e.month-1, e.day);
-                CalendarDay day = CalendarDay.from(calendar);
-                dates.add(day);
-            }
-
-            return dates;
-        }
-
-        @Override
-        protected void onPostExecute(@NonNull List<CalendarDay> calendarDays) {
-            super.onPostExecute(calendarDays);
-
-            if (isFinishing()) {
-                return;
-            }
-
-            widget.addDecorator(new EventDecorator(Color.rgb(3, 21, 255), calendarDays));
-        }
-    }
 
 
     @Override
@@ -116,15 +78,15 @@ public class DrawerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sample_dark_toolbar);
         ButterKnife.bind(this);
-
+        // <editor-fold desc=" Set Calendar">
         widget.addDecorators(
                 new MySelectorDecorator(this),
                 new HighlightWeekendsDecorator(),
                 oneDayDecorator
         );
-
         setCalendarWidget();
-
+        // </editor-fold
+        // <editor-fold desc=" Set ที่เก็บ File">
         PackageManager m = getPackageManager();
         appPath = getPackageName();
         try {
@@ -133,12 +95,8 @@ public class DrawerActivity extends AppCompatActivity {
         } catch (PackageManager.NameNotFoundException e) {
 
         }
-
-        //new ApiSimulator().executeOnExecutor(Executors.newSingleThreadExecutor());
-
-        //Remove line to test RTL support
-        //getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
-
+        // </editor-fold
+        // <editor-fold desc=" Set Menu">
         // Handle Toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -319,6 +277,7 @@ public class DrawerActivity extends AppCompatActivity {
         }
 
         result.updateBadge(4, new StringHolder(""));
+        // </editor-fold
     }
 
     private OnCheckedChangeListener onCheckedChangeListener = new OnCheckedChangeListener() {
@@ -358,6 +317,45 @@ public class DrawerActivity extends AppCompatActivity {
         DBMain dataBase=new DBMain(mHelper);
         dateList = dataBase.selectAllData();
         new ApiSimulator().executeOnExecutor(Executors.newSingleThreadExecutor());
+    }
+
+    private class ApiSimulator extends AsyncTask<Void, Void, List<CalendarDay>> {
+
+        @Override
+        protected List<CalendarDay> doInBackground(@NonNull Void... voids) {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            Calendar calendar = Calendar.getInstance();
+            ArrayList<CalendarDay> dates = new ArrayList<>();
+            /*for (int i = 0; i < 5; i++) {
+                CalendarDay day = CalendarDay.from(calendar);
+                dates.add(day);
+                calendar.add(Calendar.DATE, 5);
+            }*/
+
+            for(DBMain.CalenderValue e :dateList)
+            {
+                calendar.set(e.year, e.month-1, e.day);
+                CalendarDay day = CalendarDay.from(calendar);
+                dates.add(day);
+            }
+
+            return dates;
+        }
+
+        @Override
+        protected void onPostExecute(@NonNull List<CalendarDay> calendarDays) {
+            super.onPostExecute(calendarDays);
+
+            if (isFinishing()) {
+                return;
+            }
+
+            widget.addDecorator(new EventDecorator(Color.rgb(3, 21, 255), calendarDays));
+        }
     }
 
 
