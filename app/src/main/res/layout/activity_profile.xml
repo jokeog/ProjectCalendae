@@ -4,7 +4,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:background="#FCE4EC"
+    android:background="#FFFFFF"
     tools:context=".MainCalendar$PlaceholderFragment">
 
     <TableLayout
@@ -24,7 +24,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="ชื่อ"
                 android:id="@+id/textName"
-                android:textColor="#ff9797"
+                android:textColor="#000000"
                 android:textSize="40dp"
                 android:paddingEnd="25dp"
                 android:paddingStart="25dp" />
@@ -36,7 +36,7 @@
                 android:inputType="textPersonName"
                 android:ems="7"
                 android:id="@+id/pfName"
-                android:textColor="#cbab8d"
+                android:textColor="#484648"
                 android:textSize="30dp"
                 android:layout_column="1" />
 
@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="วันที่เกิด"
-            android:textColor="#ff9797"
+            android:textColor="#000000"
             android:textSize="40dp"
             android:id="@+id/textData"
             android:layout_column="0" />
@@ -66,8 +66,8 @@
                 android:id="@+id/pfDate"
                 android:text="ปป-ดด-วว"
                 android:textSize="30dp"
-                android:background="#F48FB1"
-                android:backgroundTint="#F48FB1"
+                android:background="#817c82"
+                android:backgroundTint="#f3c3fa"
                 android:layout_column="1" />
 
         </TableRow>
@@ -81,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="อีเมล์"
-                android:textColor="#ff9797"
+                android:textColor="#000000"
                 android:textSize="40dp"
                 android:id="@+id/textEmail" />
 
@@ -91,7 +91,7 @@
                 android:inputType="textEmailAddress"
                 android:ems="7"
                 android:id="@+id/pfEmail"
-                android:textColor="#cbab8d"
+                android:textColor="#484648"
                 android:textSize="30dp"
                 android:layout_column="1" />
 

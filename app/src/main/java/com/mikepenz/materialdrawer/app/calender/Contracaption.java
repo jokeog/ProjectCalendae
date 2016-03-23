@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,6 +54,10 @@ public class Contracaption extends AppCompatActivity {
     EditText cNumber;
     @Bind(R.id.cDate)
     Button cDate;
+    @Bind(R.id.cHour)
+    Spinner hour;
+    @Bind(R.id.cMin)
+    Spinner min;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,10 +69,10 @@ public class Contracaption extends AppCompatActivity {
         ButterKnife.bind(this);
 
 
-        int value[] = {R.id.cName,R.id.cNumber,R.id.cDate,R.id.cText1,R.id.cText2,R.id.cText3,R.id.cText4,R.id.cText5,R.id.cSwitch1};
+        int value[] = {R.id.cName,R.id.cNumber,R.id.cDate,R.id.cText1,R.id.cView,R.id.cText2,R.id.cText3,R.id.cText4,R.id.cText5,R.id.cSwitch1,R.id.cHour,R.id.cMin};
 
-        CalendarFont font =new CalendarFont() ;
-        font.setFonts(value, this) ;
+        CalendarFont font = new CalendarFont() ;
+        font.setFonts(value, this);
 
         DBHelper mHelper;
         mHelper = new DBHelper(this);
@@ -114,10 +119,16 @@ public class Contracaption extends AppCompatActivity {
 
 
     private void dbToLayout(){
+        String parts[]= dbValue.cDate.split("-");
+        String date = parts[0] +"-"+ parts[1] +"-"+ parts[2] ;
+        String hourP = parts[3];
+        String minP = parts[4];
 
         cName.setText(dbValue.cName);
         cNumber.setText(String.valueOf(dbValue.cNumber));
-        cDate.setText(dbValue.cDate);
+        cDate.setText(date);
+        hour.setSelection(Integer.parseInt(hourP));
+        min.setSelection(Integer.parseInt(minP));
 
 }
 
@@ -218,7 +229,10 @@ public class Contracaption extends AppCompatActivity {
     }
 
     void setcDate() {
-        value.cDate = cDate.getText().toString();
+        String hourText = hour.getSelectedItem().toString();
+        String minText = min.getSelectedItem().toString();
+        if( cDate.getText().toString()!= " "&& hourText != " "&& minText!="วว/ดด/ปป")
+            value.cDate = cDate.getText().toString() +"-"+hourText + "-" +minText;
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

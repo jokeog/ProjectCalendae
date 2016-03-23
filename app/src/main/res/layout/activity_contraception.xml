@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FCE4EC">
+    android:background="#FFFFFF">
 
     <TableLayout
         android:layout_width="match_parent"
@@ -17,7 +17,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="ชื่อยาคุม"
                 android:id="@+id/cText1"
-                android:textColor="#ff9797"
+                android:textColor="#000000"
                 android:textSize="40dp"
                 android:layout_column="2"
                 android:padding="12dp" />
@@ -28,7 +28,7 @@
                 android:inputType="textPersonName"
                 android:ems="5"
                 android:id="@+id/cName"
-                android:textColor="#cbab8d"
+                android:textColor="#484648"
                 android:textSize="30dp"
                 android:layout_column="3" />
 
@@ -45,7 +45,7 @@
                 android:text="จำนวนยาคุม"
                 android:id="@+id/cText2"
                 android:layout_column="2"
-                android:textColor="#ff9797"
+                android:textColor="#000000"
                 android:textSize="40dp"
                 android:padding="12dp" />
 
@@ -55,7 +55,7 @@
                 android:inputType="number"
                 android:ems="5"
                 android:id="@+id/cNumber"
-                android:textColor="#cbab8d"
+                android:textColor="#484648"
                 android:textSize="30dp"
                 android:layout_column="3"
                 android:ellipsize="end" />
@@ -65,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="เม็ด"
-                android:textColor="#ff9797"
+                android:textColor="#000000"
                 android:textSize="40dp"
                 android:id="@+id/cText5"
                 android:layout_column="10"
@@ -84,7 +84,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="วันที่เริ่มกินยาคุม"
-            android:textColor="#ff9797"
+            android:textColor="#000000"
             android:textSize="40dp"
             android:id="@+id/cText3"
             android:padding="12dp" />
@@ -96,9 +96,52 @@
             android:textSize="28dp"
             android:layout_column="1"
             android:text="    วว/ดด/ปป    "
-            android:background="#F48FB1"
-            android:backgroundTint="#F48FB1" />
+            android:background="#817c82"
+            android:backgroundTint="#f3c3fa" />
     </TableRow>
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="เวลา               "
+                android:textColor="#000000"
+                android:textSize="40dp"
+                android:id="@+id/cView" />
+
+            <Spinner
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:textColor="#000000"
+                android:id="@+id/cHour"
+                android:entries="@array/hour"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":"
+                android:textColor="#000000"
+                android:textSize="40dp"
+                android:id="@+id/editText" />
+
+            <Spinner
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:textColor="#000000"
+                android:id="@+id/cMin"
+                android:entries="@array/min"
+                android:layout_column="21" />
+        </TableRow>
+
+    </TableLayout>
 
     <TableRow
         android:layout_width="match_parent"
@@ -109,7 +152,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="แจ้งเตือน        "
-            android:textColor="#ff9797"
+            android:textColor="#000000"
             android:textSize="40dp"
             android:id="@+id/cText4"
             android:paddingLeft="12dp" />
@@ -119,8 +162,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/cSwitch1"
             android:textSize="20dp"
-            android:background="#F48FB1"
-            android:backgroundTint="#FCE4EC"
+            android:background="#817c82"
+            android:backgroundTint="#f3c3fa"
             android:layout_gravity="center_horizontal"
             android:allowUndo="false" />
     </TableRow>

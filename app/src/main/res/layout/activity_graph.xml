@@ -4,7 +4,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:background="#FCE4EC"
+    android:background="#FFFFFF"
     tools:context=".MainCalendar$PlaceholderFragment">
 
 
@@ -24,7 +24,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="วันบันทึก"
                 android:id="@+id/gText1"
-                android:textColor="#ff9797"
+                android:textColor="#000000"
                 android:textSize="40dp"
                 android:paddingEnd="10dp" />
 
@@ -36,9 +36,10 @@
                 android:ems="5"
                 android:id="@+id/gDateS"
                 android:text="ปป-ดด-วว"
+                android:textColor="#000000"
                 android:textSize="30dp"
-                android:background="#ffbbbb"
-                android:backgroundTint="#ffbbbb"
+                android:background="#BEBEBE"
+                android:backgroundTint="#f3c3fa"
                 android:layout_column="1" />
 
         </TableRow>
@@ -59,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="น้ำหนัก"
-                android:textColor="#ff9797"
+                android:textColor="#000000"
                 android:textSize="40dp"
                 android:id="@+id/gText3" />
 
@@ -68,7 +69,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:ems="6"
-                android:textColor="#cbab8d"
+                android:textColor="#484648"
                 android:id="@+id/gWeight"
                 android:textSize="30dp"
                 android:layout_column="1" />
@@ -78,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="kg."
-                android:textColor="#ff9797"
+                android:textColor="#000000"
                 android:textSize="35dp"
                 android:id="@+id/gText5" />
 
@@ -93,7 +94,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="ส่วนสูง"
-                android:textColor="#ff9797"
+                android:textColor="#000000"
                 android:textSize="40dp"
                 android:id="@+id/gText4"
                 android:layout_column="0" />
@@ -103,7 +104,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:ems="6"
-                android:textColor="#cbab8d"
+                android:textColor="#484648"
                 android:id="@+id/gHeight"
                 android:textSize="30dp"
                 android:layout_column="1" />
@@ -113,7 +114,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="cm."
-                android:textColor="#ff9797"
+                android:textColor="#000000"
                 android:textSize="35dp"
                 android:id="@+id/gText6" />
         </TableRow>
@@ -125,18 +126,19 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#ff9797"
+                android:textColor="#484648"
                 android:textSize="30dp"
                 android:text="แนะนำสุขภาพ"
                 android:id="@+id/gBMI"
                 android:layout_column="0"
-                android:background="#ffbbbb" />
+                android:backgroundTint="#BEBEBE"
+                android:background="#BEBEBE" />
 
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="คำนวณค่า BMI"
-                android:textColor="#ff9797"
+                android:textColor="#000000"
                 android:textSize="30dp"
                 android:id="@+id/gCalBMI"
                 android:layout_column="1" />
@@ -146,20 +148,20 @@
         android:layout_width="wrap_content"
         android:layout_height="47dp"
         android:id="@+id/gMessage"
-        android:textColor="#bb475d"
+        android:textColor="#000000"
         android:textSize="45sp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:background="#ffbbbb" />
+        android:background="#BEBEBE" />
         <TextView android:scrollbars = "vertical"
             android:layout_width="wrap_content"
             android:layout_height="46dp"
             android:id="@+id/gMg"
-            android:textColor="#bb475d"
+            android:textColor="#000000"
             android:textSize="45sp"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:background="#ffbbbb" />
+            android:background="#BEBEBE" />
 
 
         <TableLayout

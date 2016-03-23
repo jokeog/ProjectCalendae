@@ -588,6 +588,7 @@ public class Graph extends AppCompatActivity {
 
     @OnClick(R.id.gSave)
     void saveGraph() {
+
         android.app.AlertDialog.Builder builder =
                 new android.app.AlertDialog.Builder(this);
         builder.setTitle("บันทึกข้อมูล");
