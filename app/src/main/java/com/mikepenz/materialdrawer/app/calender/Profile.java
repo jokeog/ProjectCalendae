@@ -230,8 +230,6 @@ public class Profile extends AppCompatActivity {
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
-                       finish();
                     }
                 });
 
@@ -243,30 +241,17 @@ public class Profile extends AppCompatActivity {
                     }
                 });
 
-
         setName();
         if(value.name.equals("")){
-
             builder.setMessage("กรุณากรอกข้อมูลชื่อ");
-
             builder.show();
-
-
+            return;
         }
         setBirthDay();
 
         if(value.birthDay.equals("")){
-            builder.setTitle("แจ้งเตือน");
             builder.setMessage("กรุณากรอกข้อมูลวันที่เกิด");
-            builder.setNegativeButton(getString(android.R.string.ok),
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.cancel();
-                        }
-                    });
             builder.show();
-
             return;
         }
         setEmail();
@@ -276,17 +261,8 @@ public class Profile extends AppCompatActivity {
             String emailreg = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
             Boolean mail = line.matches(emailreg);
             if (mail == false) {
-                builder.setTitle("แจ้งเตือน");
                 builder.setMessage("รูปแบบ E-mail ไม่ถูกต้อง");
-                builder.setNegativeButton(getString(android.R.string.ok),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
-                            }
-                        });
                 builder.show();
-
                 return;
             }
 
