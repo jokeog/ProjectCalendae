@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center"
-    android:background="#FFFFFF"
+    android:background="#88DDBB"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -20,23 +20,27 @@
         android:id="@+id/frame_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
 
 
         <com.prolificinteractive.materialcalendarview.MaterialCalendarView
             android:id="@+id/calendarView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="367dp"
+            android:layout_height="390dp"
             />
         <ImageButton
-            android:layout_width="73dp"
-            android:layout_height="wrap_content"
+            android:layout_width="401dp"
+            android:layout_height="match_parent"
             android:id="@+id/mainRefesh"
 
             android:src="@android:drawable/stat_notify_sync"
-            android:background="#484648"
-            android:backgroundTint="#484648"
-            android:layout_weight="1"
+            android:background="#B9E3AE"
+            android:backgroundTint="#B9E3AE"
             android:layout_gravity="right" />
     </LinearLayout>
 </RelativeLayout>

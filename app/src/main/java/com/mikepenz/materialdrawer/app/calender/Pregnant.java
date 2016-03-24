@@ -296,6 +296,7 @@ public class Pregnant extends AppCompatActivity {
                         if(photo != null)
                         {
                             createDirectoryAndSaveFile(String.format("imp%s", dataBase.CheckIDInDay()));
+
                         }
                         if(pnSwitch.isChecked() && value.pDate != null)
                         onAddEventClicked();
@@ -387,8 +388,8 @@ public class Pregnant extends AppCompatActivity {
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
             String picturePath = cursor.getString(columnIndex);
             cursor.close();
-
-            imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+            photo =BitmapFactory.decodeFile(picturePath);
+            imageView.setImageBitmap(photo);
 
         }
     }

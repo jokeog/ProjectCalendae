@@ -5,7 +5,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:background="#FFFFFF">
+    android:background="#88DDBB">
 
     <TableLayout
         android:layout_width="match_parent"
@@ -34,6 +34,8 @@
                 android:textColor="#484648"
                 android:ems="4"
                 android:textSize="30dp"
+                android:background="#B9E3AE"
+                android:backgroundTint="#B9E3AE"
                 android:id="@+id/prenantMomm"
                 android:layout_column="2" />
 
@@ -72,6 +74,8 @@
                 android:textColor="#484648"
                 android:textSize="30dp"
                 android:ems="4"
+                android:background="#B9E3AE"
+                android:backgroundTint="#B9E3AE"
                 android:id="@+id/prenantBabyT"
                 android:layout_column="2" />
 
@@ -108,6 +112,8 @@
                 android:inputType="number"
                 android:textColor="#484648"
                 android:textSize="30dp"
+                android:background="#B9E3AE"
+                android:backgroundTint="#B9E3AE"
                 android:id="@+id/prenantHeart"
                 android:layout_column="2" />
 
@@ -147,8 +153,8 @@
                 android:layout_column="2"
                 android:text="แกลเลอรี่"
                 android:textColor="#484648"
-                android:background="#817c82"
-                android:backgroundTint="#f3c3fa"
+                android:background="#B9E3AE"
+                android:backgroundTint="#B9E3AE"
                 android:clickable="false" />
 
             <ImageButton
@@ -201,8 +207,8 @@
                 android:textColor="#484648"
                 android:layout_column="2"
                 android:text="วว/ดด/ปป"
-                android:background="#817c82"
-                android:backgroundTint="#f3c3fa"
+                android:background="#B9E3AE"
+                android:backgroundTint="#B9E3AE"
                 android:clickable="false" />
         </TableRow>
 
@@ -227,6 +233,7 @@
                     android:layout_width="50dp"
                     android:layout_height="30dp"
                     android:textColor="#000000"
+                    android:background="#B9E3AE"
                     android:id="@+id/prenantHour"
                     android:entries="@array/hour"
                     />
@@ -243,6 +250,7 @@
                     android:layout_width="50dp"
                     android:layout_height="30dp"
                     android:textColor="#000000"
+                    android:background="#B9E3AE"
                     android:id="@+id/prenantMin"
                     android:entries="@array/min"
                     android:layout_column="21" />
@@ -301,8 +309,8 @@
                 android:id="@+id/pnSwitch1"
                 android:textColor="#000000"
                 android:textSize="25dp"
-                android:background="#817c82"
-                android:backgroundTint="#f3c3fa"
+                android:background="#B9E3AE"
+                android:backgroundTint="#B9E3AE"
                 android:layout_gravity="center_horizontal"
                 android:allowUndo="false"
                 android:layout_column="2" />

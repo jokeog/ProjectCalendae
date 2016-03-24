@@ -219,6 +219,19 @@ public class Contracaption extends AppCompatActivity {
             builder.show();
             return;
         }
+        setCname();
+        if(value.cName.equals("")){
+            builder.setMessage("กรุณากรอกชื่อยาคุมกำเนิด");
+            builder.show();
+            return;
+        }
+        setcDate();
+        if(value.cDate.equals("    วว/ดด/ปป    -00-00")){
+            builder.setMessage("กรุณาใส่ วว/ดด/ปป");
+            builder.show();
+            return;
+        }
+
 
 
         builder.setTitle("บันทึกข้อมูล");
@@ -264,6 +277,7 @@ public class Contracaption extends AppCompatActivity {
     void setcDate() {
         String hourText = hour.getSelectedItem().toString();
         String minText = min.getSelectedItem().toString();
+
         if( cDate.getText().toString()!= " "&& hourText != " "&& minText!="วว/ดด/ปป")
             value.cDate = cDate.getText().toString() +"-"+hourText + "-" +minText;
     }
