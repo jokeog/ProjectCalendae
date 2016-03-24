@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Material DEFAULT colors -->
-    <color name="material_drawer_primary">#B3B3D9</color>
+    <color name="material_drawer_primary">#000000</color>
     <color name="material_drawer_primary_dark">#D0B3E1</color>
-    <color name="material_drawer_primary_light">#B3B3D9</color>
+    <color name="material_drawer_primary_light">#484648</color>
     <color name="material_drawer_accent">#B3B3D9</color>
 //////เริ่ม
     <!-- MaterialDrawer DEFAULT colors -->
     <color name="material_drawer_background">@color/md_light_background</color>
     <!-- MaterialDrawer DEFAULT text / items colors -->
-    <color name="material_drawer_primary_text">#EFA694</color>
+    <color name="material_drawer_primary_text">#000000</color>
     <!-- is overwritten for all devices > 21 (fix that transparent colors are not possible for tinting on < 21) -->
     <color name="material_drawer_primary_icon">#F9A484</color>
-    <color name="material_drawer_secondary_text">#FF9797</color>
+    <color name="material_drawer_secondary_text">#000000</color>
     <color name="material_drawer_hint_text">#FDB4BF</color>
     <color name="material_drawer_hint_icon">#FFDDDD</color>
     <color name="material_drawer_divider">#CBAB8D</color>
