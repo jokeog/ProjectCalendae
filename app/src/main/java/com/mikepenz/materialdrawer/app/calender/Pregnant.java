@@ -295,7 +295,7 @@ public class Pregnant extends AppCompatActivity {
                         }
                         if(photo != null)
                         {
-                            createDirectoryAndSaveFile(String.format("imp%s",dataBase.CheckIDInDay()));
+                            createDirectoryAndSaveFile(String.format("imp%s", dataBase.CheckIDInDay()));
                         }
                         if(pnSwitch.isChecked() && value.pDate != null)
                         onAddEventClicked();
@@ -449,7 +449,7 @@ public class Pregnant extends AppCompatActivity {
         intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME,endTime);
         intent.putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, false);
 
-        intent.putExtra(CalendarContract.Events.TITLE, "แจ้งเตือนการคุมกำเนิด");
+        intent.putExtra(CalendarContract.Events.TITLE, "แจ้งเตือนวันที่นัดพบแพทย์");
         intent.putExtra(CalendarContract.Events.DESCRIPTION,  "วันที่นัดพบแพทย์");
         intent.putExtra(CalendarContract.Events.EVENT_LOCATION, "My Guest House");
         intent.putExtra(CalendarContract.Events.RRULE, "FREQ=YEARLY");

@@ -34,8 +34,9 @@
             android:id="@+id/mainRefesh"
 
             android:src="@android:drawable/stat_notify_sync"
-            android:background="#00000000"
-            android:layout_weight="0.40"
+            android:background="#484648"
+            android:backgroundTint="#484648"
+            android:layout_weight="1"
             android:layout_gravity="right" />
     </LinearLayout>
 </RelativeLayout>

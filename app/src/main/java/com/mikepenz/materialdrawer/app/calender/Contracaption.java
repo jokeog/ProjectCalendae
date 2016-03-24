@@ -4,8 +4,10 @@ import android.annotation.TargetApi;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +31,8 @@ import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
+
+import java.util.Calendar;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -58,7 +63,8 @@ public class Contracaption extends AppCompatActivity {
     Spinner hour;
     @Bind(R.id.cMin)
     Spinner min;
-
+    @Bind(R.id.cSwitch1)
+    Switch cSwitch;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
@@ -69,7 +75,7 @@ public class Contracaption extends AppCompatActivity {
         ButterKnife.bind(this);
 
 
-        int value[] = {R.id.cName,R.id.cNumber,R.id.cDate,R.id.cText1,R.id.cView,R.id.cText2,R.id.cText3,R.id.cText4,R.id.cText5,R.id.cSwitch1,R.id.cHour,R.id.cMin};
+        int value[] = {R.id.cView,R.id.cName,R.id.cNumber,R.id.cDate,R.id.cText1,R.id.cView,R.id.cText2,R.id.cText3,R.id.cText4,R.id.cText5,R.id.cSwitch1};
 
         CalendarFont font = new CalendarFont() ;
         font.setFonts(value, this);
@@ -190,6 +196,31 @@ public class Contracaption extends AppCompatActivity {
     void savePregnant() {
         android.app.AlertDialog.Builder builder =
                 new android.app.AlertDialog.Builder(this);
+        builder.setTitle("แจ้งเตือน");
+
+        builder.setPositiveButton(getString(android.R.string.ok),
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+
+        builder.setNegativeButton(getString(android.R.string.cancel),
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+        setCnumber();
+        if(value.cNumber != 21 && value.cNumber != 28){
+            builder.setMessage("กรุณาใส่จำนวนยาคุม 21 หรือ 28 เม็ด");
+            builder.show();
+            return;
+        }
+
+
         builder.setTitle("บันทึกข้อมูล");
         builder.setMessage("ยืนยันการบันทึกข้อมูล");
         builder.setPositiveButton(getString(android.R.string.ok),
@@ -202,6 +233,8 @@ public class Contracaption extends AppCompatActivity {
                         } else {
                             dataBase.insert(value.cName, value.cNumber, value.cDate);
                         }
+                        if(cSwitch.isChecked() && value.cDate != null)
+                            onAddEventClicked();
                         finish();
                     }
                 });
@@ -254,5 +287,35 @@ public class Contracaption extends AppCompatActivity {
         } else {
             super.onBackPressed();
         }
+    }
+    public void onAddEventClicked(){
+        View view;
+        Intent intent = new Intent(Intent.ACTION_INSERT);
+        intent.setType("vnd.android.cursor.item/event");
+
+        Calendar cal = Calendar.getInstance();
+        String[] parts = value.cDate.split("-");
+        cal.set(
+                Integer.parseInt(parts[0])
+                ,Integer.parseInt(parts[1])
+                ,Integer.parseInt(parts[2])
+                ,Integer.parseInt(parts[3])
+                ,Integer.parseInt(parts[4])
+        );
+
+        long startTime = cal.getTimeInMillis();
+        long endTime = cal.getTimeInMillis()  + 60 * 60 * 1000;
+
+
+        intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, startTime);
+        intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME,endTime);
+        intent.putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, false);
+
+        intent.putExtra(CalendarContract.Events.TITLE, "แจ้งเตือนการคุมกำเนิด");
+        intent.putExtra(CalendarContract.Events.DESCRIPTION,  "วันที่ต้องกินยาคุม");
+        intent.putExtra(CalendarContract.Events.EVENT_LOCATION, "My Guest House");
+        intent.putExtra(CalendarContract.Events.RRULE, "FREQ=YEARLY");
+
+        startActivity(intent);
     }
 }

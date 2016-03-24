@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="#88DDBB">
 
     <TableLayout
         android:layout_width="match_parent"
@@ -30,7 +30,9 @@
                 android:id="@+id/cName"
                 android:textColor="#484648"
                 android:textSize="30dp"
-                android:layout_column="3" />
+                android:layout_column="3"
+                android:backgroundTint="#B9E3AE"
+                android:background="#B9E3AE" />
 
         </TableRow>
 
@@ -49,16 +51,18 @@
                 android:textSize="40dp"
                 android:padding="12dp" />
 
+
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="number"
+                android:inputType="textPersonName"
                 android:ems="5"
                 android:id="@+id/cNumber"
                 android:textColor="#484648"
                 android:textSize="30dp"
                 android:layout_column="3"
-                android:ellipsize="end" />
+                android:backgroundTint="#B9E3AE"
+                android:background="#B9E3AE" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -93,11 +97,12 @@
             android:id="@+id/cDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="28dp"
+            android:textSize="35dp"
             android:layout_column="1"
             android:text="    วว/ดด/ปป    "
-            android:background="#817c82"
-            android:backgroundTint="#f3c3fa" />
+            android:textColor="#000000"
+            android:background="#B9E3AE"
+            android:backgroundTint="#B9E3AE" />
     </TableRow>
     <TableLayout
         android:layout_width="match_parent"
@@ -114,6 +119,7 @@
                 android:text="เวลา               "
                 android:textColor="#000000"
                 android:textSize="40dp"
+                android:padding="12dp"
                 android:id="@+id/cView" />
 
             <Spinner
@@ -121,6 +127,7 @@
                 android:layout_height="30dp"
                 android:textColor="#000000"
                 android:id="@+id/cHour"
+                android:background="#B9E3AE"
                 android:entries="@array/hour"
                 />
 
@@ -129,6 +136,7 @@
                 android:layout_height="wrap_content"
                 android:text=":"
                 android:textColor="#000000"
+
                 android:textSize="40dp"
                 android:id="@+id/editText" />
 
@@ -138,7 +146,8 @@
                 android:textColor="#000000"
                 android:id="@+id/cMin"
                 android:entries="@array/min"
-                android:layout_column="21" />
+                android:layout_column="21"
+                android:background="#B9E3AE" />
         </TableRow>
 
     </TableLayout>
@@ -162,8 +171,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/cSwitch1"
             android:textSize="20dp"
-            android:background="#817c82"
-            android:backgroundTint="#f3c3fa"
+            android:background="#B9E3AE"
+            android:backgroundTint="#B9E3AE"
             android:layout_gravity="center_horizontal"
             android:allowUndo="false" />
     </TableRow>
