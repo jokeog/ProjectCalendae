@@ -37,6 +37,7 @@ import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.app.R;
+import com.mikepenz.materialdrawer.app.database.DBMain;
 import com.mikepenz.materialdrawer.app.facebook.IntentUtil;
 import com.mikepenz.materialdrawer.app.facebook.PrefUtil;
 import com.mikepenz.materialdrawer.app.utils.CalendarFont;
@@ -79,6 +80,7 @@ import com.facebook.login.widget.LoginButton;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -97,7 +99,10 @@ public class Graph extends AppCompatActivity {
 
     mValue value = new mValue();
     mValue dbValue = new mValue();
+    List<DBMain.GraphValue> dbValueG;
     private DBGraph dataBase;
+    private DBMain dataBaseG;
+
 
     @Bind(R.id.gDateS)
     public Button rDateS;
@@ -116,11 +121,9 @@ public class Graph extends AppCompatActivity {
     MaterialCalendarView widget;
 
     private CombinedChart mChart;
-    private final int itemcount = 12;
+    private int itemcount = 12;
 
-    protected String[] mMonths = new String[] {
-            "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"
-    };
+    protected String[] mMonths;
 
     public String resultBMI[];
     private CallbackManager callbackManager;
@@ -166,6 +169,7 @@ public class Graph extends AppCompatActivity {
         DBHelper mHelper;
         mHelper = new DBHelper(this);
         dataBase = new DBGraph(mHelper);
+        dataBaseG = new DBMain(mHelper);
         int id=dataBase.CheckIDInDay();
         if(id!=0)
         {
@@ -226,39 +230,59 @@ public class Graph extends AppCompatActivity {
                     }
                 }).build();
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(false);
+        dbValueG = dataBaseG.selectAllDataGraph();
 
-        mChart = (CombinedChart) findViewById(R.id.chart1);
-        mChart.setDescription("");
-        mChart.setBackgroundColor(Color.rgb(252,228,236));
-        mChart.setDrawGridBackground(false);
-        mChart.setDrawBarShadow(false);
+        if(dbValueG.size()!=0)
+        {
+            itemcount = dbValueG.size();
+            mMonths = new String[itemcount];
+            float[] bmi = new float[itemcount];
+            float[] wight = new float[itemcount];
 
-        // draw bars behind lines
-        mChart.setDrawOrder(new DrawOrder[] {
-                DrawOrder.BAR, DrawOrder.BUBBLE, DrawOrder.CANDLE, DrawOrder.LINE, DrawOrder.SCATTER
-        });
+            int i=0;
+            for (DBMain.GraphValue e:dbValueG) {
+                mMonths[i]= e.date;
+                bmi[i]=(float) e.bmi;
+                wight[i]=(float) e.weight;
+                i++;
+            }
 
-        YAxis rightAxis = mChart.getAxisRight();
-        rightAxis.setDrawGridLines(false);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeButtonEnabled(false);
 
-        YAxis leftAxis = mChart.getAxisLeft();
-        leftAxis.setDrawGridLines(false);
+            mChart = (CombinedChart) findViewById(R.id.chart1);
+            mChart.setDescription("");
+            mChart.setBackgroundColor(Color.rgb(252,228,236));
+            mChart.setDrawGridBackground(false);
+            mChart.setDrawBarShadow(false);
 
-        XAxis xAxis = mChart.getXAxis();
-        xAxis.setPosition(XAxisPosition.BOTH_SIDED);
+            // draw bars behind lines
+            mChart.setDrawOrder(new DrawOrder[] {
+                    DrawOrder.BAR, DrawOrder.BUBBLE, DrawOrder.CANDLE, DrawOrder.LINE, DrawOrder.SCATTER
+            });
 
-        CombinedData data = new CombinedData(mMonths);
+            YAxis rightAxis = mChart.getAxisRight();
+            rightAxis.setDrawGridLines(false);
 
-        data.setData(generateLineData());
-        data.setData(generateBarData());
+            YAxis leftAxis = mChart.getAxisLeft();
+            leftAxis.setDrawGridLines(false);
+
+            XAxis xAxis = mChart.getXAxis();
+            xAxis.setPosition(XAxisPosition.BOTH_SIDED);
+
+            CombinedData data = new CombinedData(mMonths);
+
+            data.setData(generateLineData(bmi));
+            data.setData(generateBarData(wight));
 //        data.setData(generateBubbleData());
 //         data.setData(generateScatterData());
 //         data.setData(generateCandleData());
 
-        mChart.setData(data);
-        mChart.invalidate();
+            mChart.setData(data);
+            mChart.invalidate();
+        }
+
+
     }
     private void dbToLayout(){
 
@@ -307,6 +331,7 @@ public class Graph extends AppCompatActivity {
 
     }
     void setValueInClass() {
+        value.gid = dbValue.gid;
         this.setDate();
         this.setWeight();
         this.setHeight();
@@ -323,7 +348,7 @@ public class Graph extends AppCompatActivity {
     void setHeight() {
         value.height = Double.parseDouble(rHeight.getText().toString());
     }
-    void setBMI() { value.bmi = Double.parseDouble(rBmi.getText().toString());   }
+    void setBMI() { value.bmi = value.weight / ((value.height/100)*(value.height/100));   }
     void setMg() { value.mg = rMg.getText().toString();    }
 
 
@@ -479,14 +504,14 @@ public class Graph extends AppCompatActivity {
 
     }
 
-    private LineData generateLineData() {
+    private LineData generateLineData(float[] value) {
 
         LineData d = new LineData();
 
         ArrayList<Entry> entries = new ArrayList<Entry>();
 
         for (int index = 0; index < itemcount; index++)
-            entries.add(new Entry(getRandom(15, 10), index));
+            entries.add(new Entry(value[index], index));
 
         LineDataSet set = new LineDataSet(entries, "Line DataSet");
         set.setColor(Color.rgb(240, 238, 70));
@@ -505,14 +530,14 @@ public class Graph extends AppCompatActivity {
 
         return d;
     }
-    private BarData generateBarData() {
+    private BarData generateBarData(float[] value) {
 
         BarData d = new BarData();
 
         ArrayList<BarEntry> entries = new ArrayList<BarEntry>();
 
         for (int index = 0; index < itemcount; index++)
-            entries.add(new BarEntry(getRandom(15, 30), index));
+            entries.add(new BarEntry(value[index], index));
 
         BarDataSet set = new BarDataSet(entries, "Bar DataSet");
         set.setColor(Color.rgb(60, 220, 78));
@@ -598,7 +623,11 @@ public class Graph extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         setValueInClass();
-                        dataBase.insert(value.date, value.weight, value.height, value.bmi, value.mg);
+                        if (dbValue.gid != 0) {
+                            dataBase.update(value.date, value.weight, value.height, value.bmi, value.gid);
+                        }else {
+                            dataBase.insert(value.date, value.weight, value.height, value.bmi, value.mg);
+                        }
                         finish();
                     }
                 });

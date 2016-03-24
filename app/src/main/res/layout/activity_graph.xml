@@ -217,7 +217,7 @@
                 <com.mikephil.charting.charts.CombinedChart
                     android:id="@+id/chart1"
                     android:layout_width="350dp"
-                    android:layout_height="550dp"/>
+                    android:layout_height="320dp"/>
 
 
             </TableRow>
