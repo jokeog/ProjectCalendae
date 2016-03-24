@@ -44,8 +44,11 @@ public  class DBMain {
                     CalenderValue value =new CalenderValue();
                     value.dateType = cursor.getInt(0);
                     value.date = cursor.getString(1);
-                    String string = cursor.getString(1);
-                    String[] parts = string.split("-");
+
+                    if(value.date.equals("null"))
+                        continue;
+
+                    String[] parts = value.date.split("-");
                     value.year = Integer.valueOf(parts[0]);
                     value.month = Integer.valueOf(parts[1]);
                     value.day = Integer.valueOf(parts[2]);

@@ -316,6 +316,7 @@ public class DrawerActivity extends AppCompatActivity {
         mHelper = new DBHelper(this);
         DBMain dataBase=new DBMain(mHelper);
         dateList = dataBase.selectAllData();
+        if(dateList.size()!=0)
         new ApiSimulator().executeOnExecutor(Executors.newSingleThreadExecutor());
     }
 

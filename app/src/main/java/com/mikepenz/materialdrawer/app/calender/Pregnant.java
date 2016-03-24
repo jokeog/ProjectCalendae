@@ -15,6 +15,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.CalendarContract;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
@@ -23,6 +24,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,6 +46,7 @@ import com.prolificinteractive.materialcalendarview.CalendarDay;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Calendar;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -85,6 +88,8 @@ public class Pregnant extends AppCompatActivity {
     Spinner hour;
     @Bind(R.id.prenantMin)
     Spinner min;
+    @Bind(R.id.pnSwitch1)
+    Switch pnSwitch;
 
     private static int RESULT_LOAD_IMAGE = 1;
 
@@ -153,17 +158,25 @@ public class Pregnant extends AppCompatActivity {
     }
 
     private void dbToLayout(){
-        String parts[]= dbValue.pDate.split("-");
-        String date = parts[0] +"-"+ parts[1] +"-"+ parts[2] ;
-         String hourP = parts[3];
-        String minP = parts[4];
+        String  date="";
+        String hourP="";
+        String minP="";
+        if(!dbValue.pDate.equals("null")) {
+            String parts[] = dbValue.pDate.split("-");
+            date = parts[0] + "-" + parts[1] + "-" + parts[2];
+            hourP = parts[3];
+            minP = parts[4];
+        }
 
 
         mWight.setText(String.valueOf(dbValue.mWight));
         bWight.setText(String.valueOf(dbValue.bWight));
         heart.setText(String.valueOf(dbValue.heart));
+        if(!date.equals(""))
         pDate.setText(date);
+        if(!hourP.equals(""))
         hour.setSelection(Integer.parseInt(hourP));
+        if(!minP.equals(""))
         min.setSelection(Integer.parseInt( minP));
 
         message.setText(dbValue.message);
@@ -284,6 +297,8 @@ public class Pregnant extends AppCompatActivity {
                         {
                             createDirectoryAndSaveFile(String.format("imp%s",dataBase.CheckIDInDay()));
                         }
+                        if(pnSwitch.isChecked() && value.pDate != null)
+                        onAddEventClicked();
                         finish();
                     }
                 });
@@ -329,8 +344,20 @@ public class Pregnant extends AppCompatActivity {
     void setPregnantDate() {
         String hourText = hour.getSelectedItem().toString();
         String minText = min.getSelectedItem().toString();
-        if( pDate.getText().toString()!= " "&& hourText != " "&& minText!="วว/ดด/ปป")
+
+        if(hourText == " ")
+        {
+            hourText = "00";
+        }
+
+        if(minText == " ")
+        {
+            minText = "00";
+        }
+
+        if(!pDate.getText().toString().equals("วว/ดด/ปป"))
         value.pDate = pDate.getText().toString() +"-"+hourText + "-" +minText;
+
 
     }
 
@@ -397,6 +424,37 @@ public class Pregnant extends AppCompatActivity {
 
         startActivityForResult(i, RESULT_LOAD_IMAGE);
 
+    }
+
+    public void onAddEventClicked(){
+        View view;
+        Intent intent = new Intent(Intent.ACTION_INSERT);
+        intent.setType("vnd.android.cursor.item/event");
+
+        Calendar cal = Calendar.getInstance();
+        String[] parts = value.pDate.split("-");
+        cal.set(
+                Integer.parseInt(parts[0])
+                ,Integer.parseInt(parts[1])
+                ,Integer.parseInt(parts[2])
+                ,Integer.parseInt(parts[3])
+                ,Integer.parseInt(parts[4])
+        );
+
+        long startTime = cal.getTimeInMillis();
+        long endTime = cal.getTimeInMillis()  + 60 * 60 * 1000;
+
+
+        intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, startTime);
+        intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME,endTime);
+        intent.putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, false);
+
+        intent.putExtra(CalendarContract.Events.TITLE, "แจ้งเตือนการคุมกำเนิด");
+        intent.putExtra(CalendarContract.Events.DESCRIPTION,  "วันที่นัดพบแพทย์");
+        intent.putExtra(CalendarContract.Events.EVENT_LOCATION, "My Guest House");
+        intent.putExtra(CalendarContract.Events.RRULE, "FREQ=YEARLY");
+
+        startActivity(intent);
     }
 
 }
