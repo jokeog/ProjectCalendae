@@ -224,6 +224,51 @@ public class Profile extends AppCompatActivity {
     void saveProfile(){
         android.app.AlertDialog.Builder builder =
                 new android.app.AlertDialog.Builder(this);
+        builder.setTitle("แจ้งเตือน");
+
+        builder.setPositiveButton(getString(android.R.string.ok),
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                       finish();
+                    }
+                });
+
+        builder.setNegativeButton(getString(android.R.string.cancel),
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+
+        setName();
+        if(value.name.equals("")){
+
+            builder.setMessage("กรุณากรอกข้อมูลชื่อ");
+
+            builder.show();
+
+
+        }
+        setBirthDay();
+
+        if(value.birthDay.equals("")){
+            builder.setTitle("แจ้งเตือน");
+            builder.setMessage("กรุณากรอกข้อมูลวันที่เกิด");
+            builder.setNegativeButton(getString(android.R.string.ok),
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+            builder.show();
+
+            return;
+        }
         setEmail();
         String line = value.email;
         if(line != null)
@@ -246,6 +291,7 @@ public class Profile extends AppCompatActivity {
             }
 
         }
+
 
         builder.setTitle("บันทึกข้อมูล");
         builder.setMessage("ยืนยันการบันทึกข้อมูล");
