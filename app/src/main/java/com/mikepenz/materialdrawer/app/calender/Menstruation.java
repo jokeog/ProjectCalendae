@@ -51,11 +51,16 @@ public class Menstruation extends AppCompatActivity {
         public int mid=0;
         public String startDate;
         public String enDate;
+        public Double phaseDateAvg;
+        public int phaseDate;
+        public String onlyDate;
     }
     mValue value = new mValue();
     mValue dbValue = new mValue();
    private DBMenstruation dataBase;
     private Drawer result = null;
+
+    boolean isTest=true;
 
     @Bind(R.id.msButtonS)
     Button startDate;
@@ -102,7 +107,7 @@ public class Menstruation extends AppCompatActivity {
         mHelper = new DBHelper(this);
         dataBase = new DBMenstruation(mHelper);
         int id=dataBase.CheckIDInDay();
-        if(id!=0)
+        if(id!=0 && isTest==false)
         {
             dbValue = dataBase.selectAllData(id);
             dbToLayout();
@@ -223,13 +228,15 @@ public class Menstruation extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         setValueInClass();
-                        if (dbValue.mid != 0) {
+                        List<Menstruation.mValue> testData = dataBase.selectAllData();
+                        if (dbValue.mid != 0 && isTest==false) {
                             dataBase.update(value.startDate, value.enDate, value.mid);
                            // dataBase.phaseDateAvg();
                         } else {
                             try {
                                 dataBase.insert(value.startDate, value.enDate);
-                               // dataBase.phaseDateAvg();
+                                dataBase.phaseDateAvg();
+                                dataBase.selectAllData();
                             } catch (ParseException e) {
                                 e.printStackTrace();
                             }

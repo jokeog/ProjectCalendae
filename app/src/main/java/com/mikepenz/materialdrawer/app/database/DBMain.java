@@ -41,9 +41,9 @@ public  class DBMain {
         public String mg;
     }
 
-    public List<CalenderValue> selectAllData() {
+    public List<CalenderValue> selectAllData(String table,String column) {
 
-        String strSQL = "SELECT 2,pDate FROM pregnant ";
+        String strSQL = String.format("SELECT 2,%s FROM %s ",column,table);
         Cursor cursor = database.rawQuery(strSQL, null);
 
         List<CalenderValue> valueList = new ArrayList<CalenderValue>();

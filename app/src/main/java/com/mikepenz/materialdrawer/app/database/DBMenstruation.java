@@ -8,9 +8,11 @@ import com.mikepenz.materialdrawer.app.calender.Menstruation;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 
@@ -67,25 +69,72 @@ public  class DBMenstruation {
 
         database.execSQL(sqlUpdate);
 
+        double avg=28;
+        if(id>=3)
+        {
+            String strSQL = String.format("SELECT AVG(phaseDateAvg) FROM menstuation where mid>=%s ",id-2 );
+
+            Cursor cursor = database.rawQuery(strSQL, null);
+
+            if(cursor != null)
+            {
+                if (cursor.moveToFirst()) {
+                    do {
+                        avg=cursor.getDouble(0);
+
+                    } while (cursor.moveToNext());
+                }
+            }
+            cursor.close();
+
+            String phaseAvg = String.format("update menstuation set phaseDateAvg = %s where mid=%s", avg, id);
+            database.execSQL(phaseAvg);
+        }
+        else
+        {
+            String phaseAvg = String.format("update menstuation set phaseDateAvg = phaseDate where mid=%s", id);
+            database.execSQL(phaseAvg);
+        }
 
 
-        String strSQL = String.format("SELECT AVG(phaseDateAvg) FROM menstuation where mid>=%s ",id-2 );
-        double avg=0;
+
+        String startDate="";
+        String strSQL = String.format("SELECT startDate FROM menstuation where mid=%s ",id);
         Cursor cursor = database.rawQuery(strSQL, null);
-
-        if(cursor != null)
+        if(cursor !=null)
         {
             if (cursor.moveToFirst()) {
                 do {
-                    avg=cursor.getDouble(0);
-
+                    startDate = cursor.getString(0);
                 } while (cursor.moveToNext());
             }
         }
         cursor.close();
-        String phaseAvg = String.format("update menstuation set phaseDateAvg = %s where mid=%s",avg,id);
 
-        database.execSQL(phaseAvg);
+        if(startDate!="")
+        {
+            Date sDate = null;
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+            try {
+                sDate = format.parse(startDate);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            if(sDate!=null) {
+                Calendar c = Calendar.getInstance();
+                c.setTime(sDate);
+                int addDays=(int) (avg/2);
+                c.add(Calendar.DATE, addDays);
+                sDate = c.getTime();
+                SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+                startDate = format1.format(sDate.getTime());
+                String phaseAvg = String.format("update menstuation set onlyDate = '%s' where mid=%s",startDate,id);
+                database.execSQL(phaseAvg);
+            }
+
+        }
+
+
 
     }
 
@@ -93,7 +142,7 @@ public  class DBMenstruation {
     {
         int id=0;
         String strSQL = String.format("SELECT MAX(mid) FROM menstuation " );
-        Cursor cursor = database.rawQuery(strSQL,null);
+        Cursor cursor = database.rawQuery(strSQL, null);
         if(cursor != null)
         {
             if (cursor.moveToFirst()) {
@@ -129,7 +178,7 @@ public  class DBMenstruation {
         }
 
 
-        String temp =String.format("INSERT INTO menstuation (startDate,endDate,createDate) VALUES  ('%s','%s','%s')",startDate,endDate,createDate);
+        String temp =String.format("INSERT INTO menstuation (startDate,endDate,createDate) VALUES  ('%s','%s','%s')", startDate, endDate, createDate);
         database.execSQL(temp);
     }
 
@@ -161,6 +210,34 @@ public  class DBMenstruation {
         }
         cursor.close();
         return mens;
+
+    }
+
+    public List<Menstruation.mValue> selectAllData() {
+
+        String strSQL = String.format("SELECT mid,startDate,endDate,phaseDate,phaseDateAvg,onlyDate,createDate FROM menstuation");
+        Cursor cursor = database.rawQuery(strSQL, null);
+
+        List<Menstruation.mValue> valueList = new ArrayList<Menstruation.mValue>();
+        if(cursor != null)
+        {
+            if (cursor.moveToFirst()) {
+                do {
+                    Menstruation.mValue mens = new Menstruation.mValue();
+                    mens.mid = cursor.getInt(0);
+                    mens.startDate= cursor.getString(1);
+                    mens.enDate = cursor.getString(2);
+                    mens.phaseDate = Integer.parseInt(cursor.getString(3));
+                    mens.phaseDateAvg = Double.parseDouble(cursor.getString(4));
+                    mens.onlyDate = cursor.getString(5);
+
+                    valueList.add(mens);
+
+                } while (cursor.moveToNext());
+            }
+        }
+        cursor.close();
+        return valueList;
 
     }
 

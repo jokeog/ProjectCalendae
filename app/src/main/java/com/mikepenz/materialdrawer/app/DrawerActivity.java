@@ -65,11 +65,12 @@ public class DrawerActivity extends AppCompatActivity {
     private Drawer result = null;
     private boolean opened = false;
     public  static  String appPath;
-    List<DBMain.CalenderValue> dateList;
+
 
     @Bind(R.id.calendarView)
     MaterialCalendarView widget;
     private final OneDayDecorator oneDayDecorator = new OneDayDecorator();
+
 
 
 
@@ -84,6 +85,22 @@ public class DrawerActivity extends AppCompatActivity {
                 new HighlightWeekendsDecorator(),
                 oneDayDecorator
         );
+//        widget.setHeaderTextAppearance(R.style.TextAppearance_AppCompat_Large);
+//        widget.setDateTextAppearance(R.style.TextAppearance_AppCompat_Medium);
+//        widget.setWeekDayTextAppearance(R.style.TextAppearance_AppCompat_Medium);
+        //widget.setSelectionMode(1); 1 or 2
+        //widget.setOnDateChangedListener(this);
+        //widget.setTileSizeDp(42);
+        widget.setShowOtherDates(MaterialCalendarView.SHOW_ALL);
+
+        Calendar calendar = Calendar.getInstance();
+        widget.setSelectedDate(calendar.getTime());
+
+        calendar.set(calendar.get(Calendar.YEAR), Calendar.JANUARY, 1);
+        widget.setMinimumDate(calendar.getTime());
+
+        calendar.set(calendar.get(Calendar.YEAR), Calendar.DECEMBER, 31);
+        widget.setMaximumDate(calendar.getTime());
         setCalendarWidget();
         // </editor-fold
         // <editor-fold desc=" Set ที่เก็บ File">
@@ -315,48 +332,22 @@ public class DrawerActivity extends AppCompatActivity {
         DBHelper mHelper;
         mHelper = new DBHelper(this);
         DBMain dataBase=new DBMain(mHelper);
-        dateList = dataBase.selectAllData();
-        if(dateList.size()!=0)
-        new ApiSimulator().executeOnExecutor(Executors.newSingleThreadExecutor());
+        pointCalendar(dataBase.selectAllData("menstuation","startDate"),Color.rgb(255, 0, 0));
+        pointCalendar(dataBase.selectAllData("menstuation","endDate"),Color.rgb(255, 51, 51));
+        pointCalendar(dataBase.selectAllData("menstuation","onlyDate"),Color.rgb(255, 255, 0));
+        pointCalendar(dataBase.selectAllData("pregnant","pDate"), Color.rgb(51, 51, 255));
     }
 
-    private class ApiSimulator extends AsyncTask<Void, Void, List<CalendarDay>> {
-
-        @Override
-        protected List<CalendarDay> doInBackground(@NonNull Void... voids) {
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            Calendar calendar = Calendar.getInstance();
-            ArrayList<CalendarDay> dates = new ArrayList<>();
-            /*for (int i = 0; i < 5; i++) {
-                CalendarDay day = CalendarDay.from(calendar);
-                dates.add(day);
-                calendar.add(Calendar.DATE, 5);
-            }*/
-
-            for(DBMain.CalenderValue e :dateList)
-            {
-                calendar.set(e.year, e.month-1, e.day);
-                CalendarDay day = CalendarDay.from(calendar);
-                dates.add(day);
-            }
-
-            return dates;
+    void pointCalendar (List<DBMain.CalenderValue> dateList,int color){
+        Calendar calendar = Calendar.getInstance();
+        ArrayList<CalendarDay> dates = new ArrayList<>();
+        for(DBMain.CalenderValue e :dateList)
+        {
+            calendar.set(e.year, e.month-1, e.day);
+            CalendarDay day = CalendarDay.from(calendar);
+            dates.add(day);
         }
-
-        @Override
-        protected void onPostExecute(@NonNull List<CalendarDay> calendarDays) {
-            super.onPostExecute(calendarDays);
-
-            if (isFinishing()) {
-                return;
-            }
-
-            widget.addDecorator(new EventDecorator(Color.rgb(3, 21, 255), calendarDays));
-        }
+        widget.addDecorator(new EventDecorator(color, dates));
     }
 
 
