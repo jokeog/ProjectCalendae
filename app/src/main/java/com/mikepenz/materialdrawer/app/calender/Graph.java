@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
@@ -27,9 +28,13 @@ import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.facebook.share.ShareApi;
 import com.facebook.share.Sharer;
 import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.model.SharePhoto;
+import com.facebook.share.model.SharePhotoContent;
 import com.facebook.share.widget.ShareDialog;
+import com.mikepenz.materialdrawer.app.DrawerActivity;
 import com.mikepenz.materialdrawer.app.database.DBHelper;
 import com.mikepenz.materialdrawer.app.database.DBGraph;
 
@@ -85,6 +90,23 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Date;
+
+import android.os.Bundle;
+import android.os.Environment;
+import android.app.Activity;
+import android.graphics.Bitmap;
+import android.text.format.DateFormat;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.Toast;
 
 public class Graph extends AppCompatActivity {
 
@@ -330,6 +352,7 @@ public class Graph extends AppCompatActivity {
         dialog.show();
 
     }
+
     void setValueInClass() {
         value.gid = dbValue.gid;
         this.setDate();
@@ -684,6 +707,7 @@ public class Graph extends AppCompatActivity {
             }
         };
     }
+
     private void clearUserArea() {
         info.setText("");
         profileImgView.setImageDrawable(null);
@@ -757,10 +781,39 @@ public class Graph extends AppCompatActivity {
         });
     }
 
-    @OnClick(R.id.shar_button1)
-    public void shardToFaceBook(){
+    public void saveScrr(View v) {
+        View view = findViewById(android.R.id.content).getRootView();
+        view.setDrawingCacheEnabled(true);
+        Bitmap bm = Bitmap.createBitmap(view.getDrawingCache());
+        view.setDrawingCacheEnabled(false);
 
-        shareDialog = new ShareDialog(this);
+        try {
+            Date d = new Date();
+            String filename  = (String)DateFormat.format("kkmmss-MMddyyyy"
+                    , d.getTime());
+            File dir = new File(Environment.getExternalStorageDirectory()
+                    , "/Pictures/" + filename + ".jpg");
+            FileOutputStream out = new FileOutputStream(dir);
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            bm.compress(Bitmap.CompressFormat.JPEG, 100, bos);
+            out.write(bos.toByteArray());
+
+            if (dir.exists()) {
+
+                Bitmap image = BitmapFactory.decodeFile(dir.getAbsolutePath());
+                        SharePhoto photo = new SharePhoto.Builder()
+                        .setBitmap(image)
+                        .build();
+                SharePhotoContent content = new SharePhotoContent.Builder()
+                        .addPhoto(photo)
+                        .build();
+
+                ImageView myImage = (ImageView) findViewById(R.id.profile_img);
+                myImage.setImageBitmap(image);
+                //ShareApi.share(content, null);
+                shareDialog = new ShareDialog(this);
+
+                        shareDialog = new ShareDialog(this);
         String userId = profile.getId();
         String profileImgUrl = "https://graph.facebook.com/" + userId + "/picture?type=large";
         ShareLinkContent linkContent = new ShareLinkContent.Builder()
@@ -771,8 +824,45 @@ public class Graph extends AppCompatActivity {
                 .setImageUrl(Uri.parse(profileImgUrl))
                 .build();
 
-        shareDialog.show(linkContent);
+
+
+                shareDialog.show(content);
+            }
+
+
+
+            Toast.makeText(getApplicationContext(), "Shared It!"
+                    , Toast.LENGTH_SHORT).show();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }  catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @OnClick(R.id.shar_button1)
+    public void shardToFaceBook(){
+
+        View v =new View(this);
+        saveScrr(v);
+
+
+
+//        shareDialog = new ShareDialog(this);
+//        String userId = profile.getId();
+//        String profileImgUrl = "https://graph.facebook.com/" + userId + "/picture?type=large";
+//        ShareLinkContent linkContent = new ShareLinkContent.Builder()
+//                .setContentTitle("Calendar Wooman -History Weighs")
+//                .setContentDescription(
+//                        "Test Projuct Minny <3")
+//                .setContentUrl(Uri.parse("https://www.google.com/"))
+//                .setImageUrl(Uri.parse(profileImgUrl))
+//                .build();
+//
+//        shareDialog.show(linkContent);
 
     }
+
+
 
 }
