@@ -3,7 +3,6 @@ package com.mikepenz.materialdrawer.app.database;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.mikepenz.materialdrawer.app.calender.Contracaption;
 import com.mikepenz.materialdrawer.app.calender.Menstruation;
 
 import java.text.DateFormat;
@@ -98,6 +97,7 @@ public  class DBMenstruation {
 
 
 
+
         String startDate="";
         String strSQL = String.format("SELECT startDate FROM menstuation where mid=%s ",id);
         Cursor cursor = database.rawQuery(strSQL, null);
@@ -113,6 +113,7 @@ public  class DBMenstruation {
 
         if(startDate!="")
         {
+
             Date sDate = null;
             DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
             try {
@@ -121,15 +122,17 @@ public  class DBMenstruation {
                 e.printStackTrace();
             }
             if(sDate!=null) {
-                Calendar c = Calendar.getInstance();
-                c.setTime(sDate);
-                int addDays=(int) (avg/2);
-                c.add(Calendar.DATE, addDays);
-                sDate = c.getTime();
-                SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
-                startDate = format1.format(sDate.getTime());
-                String phaseAvg = String.format("update menstuation set onlyDate = '%s' where mid=%s",startDate,id);
+                Calendar cO = Calendar.getInstance();
+                Calendar cS = Calendar.getInstance();
+                cO.setTime(sDate);
+                cS.setTime(sDate);
+                cO.add(Calendar.DATE, ((int) (avg/2))-1);
+                cS.add(Calendar.DATE, ((int) avg)-1);
+                String phaseAvg = String.format("update menstuation set onlyDate = '%s',nextMonth='%s'  where mid=%s"
+                        ,format.format(cO.getTime())
+                        ,format.format(cS.getTime()),id);
                 database.execSQL(phaseAvg);
+
             }
 
         }

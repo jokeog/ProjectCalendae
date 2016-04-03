@@ -88,12 +88,12 @@
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-
+        <provider android:authorities="com.facebook.app.FacebookContentProvider1051539728222718"
+        android:name="com.facebook.FacebookContentProvider"
+        android:exported="true"/>
 
     </application>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
-    <!--<provider android:authorities="com.facebook.appFacebookContentProvider{APP_ID}"-->
-        <!--android:name="com.facebook.FacebookContentProvider"-->
-        <!--android:exported="true"/>-->
+
 </manifest>

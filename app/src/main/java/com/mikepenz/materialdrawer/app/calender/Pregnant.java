@@ -436,7 +436,7 @@ public class Pregnant extends AppCompatActivity {
         String[] parts = value.pDate.split("-");
         cal.set(
                 Integer.parseInt(parts[0])
-                ,Integer.parseInt(parts[1])
+                ,Integer.parseInt(parts[1])-1
                 ,Integer.parseInt(parts[2])
                 ,Integer.parseInt(parts[3])
                 ,Integer.parseInt(parts[4])

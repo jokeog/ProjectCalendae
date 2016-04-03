@@ -13,7 +13,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private final String TAG = getClass().getSimpleName();
 
     private SQLiteDatabase sqLiteDatabase;
-    private static final int DATABASE_VERSION = 11;
+    private static final int DATABASE_VERSION = 15;
     //Ver 1 Add profile,pregnant
 
     public DBHelper(Context context) {
@@ -49,7 +49,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "contracaption",
                 "cid",
                 "cName",
-                "cNumber",
+                "cTwenty",
                 "cDate",
                 "createDate");
 
@@ -64,7 +64,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "createDate");
 
         String CREATE_MENSTUATION = String.format(" CREATE TABLE %s " +
-                        "(%s INTEGER PRIMARY KEY AUTOINCREMENT , %s NUMERIC, %s NUMERIC, %s INTEGER ,%s REAL ,%s NUMERIC,%s NUMERIC)",
+                        "(%s INTEGER PRIMARY KEY AUTOINCREMENT , %s NUMERIC, %s NUMERIC, %s INTEGER ,%s REAL ,%s NUMERIC,%s NUMERIC,%s NUMERIC)",
                 "menstuation",
                 "mid",
                 "startDate",
@@ -72,6 +72,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "phaseDate",
                 "phaseDateAvg",
                 "onlyDate",
+                "nextMonth",
                 "createDate");
         //Log.i(TAG, CREATE_TABLE);
 

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 
 import com.mikepenz.aboutlibraries.Libs;
@@ -33,6 +35,7 @@ import com.mikepenz.materialdrawer.app.decorators.EventDecorator;
 import com.mikepenz.materialdrawer.app.decorators.HighlightWeekendsDecorator;
 import com.mikepenz.materialdrawer.app.decorators.MySelectorDecorator;
 import com.mikepenz.materialdrawer.app.decorators.OneDayDecorator;
+import com.mikepenz.materialdrawer.app.utils.CalendarFont;
 import com.mikepenz.materialdrawer.holder.StringHolder;
 import com.mikepenz.materialdrawer.interfaces.OnCheckedChangeListener;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
@@ -66,10 +69,14 @@ public class DrawerActivity extends AppCompatActivity {
     private boolean opened = false;
     public  static  String appPath;
 
+    @Bind(R.id.button)
+    Button button;
 
     @Bind(R.id.calendarView)
     MaterialCalendarView widget;
     private final OneDayDecorator oneDayDecorator = new OneDayDecorator();
+
+
 
 
 
@@ -85,13 +92,20 @@ public class DrawerActivity extends AppCompatActivity {
                 new HighlightWeekendsDecorator(),
                 oneDayDecorator
         );
-//        widget.setHeaderTextAppearance(R.style.TextAppearance_AppCompat_Large);
-//        widget.setDateTextAppearance(R.style.TextAppearance_AppCompat_Medium);
-//        widget.setWeekDayTextAppearance(R.style.TextAppearance_AppCompat_Medium);
+
+
+        int value[] = {R.id.button,R.id.button2,R.id.button3,R.id.button4,R.id.button5};
+        CalendarFont font = new CalendarFont() ;
+        font.setFonts(value, this);
+
+
+        widget.setHeaderTextAppearance(R.style.TextAppearance_AppCompat_Large);
+        widget.setDateTextAppearance(R.style.TextAppearance_AppCompat_Medium);
+        widget.setWeekDayTextAppearance(R.style.TextAppearance_AppCompat_Medium);
         //widget.setSelectionMode(1); 1 or 2
         //widget.setOnDateChangedListener(this);
         //widget.setTileSizeDp(42);
-        widget.setShowOtherDates(MaterialCalendarView.SHOW_ALL);
+        //widget.setShowOtherDates(MaterialCalendarView.SHOW_ALL);
 
         Calendar calendar = Calendar.getInstance();
         widget.setSelectedDate(calendar.getTime());
@@ -332,10 +346,15 @@ public class DrawerActivity extends AppCompatActivity {
         DBHelper mHelper;
         mHelper = new DBHelper(this);
         DBMain dataBase=new DBMain(mHelper);
-        pointCalendar(dataBase.selectAllData("menstuation","startDate"),Color.rgb(255, 0, 0));
-        pointCalendar(dataBase.selectAllData("menstuation","endDate"),Color.rgb(255, 51, 51));
-        pointCalendar(dataBase.selectAllData("menstuation","onlyDate"),Color.rgb(255, 255, 0));
-        pointCalendar(dataBase.selectAllData("pregnant","pDate"), Color.rgb(51, 51, 255));
+        pointCalendar(dataBase.selectAllDataContracaptionList(),Color.rgb(128, 0 ,128));
+        pointCalendar(dataBase.selectAllData("pregnant", "pDate"), Color.rgb(139 ,101 ,8));
+        pointCalendar(dataBase.selectAllData("menstuation", "startDate"), Color.rgb(139, 0, 0));
+        //pointCalendar(dataBase.selectAllData("menstuation","endDate"),Color.rgb(0 ,0 ,139));
+        pointCalendar(dataBase.selectAllData("menstuation","onlyDate"),Color.rgb(255 ,127 ,0));
+        pointCalendar(dataBase.selectAllData("menstuation","nextMonth"),Color.rgb(0 ,0 ,139));
+
+
+
     }
 
     void pointCalendar (List<DBMain.CalenderValue> dateList,int color){

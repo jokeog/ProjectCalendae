@@ -2,40 +2,47 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#88DDBB">
+    android:background="#88DDBB"
+    android:weightSum="1">
 
     <TableLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TableRow
         android:layout_width="match_parent"
-        android:layout_height="168dp">
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        android:layout_height="match_parent">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="ชื่อยาคุม"
-                android:id="@+id/cText1"
-                android:textColor="#000000"
-                android:textSize="40dp"
-                android:layout_column="2"
-                android:padding="12dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="ชื่อยาคุม"
+            android:id="@+id/cText1"
+            android:textColor="#000000"
+            android:textSize="40dp"
+            android:layout_column="2"
+            android:padding="12dp" />
 
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:ems="5"
-                android:id="@+id/cName"
-                android:textColor="#484648"
-                android:textSize="30dp"
-                android:layout_column="3"
-                android:backgroundTint="#B9E3AE"
-                android:background="#B9E3AE" />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="5"
+            android:id="@+id/cName"
+            android:textColor="#484648"
+            android:textSize="30dp"
+            android:layout_column="3"
+            android:backgroundTint="#B9E3AE"
+            android:background="#B9E3AE" />
 
-        </TableRow>
+    </TableRow>
 
+
+
+</TableLayout>
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -51,18 +58,17 @@
                 android:textSize="40dp"
                 android:padding="12dp" />
 
-
-            <EditText
+            <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:ems="5"
-                android:id="@+id/cNumber"
-                android:textColor="#484648"
-                android:textSize="30dp"
-                android:layout_column="3"
-                android:backgroundTint="#B9E3AE"
-                android:background="#B9E3AE" />
+                android:text="21"
+                android:textColor="#000000"
+                android:textSize="40dp"
+                android:id="@+id/cTwentyOne"
+                android:layout_column="3" />
+
+
+
 
             <TextView
                 android:layout_width="wrap_content"
@@ -75,7 +81,48 @@
                 android:layout_column="10"
                 android:padding="12dp" />
         </TableRow>
+        </TableLayout>
 
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="จำนวนยาคุม"
+                android:id="@+id/cText7"
+                android:layout_column="2"
+                android:textColor="#88DDBB"
+                android:textSize="40dp"
+                android:padding="12dp" />
+
+
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="28"
+                android:textColor="#000000"
+                android:textSize="40dp"
+                android:id="@+id/cTwentyEight"
+                android:layout_column="3" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="เม็ด"
+                android:textColor="#000000"
+                android:textSize="40dp"
+                android:id="@+id/cText6"
+                android:layout_column="10"
+                android:padding="12dp" />
+        </TableRow>
     </TableLayout>
 
     <TableRow
@@ -104,6 +151,13 @@
             android:background="#B9E3AE"
             android:backgroundTint="#B9E3AE" />
     </TableRow>
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner"
+        android:layout_gravity="right" />
+
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -150,7 +204,11 @@
                 android:background="#B9E3AE" />
         </TableRow>
 
-    </TableLayout>
+
+
+        </TableLayout>
+
+
 
     <TableRow
         android:layout_width="match_parent"
@@ -160,7 +218,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="แจ้งเตือน        "
+            android:text="แจ้งเตือนวันที่ต้องกินยาคุม"
             android:textColor="#000000"
             android:textSize="40dp"
             android:id="@+id/cText4"

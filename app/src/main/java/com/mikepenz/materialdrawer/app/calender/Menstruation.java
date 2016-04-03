@@ -57,7 +57,7 @@ public class Menstruation extends AppCompatActivity {
     }
     mValue value = new mValue();
     mValue dbValue = new mValue();
-   private DBMenstruation dataBase;
+    private DBMenstruation dataBase;
     private Drawer result = null;
 
     boolean isTest=true;

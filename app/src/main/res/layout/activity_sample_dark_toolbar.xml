@@ -33,14 +33,77 @@
             android:layout_width="367dp"
             android:layout_height="390dp"
             />
-        <ImageButton
-            android:layout_width="401dp"
-            android:layout_height="match_parent"
-            android:id="@+id/mainRefesh"
 
-            android:src="@android:drawable/stat_notify_sync"
-            android:background="#B9E3AE"
-            android:backgroundTint="#B9E3AE"
-            android:layout_gravity="right" />
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFFFE0"
+                    android:textSize="30dp"
+                    android:text="รอบเดือนปัจจุบัน"
+                    android:id="@+id/button"
+                    android:background="#8B0000" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFFFE0"
+                    android:background="#FF7F00"
+                    android:textSize="30dp"
+                    android:text="วันไข่ตก"
+                    android:id="@+id/button2" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFFFE0"
+                    android:textSize="30dp"
+                    android:background="#00008B"
+                    android:text="รอบเดือนถัดไป"
+                    android:id="@+id/button3" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFFFE0"
+                    android:background="#8B658B"
+                    android:textSize="30dp"
+                    android:text="วันพบเเพทย์"
+                    android:id="@+id/button4" />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFFFE0"
+                    android:background="#800080"
+                    android:text="วันที่ต้องกินยาคุม"
+                    android:textSize="30dp"
+                    android:id="@+id/button5" />
+
+                <ImageButton
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/mainRefesh"
+
+                    android:src="@android:drawable/stat_notify_sync"
+                    android:background="#B9E3AE"
+                    android:backgroundTint="#B9E3AE"
+                    android:layout_gravity="right" />
+            </TableRow>
+
+        </TableLayout>
+
     </LinearLayout>
 </RelativeLayout>

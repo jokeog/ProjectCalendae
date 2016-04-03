@@ -296,9 +296,7 @@ public class Graph extends AppCompatActivity {
 
             data.setData(generateLineData(bmi));
             data.setData(generateBarData(wight));
-//        data.setData(generateBubbleData());
-//         data.setData(generateScatterData());
-//         data.setData(generateCandleData());
+
 
             mChart.setData(data);
             mChart.invalidate();
@@ -808,28 +806,19 @@ public class Graph extends AppCompatActivity {
                         .addPhoto(photo)
                         .build();
 
-                ImageView myImage = (ImageView) findViewById(R.id.profile_img);
-                myImage.setImageBitmap(image);
-                //ShareApi.share(content, null);
                 shareDialog = new ShareDialog(this);
-
-                        shareDialog = new ShareDialog(this);
-        String userId = profile.getId();
-        String profileImgUrl = "https://graph.facebook.com/" + userId + "/picture?type=large";
-        ShareLinkContent linkContent = new ShareLinkContent.Builder()
-                .setContentTitle("Calendar Wooman -History Weighs")
-                .setContentDescription(
-                        "Test Projuct Minny <3")
-                .setContentUrl(Uri.parse("https://www.google.com/"))
-                .setImageUrl(Uri.parse(profileImgUrl))
-                .build();
-
-
-
                 shareDialog.show(content);
+//        String userId = profile.getId();
+//        String profileImgUrl = "https://graph.facebook.com/" + userId + "/picture?type=large";
+//        ShareLinkContent linkContent = new ShareLinkContent.Builder()
+//                .setContentTitle("Calendar Wooman -History Weighs")
+//                .setContentDescription(
+//                        "Test Projuct Minny <3")
+//                .setContentUrl(Uri.parse("https://www.google.com/"))
+//                .setImageUrl(Uri.parse(profileImgUrl))
+//                .build();
+
             }
-
-
 
             Toast.makeText(getApplicationContext(), "Shared It!"
                     , Toast.LENGTH_SHORT).show();
@@ -842,25 +831,8 @@ public class Graph extends AppCompatActivity {
 
     @OnClick(R.id.shar_button1)
     public void shardToFaceBook(){
-
         View v =new View(this);
         saveScrr(v);
-
-
-
-//        shareDialog = new ShareDialog(this);
-//        String userId = profile.getId();
-//        String profileImgUrl = "https://graph.facebook.com/" + userId + "/picture?type=large";
-//        ShareLinkContent linkContent = new ShareLinkContent.Builder()
-//                .setContentTitle("Calendar Wooman -History Weighs")
-//                .setContentDescription(
-//                        "Test Projuct Minny <3")
-//                .setContentUrl(Uri.parse("https://www.google.com/"))
-//                .setImageUrl(Uri.parse(profileImgUrl))
-//                .build();
-//
-//        shareDialog.show(linkContent);
-
     }
 
 
